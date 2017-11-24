@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IntegratedProjectMobile.iml" filepath="$PROJECT_DIR$/IntegratedProjectMobile.iml" />
+      <module fileurl="file://D:\CaruCath\Documents\3DeJaar\Integrated-project-Mobile\IntegratedProjectMobile\IntegratedProjectMobile.iml" filepath="D:\CaruCath\Documents\3DeJaar\Integrated-project-Mobile\IntegratedProjectMobile\IntegratedProjectMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\CaruCath\Documents\3DeJaar\Integrated-project-Mobile\IntegratedProjectMobile\app\app.iml" filepath="D:\CaruCath\Documents\3DeJaar\Integrated-project-Mobile\IntegratedProjectMobile\app\app.iml" />
     </modules>
   </component>
 </project>
