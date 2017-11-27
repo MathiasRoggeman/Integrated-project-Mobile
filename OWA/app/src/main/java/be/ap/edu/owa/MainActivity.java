@@ -1,44 +1,32 @@
-package com.ap.integratedprojectmobile;
+package be.ap.edu.owa;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.microsoft.identity.client.AuthenticationCallback;
-import com.microsoft.identity.client.AuthenticationResult;
-import com.microsoft.identity.client.MsalClientException;
-import com.microsoft.identity.client.MsalException;
-import com.microsoft.identity.client.MsalServiceException;
-import com.microsoft.identity.client.MsalUiRequiredException;
-import com.microsoft.identity.client.PublicClientApplication;
-import com.microsoft.identity.client.User;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.microsoft.identity.client.*;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    final static String CLIENT_ID = "b67bd32e-2d23-4175-a793-5b8ec1d41be0";
-    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read"};
-    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
+    final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
+    final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
+    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me";
 
     /* UI & Debugging Variables */
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -73,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         sampleApp = null;
         if (sampleApp == null) {
             sampleApp = new PublicClientApplication(
-                this.getApplicationContext(),
-                CLIENT_ID);
+                    this.getApplicationContext(),
+                    CLIENT_ID);
         }
 
   /* Attempt to get a user and acquireTokenSilent
@@ -207,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         signOutButton.setVisibility(View.VISIBLE);
         findViewById(R.id.welcome).setVisibility(View.VISIBLE);
         ((TextView) findViewById(R.id.welcome)).setText("Welcome, " +
-            authResult.getUser().getName());
+                authResult.getUser().getName());
         findViewById(R.id.graphData).setVisibility(View.VISIBLE);
     }
 
@@ -225,15 +213,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /* Use Volley to make an HTTP request to the /me endpoint from MS Graph using an access token */
     private void callGraphAPI() {
         Log.d(TAG, "Starting volley request to graph");
 
     /* Make sure we have a token to send to graph */
-        if (authResult.getAccessToken() == null) {
-            return;
-        }
+        if (authResult.getAccessToken() == null) {return;}
 
         RequestQueue queue = Volley.newRequestQueue(this);
         JSONObject parameters = new JSONObject();
@@ -244,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Failed to put parameters: " + e.toString());
         }
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MSGRAPH_URL,
-            parameters, new Response.Listener<JSONObject>() {
+                parameters,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
             /* Successfully called graph, process data and send to UI */
@@ -269,9 +254,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Adding HTTP GET to Queue, Request: " + request.toString());
 
         request.setRetryPolicy(new DefaultRetryPolicy(
-            3000,
-            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
 
@@ -301,7 +286,8 @@ public class MainActivity extends AppCompatActivity {
                 sampleApp.remove(users.get(0));
                 updateSignedOutUI();
 
-            } else {
+            }
+            else {
             /* We have multiple users */
                 for (int i = 0; i < users.size(); i++) {
                     sampleApp.remove(users.get(i));
@@ -309,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Toast.makeText(getBaseContext(), "Signed Out!", Toast.LENGTH_SHORT)
-                .show();
+                    .show();
 
         } catch (MsalClientException e) {
             Log.d(TAG, "MSAL Exception Generated while getting users: " + e.toString());
@@ -327,5 +313,5 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.graphData).setVisibility(View.INVISIBLE);
         ((TextView) findViewById(R.id.graphData)).setText("No Data");
     }
-}
 
+}
