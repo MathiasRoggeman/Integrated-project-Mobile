@@ -25,8 +25,8 @@ import com.microsoft.identity.client.*;
 public class MainActivity extends AppCompatActivity {
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
-    final static String SCOPES [] = {"https://graph.microsoft.com/User.Read"};
-    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me";
+    final static String SCOPES [] = {"https://graph.microsoft.com/Mail.Read"};
+    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
 
     /* UI & Debugging Variables */
     private static final String TAG = MainActivity.class.getSimpleName();
