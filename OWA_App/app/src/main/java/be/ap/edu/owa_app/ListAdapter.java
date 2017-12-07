@@ -2,6 +2,8 @@ package be.ap.edu.owa_app;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +65,7 @@ public class ListAdapter extends ArrayAdapter<MailList> {
             TextView ttd = (TextView) v.findViewById(R.id.sender);
             TextView bp = (TextView) v.findViewById(R.id.body);
 
+
             // check to see if each individual textview is null.
             // if not, assign some text!
             if (tt != null){
@@ -73,6 +76,11 @@ public class ListAdapter extends ArrayAdapter<MailList> {
             }
             if (bp != null){
                 bp.setText(i.getBody());
+            }
+            if(!(i.isRead())){
+                tt.setTextColor(Color.RED);
+                bp.setTextColor(Color.RED);
+                ttd.setTextColor(Color.RED);
             }
         }
 

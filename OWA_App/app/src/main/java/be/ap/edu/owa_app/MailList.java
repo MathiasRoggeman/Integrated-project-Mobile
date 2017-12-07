@@ -8,11 +8,13 @@ public class MailList {
     private String subject;
     private String sender;
     private String body;
+    private Boolean read;
 
-    public MailList(String subject, String sender, String body) {
+    public MailList(String subject, String sender, String body, boolean read) {
         this.subject = subject;
         this.sender = sender;
         this.body = body;
+        this.read = read;
     }
 
     public String getSubject() {
@@ -37,5 +39,13 @@ public class MailList {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Boolean isRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
     }
 }

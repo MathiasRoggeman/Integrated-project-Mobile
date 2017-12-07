@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     final static String SCOPES [] = {"https://graph.microsoft.com/Mail.Read"};
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages?$top=25";
 
-    ArrayList<String> subjectList = new ArrayList<>();
     private ArrayList<MailList> maillist = new ArrayList<>();
     private ListAdapter listadapter;
 
@@ -62,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listView = findViewById(R.id.mobile_list);
+        maillist = new ArrayList<>();
 
         callGraphButton = (Button) findViewById(R.id.callGraph);
         signOutButton = (Button) findViewById(R.id.clearCache);
@@ -111,14 +113,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "User at this position does not exist: " + e.toString());
         }
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, subjectList);
-        listView = findViewById(R.id.mobile_list);
-        //listView.setAdapter(adapter);
+
 
         listadapter = new ListAdapter(this, R.layout.activity_listview, maillist);
         listView.setAdapter(listadapter);
-
     }
 
 //
@@ -294,16 +292,20 @@ public class MainActivity extends AppCompatActivity {
     private void updateGraphUI(JSONObject graphResponse) {
         //TextView graphText = (TextView) findViewById(R.id.graphData);
         //graphText.setText(graphResponse.toString());
+        maillist = new ArrayList<>();
         try {
             JSONArray subject = graphResponse.getJSONArray("value");
             for(int i = 0; i < subject.length(); i++){
                 String subj = (subject.getJSONObject(i).get("subject")).toString();
                 String sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();
                 String bodypr = (subject.getJSONObject(i).getString("bodyPreview"));
-                maillist.add(new MailList(subj, sender, bodypr));
-                subjectList.add((subject.getJSONObject(i).get("subject")).toString());
+                Boolean isRead = (subject.getJSONObject(i).getBoolean("isRead"));
+                maillist.add(new MailList(subj, sender, bodypr, isRead));
+                Log.e("Read", isRead.toString());
             }
             listView.requestLayout();
+            listadapter = new ListAdapter(this, R.layout.activity_listview, maillist);
+            listView.setAdapter(listadapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -316,7 +318,6 @@ public class MainActivity extends AppCompatActivity {
 
     /* Attempt to get a user and remove their cookies from cache */
         List<User> users = null;
-
         try {
             users = sampleApp.getUsers();
 
@@ -356,5 +357,6 @@ public class MainActivity extends AppCompatActivity {
         //findViewById(R.id.graphData).setVisibility(View.INVISIBLE);
         //((TextView) findViewById(R.id.graphData)).setText("No Data");
         findViewById(R.id.mobile_list).setVisibility(View.INVISIBLE);
+
     }
 }
