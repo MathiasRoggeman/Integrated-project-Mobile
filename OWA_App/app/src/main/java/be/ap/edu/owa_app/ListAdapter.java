@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,10 +43,10 @@ public class ListAdapter extends ArrayAdapter<MailList> {
 
         // first check to see if the view is null. if so, we have to inflate it.
         // to inflate it basically means to render, or show, the view.
-        if (v == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.activity_listview, null);
-        }
+
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = inflater.inflate(R.layout.activity_listview, null);
+
 
 		/*
 		 * Recall that the variable position is sent in as an argument to this method.
@@ -64,6 +65,7 @@ public class ListAdapter extends ArrayAdapter<MailList> {
             TextView tt = (TextView) v.findViewById(R.id.subject);
             TextView ttd = (TextView) v.findViewById(R.id.sender);
             TextView bp = (TextView) v.findViewById(R.id.body);
+            CheckBox cb = v.findViewById(R.id.delete);
 
 
             // check to see if each individual textview is null.
