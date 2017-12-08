@@ -1,11 +1,9 @@
 package be.ap.edu.owa_app;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -39,12 +37,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-
+public class Login extends AppCompatActivity {
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
     final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read"};
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages?$top=25";
-    SharedPreferences pref;
 
     ArrayList<String> subjectList = new ArrayList<>();
     private ArrayList<MailList> maillist = new ArrayList<>();
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         callGraphButton = (Button) findViewById(R.id.callGraph);
         signOutButton = (Button) findViewById(R.id.clearCache);
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         makeMailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Sendmail.class));
+                startActivity(new Intent(Login.this, Sendmail.class));
             }
         });
   /* Configure your sample app and save state for this activity */
@@ -196,11 +192,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Successfully authenticated");
                 Log.d(TAG, "ID Token: " + authenticationResult.getIdToken());
 
-                /* send token to Sharedpref so it can be used on all screens*/
-                SharedPreferences sharedPref = getSharedPreferences("SessionInfo" , Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("Saved_Token", (authenticationResult.getIdToken()).toString());
-                editor.apply();
             /* Store the auth result */
                 authResult = authenticationResult;
 
@@ -377,6 +368,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mobile_list).setVisibility(View.INVISIBLE);
     }
 
-    public void openMessage(View view) {
-    }
+
+
 }
