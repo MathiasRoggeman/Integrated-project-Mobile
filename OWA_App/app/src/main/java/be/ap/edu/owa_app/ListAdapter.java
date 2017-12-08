@@ -84,6 +84,11 @@ public class ListAdapter extends ArrayAdapter<MailList> {
                 bp.setTextColor(Color.RED);
                 ttd.setTextColor(Color.RED);
             }
+            if(cb.isChecked()){
+                cb.setChecked(true);
+            }else{
+                cb.setChecked(false);
+            }
         }
 
         // the view must be returned to our activity

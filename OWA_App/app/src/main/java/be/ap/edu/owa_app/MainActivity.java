@@ -359,4 +359,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mobile_list).setVisibility(View.INVISIBLE);
 
     }
+
+    public void openMessage(View view) {
+    }
 }
