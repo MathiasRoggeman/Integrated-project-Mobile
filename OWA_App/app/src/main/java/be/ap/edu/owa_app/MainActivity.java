@@ -308,7 +308,8 @@ public class MainActivity extends AppCompatActivity {
                 String subj = (subject.getJSONObject(i).get("subject")).toString();
                 String sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();
                 String bodypr = (subject.getJSONObject(i).getString("bodyPreview"));
-                maillist.add(new MailList(subj, sender, bodypr));
+                Boolean read = (subject.getJSONObject(i).getBoolean("isRead"));
+                maillist.add(new MailList(subj, sender, bodypr, read));
                 subjectList.add((subject.getJSONObject(i).get("subject")).toString());
             }
             listView.requestLayout();
