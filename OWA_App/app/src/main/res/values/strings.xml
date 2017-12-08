@@ -2,4 +2,7 @@
     <string name="app_name">OWA_App</string>
     <string name="login">Login</string>
     <string name="sign_out">Sign Out</string>
+    <string name="make_mail">Make new mail</string>
+    <string name="send_mail">Send mail</string>
+    <string name="add_attachment">Add attachment </string>
 </resources>

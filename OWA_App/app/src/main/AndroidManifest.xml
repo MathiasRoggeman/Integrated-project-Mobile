@@ -16,20 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--Intent filter to capture System Browser calling back to our app after Sign In-->
-        <activity
-            android:name="com.microsoft.identity.client.BrowserTabActivity">
+        <!-- Intent filter to capture System Browser calling back to our app after Sign In -->
+        <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!--Add in your scheme/host from registered redirect URI-->
-                <!--By default, the scheme should be similar to 'msal[appId]' -->
-                <data android:scheme="msal0f1fbbeb-1161-4034-9875-70c8099230d7"
-                    android:host="auth" />
+                <!-- Add in your scheme/host from registered redirect URI -->
+                <!-- By default, the scheme should be similar to 'msal[appId]' -->
+                <data
+                    android:host="auth"
+                    android:scheme="msal0f1fbbeb-1161-4034-9875-70c8099230d7" />
             </intent-filter>
         </activity>
+        <activity android:name=".Sendmail"></activity>
     </application>
 
 </manifest>
