@@ -77,7 +77,7 @@ public class ListAdapter extends ArrayAdapter<MailList> {
                 ttd.setText(i.getSender());
             }
             if (bp != null){
-                bp.setText(i.getBody());
+                bp.setText(i.getBodyPreview());
             }
             if(!(i.isRead())){
                 tt.setTextColor(Color.RED);
@@ -94,5 +94,9 @@ public class ListAdapter extends ArrayAdapter<MailList> {
         // the view must be returned to our activity
         return v;
 
+    }
+
+    public MailList getItem(int position){
+        return objects.get(position);
     }
 }

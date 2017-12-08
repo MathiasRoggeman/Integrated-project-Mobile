@@ -34,7 +34,6 @@
         </activity>
         <activity android:name=".OpenMailActivity" />
         <activity android:name=".Sendmail" />
-        <activity android:name=".Login"></activity>
     </application>
 
 </manifest>
