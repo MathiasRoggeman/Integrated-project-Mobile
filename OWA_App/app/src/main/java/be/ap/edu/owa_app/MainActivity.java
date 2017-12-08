@@ -1,11 +1,13 @@
 package be.ap.edu.owa_app;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -83,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Sendmail.class));
             }
         });
+
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent i = new Intent(getActivity(), OpenMailActivity.class);
+                startActivity(i);
+            }
+        });*/
+
   /* Configure your sample app and save state for this activity */
         sampleApp = null;
         if (sampleApp == null) {
@@ -123,6 +135,31 @@ public class MainActivity extends AppCompatActivity {
 
         listadapter = new ListAdapter(this, R.layout.activity_listview, maillist);
         listView.setAdapter(listadapter);
+
+        final Context context = this;
+        if(listView != null) {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    // 1
+                    MailList mail = maillist.get(position);
+
+                    // 2
+                    Intent intent = new Intent(context, OpenMailActivity.class);
+
+                    // 3
+                    intent.putExtra("sender", mail.getSender());
+                    intent.putExtra("onderwerp", mail.getSubject());
+                    intent.putExtra("date", mail.getDate());
+                    intent.putExtra("message", mail.getMessage());
+
+                    // 4
+                    startActivity(intent);
+                }
+
+            });
+        }
 
     }
 
@@ -309,10 +346,12 @@ public class MainActivity extends AppCompatActivity {
                 String sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();
                 String bodypr = (subject.getJSONObject(i).getString("bodyPreview"));
                 Boolean read = (subject.getJSONObject(i).getBoolean("isRead"));
-                maillist.add(new MailList(subj, sender, bodypr, read));
-                subjectList.add((subject.getJSONObject(i).get("subject")).toString());
+                String message = (subject.getJSONObject(i).getJSONObject("body").getString("content"));
+                String date = (subject.getJSONObject(i).getString("receivedDateTime"));
+                maillist.add(new MailList(subj, sender, bodypr, read, message, date));
             }
             listView.requestLayout();
+            listadapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -369,6 +408,4 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mobile_list).setVisibility(View.INVISIBLE);
     }
 
-    public void openMessage(View view) {
-    }
 }

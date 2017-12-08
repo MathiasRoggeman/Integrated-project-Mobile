@@ -43,6 +43,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
+        android:gravity="top"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +111,7 @@
     <EditText
         android:id="@+id/txtSubject"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="34dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"

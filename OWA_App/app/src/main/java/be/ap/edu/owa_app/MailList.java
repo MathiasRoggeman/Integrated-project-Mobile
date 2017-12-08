@@ -7,14 +7,19 @@ package be.ap.edu.owa_app;
 public class MailList {
     private String subject;
     private String sender;
-    private String body;
+    private String bodypreview;
     private Boolean read;
+    private String receiver;
+    private String message;
+    private String date;
 
-    public MailList(String subject, String sender, String body, boolean read) {
+    public MailList(String subject, String sender, String bodypreview, boolean read, String message, String date) {
         this.subject = subject;
         this.sender = sender;
-        this.body = body;
+        this.bodypreview = bodypreview;
         this.read = read;
+        this.message = message;
+        this.date = date;
     }
 
     public String getSubject() {
@@ -33,12 +38,12 @@ public class MailList {
         this.sender = sender;
     }
 
-    public String getBody() {
-        return body;
+    public String getBodyPreview() {
+        return bodypreview;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setBodyPreview(String body) {
+        this.bodypreview = body;
     }
 
     public Boolean isRead() {
@@ -47,5 +52,33 @@ public class MailList {
 
     public void setRead(Boolean read) {
         this.read = read;
+    }
+
+    public String getBodypreview() {
+        return bodypreview;
+    }
+
+    public void setBodypreview(String bodypreview) {
+        this.bodypreview = bodypreview;
+    }
+
+    public Boolean getRead() {
+        return read;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
