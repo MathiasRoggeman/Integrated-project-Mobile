@@ -65,7 +65,7 @@ public class ListAdapter extends ArrayAdapter<MailList> {
             TextView tt = (TextView) v.findViewById(R.id.subject);
             TextView ttd = (TextView) v.findViewById(R.id.sender);
             TextView bp = (TextView) v.findViewById(R.id.body);
-            CheckBox cb = v.findViewById(R.id.delete);
+           // CheckBox cb = v.findViewById(R.id.delete);
 
 
             // check to see if each individual textview is null.
@@ -83,11 +83,6 @@ public class ListAdapter extends ArrayAdapter<MailList> {
                 tt.setTextColor(Color.RED);
                 bp.setTextColor(Color.RED);
                 ttd.setTextColor(Color.RED);
-            }
-            if(cb.isChecked()){
-                cb.setChecked(true);
-            }else{
-                cb.setChecked(false);
             }
         }
 

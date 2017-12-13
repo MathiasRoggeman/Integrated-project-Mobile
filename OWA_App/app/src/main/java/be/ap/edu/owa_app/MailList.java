@@ -5,21 +5,30 @@ package be.ap.edu.owa_app;
  */
 
 public class MailList {
+    private String id;
     private String subject;
     private String sender;
     private String bodypreview;
     private Boolean read;
-    private String receiver;
     private String message;
     private String date;
 
-    public MailList(String subject, String sender, String bodypreview, boolean read, String message, String date) {
+    public MailList(String id, String subject, String sender, String bodypreview, boolean read, String message, String date) {
+        this.id = id;
         this.subject = subject;
         this.sender = sender;
         this.bodypreview = bodypreview;
         this.read = read;
         this.message = message;
         this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSubject() {

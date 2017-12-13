@@ -43,11 +43,10 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
-    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read"};
-    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages?$top=25";
+    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read", "https://graph.microsoft.com/Mail.ReadWrite", "https://graph.microsoft.com/Mail.Send", };
+    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
     SharedPreferences pref;
 
-    ArrayList<String> subjectList = new ArrayList<>();
     private ArrayList<MailList> maillist = new ArrayList<>();
     private ListAdapter listadapter;
 
@@ -130,10 +129,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "User at this position does not exist: " + e.toString());
         }
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-            R.layout.activity_listview, subjectList);
         listView = findViewById(R.id.mobile_list);
-        //listView.setAdapter(adapter);
 
         listadapter = new ListAdapter(this, R.layout.activity_listview, maillist);
         listView.setAdapter(listadapter);
@@ -151,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, OpenMailActivity.class);
 
                     // 3
+                    intent.putExtra("id", mail.getId());
                     intent.putExtra("sender", mail.getSender());
                     intent.putExtra("onderwerp", mail.getSubject());
                     intent.putExtra("date", mail.getDate());
@@ -349,13 +346,14 @@ public class MainActivity extends AppCompatActivity {
         try {
             JSONArray subject = graphResponse.getJSONArray("value");
             for (int i = 0; i < subject.length(); i++) {
+                String id = (subject.getJSONObject(i).getString("id"));
                 String subj = (subject.getJSONObject(i).get("subject")).toString();
                 String sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();
                 String bodypr = (subject.getJSONObject(i).getString("bodyPreview"));
                 Boolean read = (subject.getJSONObject(i).getBoolean("isRead"));
                 String message = (subject.getJSONObject(i).getJSONObject("body").getString("content"));
                 String date = (subject.getJSONObject(i).getString("receivedDateTime"));
-                maillist.add(new MailList(subj, sender, bodypr, read, message, date));
+                maillist.add(new MailList(id, subj, sender, bodypr, read, message, date));
             }
             listView.requestLayout();
             listadapter.notifyDataSetChanged();
