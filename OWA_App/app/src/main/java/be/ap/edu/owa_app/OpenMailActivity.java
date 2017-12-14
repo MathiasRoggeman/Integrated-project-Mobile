@@ -3,10 +3,13 @@ package be.ap.edu.owa_app;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -47,7 +49,8 @@ public class OpenMailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_mail);
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         id = this.getIntent().getExtras().getString("id");
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
         sharedPref = getSharedPreferences("SessionInfo" , Context.MODE_PRIVATE);
@@ -87,6 +90,35 @@ public class OpenMailActivity extends AppCompatActivity {
                 startActivity(new Intent(OpenMailActivity.this, MainActivity.class));
             }
         });
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_openmail, menu);
+
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+            case R.id.action_delete:
+                startActivity(new Intent(this, .class));
+                return true;
+            //TODO change icon
+
+            case R.id.forward_message:
+                startActivity(new Intent(this, .class));
+                return true;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void callGraphAPI(String url, String id) throws JSONException {
