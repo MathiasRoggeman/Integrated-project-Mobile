@@ -64,7 +64,7 @@ public class OpenMailActivity extends AppCompatActivity {
         final TextView datum = (TextView)findViewById(R.id.date_open);
         final EditText bericht = (EditText) findViewById(R.id.message_open);
 
-        String textFromHtml = Jsoup.parse(message).text();
+        final String textFromHtml = Jsoup.parse(message).text();
 
         try {
             callGraphAPI(MSGRAPH_URL, id);
@@ -80,11 +80,26 @@ public class OpenMailActivity extends AppCompatActivity {
         bericht.setText(textFromHtml);
 
         Button button = findViewById(R.id.back_open);
+        Button forward = (Button)findViewById(R.id.forward_message);
 
+        final Context context = this;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(OpenMailActivity.this, MainActivity.class));
+            }
+        });
+        forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ForwardActivity.class);
+
+                intent.putExtra("messageid", id);
+                intent.putExtra("body", textFromHtml);
+                intent.putExtra("token", token);
+                startActivity(intent);
+                Log.d("messageid", id);
+
             }
         });
     }
