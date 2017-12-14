@@ -123,12 +123,13 @@ public class OpenMailActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_delete:
-                startActivity(new Intent(this, .class));
+                deleteMail(id);
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             //TODO change icon
 
             case R.id.forward_message:
-                startActivity(new Intent(this, .class));
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
 
 
@@ -188,6 +189,47 @@ public class OpenMailActivity extends AppCompatActivity {
     private String makeMail() {
         JsonObjectBuilder mail = Json.createObjectBuilder().add("isRead", true);
         return mail.build().toString();
+    }
+
+    private void deleteMail(String id) {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JSONObject parameters = new JSONObject();
+
+        try {
+            parameters.put("key", "value");
+        } catch (Exception e) {
+            Log.d(TAG, "Failed to put parameters: " + e.toString());
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, MSGRAPH_URL + id,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+            /* Successfully called graph, process data and send to UI */
+                Log.d(TAG, "Response: " + response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Error: " + error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+        };
+
+        Log.d(TAG, "Adding HTTP GET to Queue, Request: " + request.toString());
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(request);
     }
 
 }
