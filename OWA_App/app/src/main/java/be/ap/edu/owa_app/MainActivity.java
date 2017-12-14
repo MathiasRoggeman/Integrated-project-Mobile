@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("onderwerp", mail.getSubject());
                     intent.putExtra("date", mail.getDate());
                     intent.putExtra("message", mail.getMessage());
+                    intent.putExtra("accesstoken", authResult.getAccessToken());
+                    intent.putExtra("isRead", mail.isRead());
 
                     // 4
                     startActivity(intent);

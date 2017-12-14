@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -31,15 +32,12 @@ import java.util.Map;
 public class OpenMailActivity extends AppCompatActivity {
 
     private String id;
+    private String isRead;
     private static final String TAG = OpenMailActivity.class.getSimpleName();
     private String MSGRAPH_URL;
     SharedPreferences sharedPref;
     String token;
 
-    String onderwerp;
-    String sender;
-    String date;
-    String message;
 
 
     @Override
@@ -50,26 +48,28 @@ public class OpenMailActivity extends AppCompatActivity {
         id = this.getIntent().getExtras().getString("id");
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/" + id;
         sharedPref = getSharedPreferences("SessionInfo" , Context.MODE_PRIVATE);
-        token = sharedPref.getString("Saved_Token","");
+        token = this.getIntent().getExtras().getString("accesstoken");
+        isRead = this.getIntent().getExtras().getString("isRead");
+
+        String sender = this.getIntent().getExtras().getString("sender");
+        String onderwerp = this.getIntent().getExtras().getString("onderwerp");
+        String date = this.getIntent().getExtras().getString("date");
+        String message = this.getIntent().getExtras().getString("message");
+
+        final TextView zender = (TextView)findViewById(R.id.sender_open);
+        final TextView subject = (TextView)findViewById(R.id.onderwerp_open);
+        final TextView datum = (TextView)findViewById(R.id.date_open);
+        final EditText bericht = (EditText) findViewById(R.id.message_open);
+
+        String textFromHtml = Jsoup.parse(message).text();
 
         callGraphAPI();
 
-        /*String sender = this.getIntent().getExtras().getString("sender");
-        String onderwerp = this.getIntent().getExtras().getString("onderwerp");
-        String date = this.getIntent().getExtras().getString("date");
-        String message = this.getIntent().getExtras().getString("message");*/
 
-        TextView zender = (TextView)findViewById(R.id.sender_open);
-        TextView subject = (TextView)findViewById(R.id.onderwerp_open);
-        TextView datum = (TextView)findViewById(R.id.date_open);
-        EditText bericht = (EditText) findViewById(R.id.message_open);
-
-        //String textFromHtml = Jsoup.parse(message).text();
-
-        /*zender.setText(sender);
+        zender.setText(sender);
         subject.setText(onderwerp);
         datum.setText(date);
-        bericht.setText(textFromHtml);*/
+        bericht.setText(textFromHtml);
 
         Button button = findViewById(R.id.back_open);
 
@@ -94,23 +94,17 @@ public class OpenMailActivity extends AppCompatActivity {
 
         try {
             parameters.put("key", "value");
+            parameters.put("isRead", true);
         } catch (Exception e) {
             Log.d(TAG, "Failed to put parameters: " + e.toString());
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MSGRAPH_URL,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PATCH, MSGRAPH_URL,
                 parameters, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
             /* Successfully called graph, process data and send to UI */
                 Log.d(TAG, "Response: " + response.toString());
 
-                /*JSON Object creation*/
-                try {
-                    onderwerp = response.getString("subject");
-                    Log.d("onderwerp", onderwerp);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -122,6 +116,7 @@ public class OpenMailActivity extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + token);
+                headers.put("Content-Type", "application/json");
                 return headers;
             }
         };
@@ -134,4 +129,5 @@ public class OpenMailActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
+
 }
