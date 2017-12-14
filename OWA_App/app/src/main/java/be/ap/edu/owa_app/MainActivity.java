@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -83,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
         makeMailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Sendmail.class));
+                Intent intent = new Intent(MainActivity.this, Sendmail.class);
+                intent.putExtra("accesstoken", authResult.getAccessToken());
+                startActivity(intent);
+
             }
         });
 
@@ -231,11 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Successfully authenticated");
                 Log.d(TAG, "ID Token: " + authenticationResult.getIdToken());
 
-                /* send token to Sharedpref so it can be used on all screens*/
-                SharedPreferences sharedPref = getSharedPreferences("SessionInfo" , Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("Saved_Token", (authenticationResult.getIdToken()).toString());
-                editor.apply();
+
             /* Store the auth result */
                 authResult = authenticationResult;
 
