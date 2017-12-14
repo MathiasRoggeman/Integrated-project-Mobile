@@ -14,5 +14,9 @@
         android:icon="@drawable/ic_delete_black_24dp"
         android:title="@string/delete_mail"
         app:showAsAction="always" />
+
+
+
+
 </menu>
 
