@@ -1,8 +1,6 @@
 package be.ap.edu.owa_app;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -39,7 +37,9 @@ public class Sendmail extends AppCompatActivity {
     Button addAttachementButton;
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
-    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/sendMail/";
+    final static String SEND_URL = "https://graph.microsoft.com/v1.0/me/sendMail/";
+    final static String DRAFT_URL = "https://graph.microsoft.com/v1.0/me/messages";
+    Boolean attachementAdded = false;
     private AuthenticationResult authResult;
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -55,6 +55,13 @@ public class Sendmail extends AppCompatActivity {
 
         sendMailButton = findViewById(R.id.btnSendMail);
         addAttachementButton = findViewById(R.id.btnAttachement);
+        addAttachementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attachementAdded = true;
+            }
+        });
+
         sendMailButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
@@ -64,9 +71,6 @@ public class Sendmail extends AppCompatActivity {
                 }
             }
         });
-
-
-        //  mailContent.setText("Hier token " + token.toString());
 
 
     }
@@ -86,7 +90,7 @@ public class Sendmail extends AppCompatActivity {
 
         System.out.println(mailObject.toString());
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, MSGRAPH_URL, mailObject,
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, SEND_URL, mailObject,
             new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -97,7 +101,7 @@ public class Sendmail extends AppCompatActivity {
             }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "failed " + error.getMessage() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "failed " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 VolleyLog.e("Error: ", error.getMessage());
                 error.printStackTrace();
             }
@@ -131,6 +135,22 @@ public class Sendmail extends AppCompatActivity {
             );
         return mail.build().toString();
     }
+
+    private String makeDraftMail() {
+      String mailbody =   mailContent.getText().toString();
+        JsonObjectBuilder draftMail = Json.createObjectBuilder()
+            .add("recievedDataTime", 0)
+            .add("sentDateTime", 0)
+            .add("hasAttachements", attachementAdded)
+            .add("subject", mailSubject.getText().toString())
+            .add("Body", Json.createObjectBuilder()
+                .add("ContentType", "Text")
+                .add("Content", mailContent.getText().toString()))
+            .add("bodyPreview-value",mailbody.substring(0, Math.min(mailbody.length(), 255)));
+
+        return draftMail.build().toString();
+    }
+
 
 }
 
