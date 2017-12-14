@@ -12,6 +12,14 @@
     <string name="send_mail">Send mail</string>
     <string name="add_attachment">Add attachment </string>
     <string name="forward_message">Forward Message</string>
+
     <string name="delete_mail">Delete</string>
 
+
+    <string name="naam">naam</string>
+    <string name="mailadres">mailadres</string>
+    <string name="comment">Comment</string>
+    <string name="mail_inhoud">Mail inhoud</string>
+    <string name="send">Send</string>
+    <string name="e_mail">E-mail</string>
 </resources>
