@@ -29,10 +29,13 @@ import org.jsoup.Jsoup;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
+
 public class OpenMailActivity extends AppCompatActivity {
 
     private String id;
-    private String isRead;
+    private Boolean isRead;
     private static final String TAG = OpenMailActivity.class.getSimpleName();
     private String MSGRAPH_URL;
     SharedPreferences sharedPref;
@@ -46,10 +49,10 @@ public class OpenMailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_mail);
 
         id = this.getIntent().getExtras().getString("id");
-        MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/" + id;
+        MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
         sharedPref = getSharedPreferences("SessionInfo" , Context.MODE_PRIVATE);
         token = this.getIntent().getExtras().getString("accesstoken");
-        isRead = this.getIntent().getExtras().getString("isRead");
+        isRead = this.getIntent().getExtras().getBoolean("isRead");
 
         String sender = this.getIntent().getExtras().getString("sender");
         String onderwerp = this.getIntent().getExtras().getString("onderwerp");
@@ -63,8 +66,13 @@ public class OpenMailActivity extends AppCompatActivity {
 
         String textFromHtml = Jsoup.parse(message).text();
 
-        callGraphAPI();
+        try {
+            callGraphAPI(MSGRAPH_URL, id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        Log.d("isRead", makeMail());
 
         zender.setText(sender);
         subject.setText(onderwerp);
@@ -81,7 +89,7 @@ public class OpenMailActivity extends AppCompatActivity {
         });
     }
 
-    private void callGraphAPI() {
+    private void callGraphAPI(String url, String id) throws JSONException {
         Log.d("token", MSGRAPH_URL);
 
     /* Make sure we have a token to send to graph */
@@ -90,16 +98,16 @@ public class OpenMailActivity extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        JSONObject parameters = new JSONObject();
+        final JSONObject mailObject = new JSONObject(makeMail());
+        Log.d("isRead", mailObject.toString());
 
         try {
-            parameters.put("key", "value");
-            parameters.put("isRead", true);
+
         } catch (Exception e) {
             Log.d(TAG, "Failed to put parameters: " + e.toString());
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PATCH, MSGRAPH_URL,
-                parameters, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PATCH, MSGRAPH_URL + id,
+                mailObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
             /* Successfully called graph, process data and send to UI */
@@ -116,7 +124,7 @@ public class OpenMailActivity extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + token);
-                headers.put("Content-Type", "application/json");
+                headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
         };
@@ -128,6 +136,11 @@ public class OpenMailActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
+    }
+
+    private String makeMail() {
+        JsonObjectBuilder mail = Json.createObjectBuilder().add("isRead", true);
+        return mail.build().toString();
     }
 
 }
