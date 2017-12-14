@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="be.ap.edu.owa_app.Sendmail">
+
+    <item
+        android:id="@+id/action_cancel"
+        android:icon="@drawable/ic_cancel_black_24dp"
+        android:title="@string/cancel"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_add_attachment"
+        android:icon="@drawable/ic_attachment_black_24dp"
+        android:title="@string/add_attachment"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_send_mail"
+        android:icon="@drawable/ic_send_black_24dp"
+        android:title="@string/send_mail"
+        app:showAsAction="always" />
+
+
+</menu>
+

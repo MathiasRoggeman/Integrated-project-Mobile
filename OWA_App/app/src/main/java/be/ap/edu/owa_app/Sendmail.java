@@ -2,8 +2,11 @@ package be.ap.edu.owa_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,7 +39,7 @@ public class Sendmail extends AppCompatActivity {
     Button sendMailButton;
     Button addAttachementButton;
 
-    final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
+
     final static String SEND_URL = "https://graph.microsoft.com/v1.0/me/sendMail/";
     final static String DRAFT_URL = "https://graph.microsoft.com/v1.0/me/messages";
     Boolean attachementAdded = false;
@@ -46,35 +49,45 @@ public class Sendmail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendmail);
-
-
-        final String token = this.getIntent().getExtras().getString("accesstoken");
-
-
-        sendMailButton = findViewById(R.id.btnSendMail);
-        addAttachementButton = findViewById(R.id.btnAttachement);
-        addAttachementButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attachementAdded = true;
-            }
-        });
-
-        sendMailButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    sendMail(token);
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(null);
     }
 
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sendmail, menu);
+
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+            case R.id.action_send_mail:
+                final String token = this.getIntent().getExtras().getString("accesstoken");
+                try {
+                    sendMail(token);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            //TODO change icon
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void sendMail(final String token) throws JSONException {
 
         mailContent = findViewById(R.id.txtMailContent);
