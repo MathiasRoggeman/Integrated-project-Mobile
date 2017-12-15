@@ -10,7 +10,10 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+
+
+        <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,13 +35,16 @@
                     android:scheme="msal0f1fbbeb-1161-4034-9875-70c8099230d7" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".OpenMailActivity" />
         <activity android:name=".Sendmail" />
         <activity android:name=".ForwardActivity" />
+
         <activity
             android:name=".calendar"
             android:label="@string/title_activity_calendar"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+
     </application>
 
 </manifest>
