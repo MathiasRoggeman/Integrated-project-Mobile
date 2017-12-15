@@ -7,7 +7,7 @@
         android:title="@string/home"/>
 
     <item
-        android:id="@+id/action_bag"
+        android:id="@+id/action_calendar"
         android:icon="@drawable/ic_send_black_24dp"
         android:title="@string/bag"/>
 

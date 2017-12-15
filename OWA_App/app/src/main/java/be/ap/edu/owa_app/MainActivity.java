@@ -5,8 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -42,7 +48,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
-    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read", "https://graph.microsoft.com/Mail.ReadWrite", "https://graph.microsoft.com/Mail.Send", };
+    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read", "https://graph.microsoft.com/Mail.ReadWrite", "https://graph.microsoft.com/Mail.Send",};
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
     SharedPreferences pref;
 
@@ -52,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
     /* UI & Debugging Variables */
     private static final String TAG = MainActivity.class.getSimpleName();
     Button callGraphButton;
-    Button signOutButton;
-    Button makeMailButton;
+
+
     ListView listView;
 
     /* Azure AD Variables */
@@ -64,32 +70,38 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(null);
 
         callGraphButton = (Button) findViewById(R.id.callGraph);
-        signOutButton = (Button) findViewById(R.id.clearCache);
-        makeMailButton = (Button) findViewById(R.id.makeNewMail);
+
         callGraphButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onCallGraphClicked();
             }
         });
 
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onSignOutClicked();
-            }
-        });
-        makeMailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Sendmail.class);
-                intent.putExtra("accesstoken", authResult.getAccessToken());
-                startActivity(intent);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView != null) {
+            // Set action to perform when any menu-item is selected.
+            bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Intent intent = new Intent(MainActivity.this, calendar.class);
+                        intent.putExtra("accesstoken", authResult.getAccessToken());
+                        startActivity(intent);
+                        return false;
+                    }
+                });
+        }
 
-            }
-        });
 
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
+        /*listView.setèOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -102,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         sampleApp = null;
         if (sampleApp == null) {
             sampleApp = new PublicClientApplication(
+
                 this.getApplicationContext(),
                 CLIENT_ID);
         }
@@ -137,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(listadapter);
 
         final Context context = this;
-        if(listView != null) {
+        if (listView != null) {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
@@ -164,6 +177,80 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    private void setupNavigationView() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView != null) {
+
+            // Select first menu item by default and show Fragment accordingly.
+            Menu menu = bottomNavigationView.getMenu();
+            selectFragment(menu.getItem(0));
+
+            // Set action to perform when any menu-item is selected.
+            bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        selectFragment(item);
+                        return false;
+                    }
+                });
+        }
+    }
+    protected void selectFragment(MenuItem item) {
+
+        item.setChecked(true);
+
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                // Action to perform when Home Menu item is selected.
+
+                break;
+            case R.id.action_calendar:
+                // Action to perform when Bag Menu item is selected.
+                Intent intent = new Intent(MainActivity.this, calendar.class);
+                intent.putExtra("accesstoken", authResult.getAccessToken());
+                startActivity(intent);
+                break;
+        }
+    }
+
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_maillist, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+            case R.id.action_create_mail:
+                Intent intent = new Intent(MainActivity.this, Sendmail.class);
+                intent.putExtra("accesstoken", authResult.getAccessToken());
+                startActivity(intent);
+                return true;
+
+
+            case R.id.action_logout:
+                onSignOutClicked();
+                return true;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 //
@@ -267,8 +354,7 @@ public class MainActivity extends AppCompatActivity {
     /* Set the UI for successful token acquisition data */
     private void updateSuccessUI() {
         callGraphButton.setVisibility(View.INVISIBLE);
-        signOutButton.setVisibility(View.VISIBLE);
-        makeMailButton.setVisibility(View.VISIBLE);
+
         //findViewById(R.id.welcome).setVisibility(View.VISIBLE);
         //((TextView) findViewById(R.id.welcome)).setText("Welcome, " +
         //        authResult.getUser().getName());
@@ -401,12 +487,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /* Set the UI for signed-out user */
     private void updateSignedOutUI() {
         callGraphButton.setVisibility(View.VISIBLE);
-        signOutButton.setVisibility(View.INVISIBLE);
-        makeMailButton.setVisibility(View.INVISIBLE);
+
         //findViewById(R.id.welcome).setVisibility(View.INVISIBLE);
         //findViewById(R.id.graphData).setVisibility(View.INVISIBLE);
         //((TextView) findViewById(R.id.graphData)).setText("No Data");

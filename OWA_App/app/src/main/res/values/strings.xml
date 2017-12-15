@@ -33,4 +33,8 @@
     <string name="bag">Calendar</string>
     <string name="account">Contacts</string>
 
+    <string name="create_mail">Create mail</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_calendar">calendar</string>
+
 </resources>
