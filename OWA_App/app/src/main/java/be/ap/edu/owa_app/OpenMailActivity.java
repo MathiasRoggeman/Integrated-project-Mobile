@@ -90,7 +90,10 @@ public class OpenMailActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OpenMailActivity.this, MainActivity.class));
+
+                Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
             }
         });
         forward.setOnClickListener(new View.OnClickListener() {
@@ -127,12 +130,16 @@ public class OpenMailActivity extends AppCompatActivity {
 
             case R.id.action_delete:
                 deleteMail(id);
-                startActivity(new Intent(this, MainActivity.class));
+                Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
                 return true;
             //TODO change icon
 
             case R.id.forward_message:
-                startActivity(new Intent(this, MainActivity.class));
+                Intent i = new Intent(OpenMailActivity.this, MainActivity.class);
+                i.putExtra("token", token);
+                startActivity(i);
                 return true;
 
 
