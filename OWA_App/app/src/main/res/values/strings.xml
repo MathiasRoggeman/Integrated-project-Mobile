@@ -24,7 +24,13 @@
     <string name="e_mail">E-mail</string>
     <string name="cancel">Cancel</string>
 
+
     <string name="bottom_menu_mail">bottom_menu_mail</string>
     <string name="bottom_menu_calendar">bottom_menu_calendar</string>
     <string name="bottom_menu_contacts">bottom_menu_contacts</string>
+
+    <string name="home">Mail</string>
+    <string name="bag">Calendar</string>
+    <string name="account">Contacts</string>
+
 </resources>
