@@ -54,14 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     /* UI & Debugging Variables */
     private static final String TAG = MainActivity.class.getSimpleName();
-    //Button callGraphButton;
-    Button signOutButton;
-    Button makeMailButton;
     ListView listView;
-
-    /* Azure AD Variables */
-    //private PublicClientApplication sampleApp;
-    //private AuthenticationResult authResult;
     private String token;
 
     @Override
@@ -125,8 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        //handle presses on the action bar items
         switch (item.getItemId()) {
 
             case android.R.id.home:
@@ -149,132 +140,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//
-// App callbacks for MSAL
-// ======================
-// getActivity() - returns activity so we can acquireToken within a callback
-// getAuthSilentCallback() - callback defined to handle acquireTokenSilent() case
-// getAuthInteractiveCallback() - callback defined to handle acquireToken() case
-//
-
-    /*public Activity getActivity() {
-        return this;
-    }
-
-    /* Callback method for acquireTokenSilent calls
-     * Looks if tokens are in the cache (refreshes if necessary and if we don't forceRefresh)
-     * else errors that we need to do an interactive request.
-     */
-   /* private AuthenticationCallback getAuthSilentCallback() {
-        return new AuthenticationCallback() {
-            @Override
-            public void onSuccess(AuthenticationResult authenticationResult) {
-            // Successfully got a token, call Graph now
-                Log.d(TAG, "Successfully authenticated");
-
-            // Store the authResult
-                authResult = authenticationResult;
-
-            // call graph
-                callGraphAPI();
-
-            // update the UI to post call Graph state
-                updateSuccessUI();
-            }
-
-            @Override
-            public void onError(MsalException exception) {
-            // Failed to acquireToken
-                Log.d(TAG, "Authentication failed: " + exception.toString());
-
-                if (exception instanceof MsalClientException) {
-                // Exception inside MSAL, more info inside MsalError.java
-                } else if (exception instanceof MsalServiceException) {
-                // Exception when communicating with the STS, likely config issue
-                } else if (exception instanceof MsalUiRequiredException) {
-                // Tokens expired or no session, retry with interactive
-                }
-            }
-
-            @Override
-            public void onCancel() {
-            //User canceled the authentication
-                Log.d(TAG, "User cancelled login.");
-            }
-        };
-    }*/
-
-
-    /* Callback used for interactive request.  If succeeds we use the access
-         * token to call the Microsoft Graph. Does not check cache
-         */
-    /*private AuthenticationCallback getAuthInteractiveCallback() {
-        return new AuthenticationCallback() {
-            @Override
-            public void onSuccess(AuthenticationResult authenticationResult) {
-            /* Successfully got a token, call graph now
-                Log.d(TAG, "Successfully authenticated");
-                Log.d(TAG, "ID Token: " + authenticationResult.getIdToken());
-
-
-            /* Store the auth result
-                authResult = authenticationResult;
-
-            /* call Graph
-                callGraphAPI();
-
-            /* update the UI to post call Graph state
-                updateSuccessUI();
-            }
-
-            @Override
-            public void onError(MsalException exception) {
-            /* Failed to acquireToken
-                Log.d(TAG, "Authentication failed: " + exception.toString());
-
-                if (exception instanceof MsalClientException) {
-                /* Exception inside MSAL, more info inside MsalError.java
-                } else if (exception instanceof MsalServiceException) {
-                /* Exception when communicating with the STS, likely config issue
-                }
-            }
-
-            @Override
-            public void onCancel() {
-            /* User canceled the authentication
-                Log.d(TAG, "User cancelled login.");
-            }
-        };
-    }*/
-
-    /* Set the UI for successful token acquisition data */
-    //Only setting everything visible not necessary
-    /*private void updateSuccessUI() {
-        callGraphButton.setVisibility(View.INVISIBLE);
-        signOutButton.setVisibility(View.VISIBLE);
-        makeMailButton.setVisibility(View.VISIBLE);
-        //findViewById(R.id.welcome).setVisibility(View.VISIBLE);
-        //((TextView) findViewById(R.id.welcome)).setText("Welcome, " +
-        //        authResult.getUser().getName());
-        //findViewById(R.id.graphData).setVisibility(View.VISIBLE);
-        findViewById(R.id.mobile_list).setVisibility(View.VISIBLE);
-    }*/
-
-    /* Use MSAL to acquireToken for the end-user
-     * Callback will call Graph api w/ access token & update UI
-     */
-    /*private void onCallGraphClicked() {
-        sampleApp.acquireToken(getActivity(), SCOPES, getAuthInteractiveCallback());
-    }
-
-    /* Handles the redirect from the System Browser
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        sampleApp.handleInteractiveRequestRedirect(requestCode, resultCode, data);
-    }/*
-
-
-    /* Use Volley to make an HTTP request to the /me endpoint from MS Graph using an access token */
     private void callGraphAPI(final String token) {
         Log.d(TAG, "Starting volley request to graph");
 
@@ -325,8 +190,6 @@ public class MainActivity extends AppCompatActivity {
 
     /* Sets the Graph response */
     private void updateGraphUI(JSONObject graphResponse) {
-        //TextView graphText = (TextView) findViewById(R.id.graphData);
-        //graphText.setText(graphResponse.toString());
         try {
             JSONArray subject = graphResponse.getJSONArray("value");
             for (int i = 0; i < subject.length(); i++) {
@@ -345,58 +208,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    /* Clears a user's tokens from the cache.
- * Logically similar to "sign out" but only signs out of this app.
- */
-    /*private void onSignOutClicked() {
-
-    /* Attempt to get a user and remove their cookies from cache
-        List<User> users = null;
-
-        try {
-            users = sampleApp.getUsers();
-
-            if (users == null) {
-            /* We have no users
-
-            } else if (users.size() == 1) {
-            /* We have 1 user */
-            /* Remove from token cache
-                sampleApp.remove(users.get(0));
-                //updateSignedOutUI();
-
-            } else {
-            /* We have multiple users
-                for (int i = 0; i < users.size(); i++) {
-                    sampleApp.remove(users.get(i));
-                }
-            }
-
-            Toast.makeText(getBaseContext(), "Signed Out!", Toast.LENGTH_SHORT)
-                .show();
-
-        } catch (MsalClientException e) {
-            Log.d(TAG, "MSAL Exception Generated while getting users: " + e.toString());
-
-        } catch (IndexOutOfBoundsException e) {
-            Log.d(TAG, "User at this position does not exist: " + e.toString());
-        }
-    }*/
-
-
-
-    /* Set the UI for signed-out user */
-    //Go back to LoginACTIVITY
-    /*private void updateSignedOutUI() {
-        callGraphButton.setVisibility(View.VISIBLE);
-        signOutButton.setVisibility(View.INVISIBLE);
-        makeMailButton.setVisibility(View.INVISIBLE);
-        //findViewById(R.id.welcome).setVisibility(View.INVISIBLE);
-        //findViewById(R.id.graphData).setVisibility(View.INVISIBLE);
-        //((TextView) findViewById(R.id.graphData)).setText("No Data");
-        findViewById(R.id.mobile_list).setVisibility(View.INVISIBLE);
-    }*/
 
     private void onSignOutClicked() {
         PublicClientApplication sampleApp;

@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login = (Button) findViewById(R.id.login);
-        //signOutButton = (Button) findViewById(R.id.clearCache);
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -50,12 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        /*signOutButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onSignOutClicked();
-            }
-        });*/
-  /* Configure your sample app and save state for this activity */
         sampleApp = null;
         if (sampleApp == null) {
             sampleApp = new PublicClientApplication(
@@ -63,9 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                     CLIENT_ID);
         }
 
-  /* Attempt to get a user and acquireTokenSilent
-   * If this fails we do an interactive request
-   */
         List<User> users = null;
 
         try {
@@ -118,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("token", authResult.getAccessToken());
 
             /* call graph */
-                //callGraphAPI();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.putExtra("token", authResult.getAccessToken());
                 intent.putExtra("clientid", CLIENT_ID);
