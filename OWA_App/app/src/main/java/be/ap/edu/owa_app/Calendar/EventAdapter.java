@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import be.ap.edu.owa_app.MailList;
 import be.ap.edu.owa_app.R;
@@ -71,8 +75,19 @@ public class EventAdapter extends ArrayAdapter<Event> {
                 subject.setText(i.getSubject());
             }
             if (date != null){
-                String datetime = i.getStartDate() + " - " + i.getEndDate();
-                date.setText(datetime);
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                    Date startdate = null;//You will get date object relative to server/client timezone wherever it is parsed
+                    startdate = dateFormat.parse(i.getStartDate());
+                    Date enddate = dateFormat.parse(i.getEndDate());
+                    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy' 'HH:mm");
+                    String dateStr = formatter.format(startdate);
+                    String endD = formatter.format(enddate);
+                    String datetime = dateStr + " - " + endD;
+                    date.setText(datetime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

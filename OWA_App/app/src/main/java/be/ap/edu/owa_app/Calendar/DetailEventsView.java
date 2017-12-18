@@ -3,6 +3,7 @@ package be.ap.edu.owa_app.Calendar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +68,12 @@ public class DetailEventsView extends AppCompatActivity {
         attendees = findViewById(R.id.aanwezigen_eventdetail);
 
         onderwerp.setText(subject);
-        description.setText(beschrijving);
+        //description.setText(beschrijving);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            description.setText(Html.fromHtml(beschrijving,Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            description.setText(Html.fromHtml(beschrijving));
+        }
         datetime.setText(startdate + " - " + enddate);
         locatie.setText(location);
         attendees.setText(aanwezigen);

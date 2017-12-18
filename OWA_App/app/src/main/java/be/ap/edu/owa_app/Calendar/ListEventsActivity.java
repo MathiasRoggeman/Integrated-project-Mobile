@@ -61,6 +61,7 @@ public class ListEventsActivity extends AppCompatActivity {
 
         callGraphAPI(token, MSGRAPH_URL);
 
+
         //Log.d("eventslist", events.get(0).toString());
 
         listView = findViewById(R.id.event_list);
