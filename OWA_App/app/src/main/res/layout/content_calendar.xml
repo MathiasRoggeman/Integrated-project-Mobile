@@ -8,4 +8,5 @@
     tools:context="be.ap.edu.owa_app.Calendar.CalendarActivity"
     tools:showIn="@layout/activity_calendar">
 
+
 </android.support.constraint.ConstraintLayout>
