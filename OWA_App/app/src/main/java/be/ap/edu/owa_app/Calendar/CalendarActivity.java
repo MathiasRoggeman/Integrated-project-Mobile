@@ -2,26 +2,25 @@ package be.ap.edu.owa_app.Calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
+import be.ap.edu.owa_app.MainActivity;
 import be.ap.edu.owa_app.R;
 
 public class CalendarActivity extends AppCompatActivity {
 
     CalendarView calendarView;
-    Button today;
-    Button add;
-    Button listEvents;
+
     String token;
 
     @Override
@@ -32,38 +31,30 @@ public class CalendarActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(null);
 
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.action_calendar);
+        if (bottomNavigationView != null) {
+            // Set action to perform when any menu-item is selected.
+            bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        selectFragment(item);
+                        return false;
+                    }
+                });
+        }
+
         token = this.getIntent().getExtras().getString("token");
-        today = findViewById(R.id.today);
-        add = findViewById(R.id.addEvent);
-        listEvents = findViewById(R.id.listEvents);
+
         calendarView = findViewById(R.id.calendarView3);
         calendarView.setShowWeekNumber(true);
 
         calendarView.setDate(Calendar.getInstance().getTimeInMillis(),false,true);
 
-        today.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                calendarView.setDate(Calendar.getInstance().getTimeInMillis(),false,true);
-            }
-        });
-        listEvents.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CalendarActivity.this, ListEventsActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CalendarActivity.this, AddEventActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -86,9 +77,25 @@ public class CalendarActivity extends AppCompatActivity {
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_calendar, menu);
-
         return true;
 
+    }
+    protected void selectFragment(MenuItem item) {
+
+        item.setChecked(true);
+
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                // Action to perform when Home Menu item is selected.
+                Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
+                intent.putExtra("token",token);
+                startActivity(intent);
+                break;
+            case R.id.action_calendar:
+                // Action to perform when Bag Menu item is selected.
+
+                break;
+        }
     }
 
 

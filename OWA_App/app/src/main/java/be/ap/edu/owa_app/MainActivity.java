@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
         if (bottomNavigationView != null) {
             // Set action to perform when any menu-item is selected.
             bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -123,25 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setupNavigationView() {
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        if (bottomNavigationView != null) {
 
-            // Select first menu item by default and show Fragment accordingly.
-            Menu menu = bottomNavigationView.getMenu();
-            selectFragment(menu.getItem(0));
-
-            // Set action to perform when any menu-item is selected.
-            bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        selectFragment(item);
-                        return false;
-                    }
-                });
-        }
-    }
     protected void selectFragment(MenuItem item) {
 
         item.setChecked(true);

@@ -53,6 +53,6 @@
     <string name="starttime">Starttime</string>
     <string name="startdate">Startdate</string>
     <string name="aanwezig">Aanwezig</string>
-
+    <string name="search">Search</string>
 
 </resources>
