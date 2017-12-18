@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.ap.edu.owa_app.Calendar.DetailEventsView">
+
+    <TextView
+        android:id="@+id/subject_eventdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/beschrijving_eventdetail"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="62dp"
+        android:text="@string/subject"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <TextView
+        android:id="@+id/beschrijving_eventdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/datetime_eventdetail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp"
+        android:text="@string/beschrijving"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <TextView
+        android:id="@+id/datetime_eventdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/locatie_eventdetail"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="57dp"
+        android:text="@string/date_time_date_time"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="148dp" />
+
+    <TextView
+        android:id="@+id/locatie_eventdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/aanwezigen_eventdetail"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="50dp"
+        android:text="@string/locatie"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="197dp" />
+
+    <TextView
+        android:id="@+id/aanwezigen_eventdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="114dp"
+        android:text="@string/aanwezigen"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <Button
+        android:id="@+id/backdetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="39dp"
+        android:layout_marginStart="17dp"
+        android:text="@string/back" />
+
+    <Button
+        android:id="@+id/deletedetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/backdetail"
+        android:layout_marginEnd="24dp"
+        android:text="@string/delete_mail" />
+</RelativeLayout>

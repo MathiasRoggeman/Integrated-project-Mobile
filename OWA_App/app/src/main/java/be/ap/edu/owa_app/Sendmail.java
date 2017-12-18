@@ -75,7 +75,7 @@ public class Sendmail extends AppCompatActivity {
                 return true;
 
             case R.id.action_send_mail:
-                final String token = this.getIntent().getExtras().getString("accesstoken");
+                final String token = this.getIntent().getExtras().getString("token");
                 try {
                     sendMail(token);
                 } catch (JSONException e) {

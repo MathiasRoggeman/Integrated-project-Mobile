@@ -37,10 +37,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import be.ap.edu.owa_app.Calendar.CalendarActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
-    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read", "https://graph.microsoft.com/Mail.ReadWrite", "https://graph.microsoft.com/Mail.Send",};
+    final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read",
+            "https://graph.microsoft.com/Mail.ReadWrite",
+            "https://graph.microsoft.com/Mail.Send",
+            "https://graph.microsoft.com/Calendars.Read" };
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
 
     private ArrayList<MailList> maillist = new ArrayList<>();
@@ -48,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     /* UI & Debugging Variables */
     private static final String TAG = MainActivity.class.getSimpleName();
-
-
-
-
 
 
     ListView listView;
@@ -88,9 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.mobile_list);
 
-        listadapter = new ListAdapter(this, R.layout.activity_listview, maillist);
+        listadapter = new ListAdapter(this, R.layout.activity_listviewmails, maillist);
         listView.setAdapter(listadapter);
-        listView.setVisibility(View.VISIBLE);
 
         final Context context = this;
         if (listView != null) {
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("onderwerp", mail.getSubject());
                     intent.putExtra("date", mail.getDate());
                     intent.putExtra("message", mail.getMessage());
-                    intent.putExtra("accesstoken", token);
+                    intent.putExtra("token", token);
                     intent.putExtra("isRead", mail.isRead());
 
                     // 4
@@ -153,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_calendar:
                 // Action to perform when Bag Menu item is selected.
-                Intent intent = new Intent(MainActivity.this, calendar.class);
-                intent.putExtra("accesstoken",token);
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                intent.putExtra("token",token);
                 startActivity(intent);
                 break;
         }
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_create_mail:
                 Intent intent = new Intent(MainActivity.this, Sendmail.class);
-                intent.putExtra("accesstoken", token);
+                intent.putExtra("token", token);
                 startActivity(intent);
                 return true;
 

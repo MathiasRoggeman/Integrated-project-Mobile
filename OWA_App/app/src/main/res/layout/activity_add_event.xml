@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.ap.edu.owa_app.Calendar.AddEventActivity">
+
+    <EditText
+        android:id="@+id/addevent_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:hint="@string/subject"
+        android:inputType="text|textShortMessage" />
+
+    <EditText
+        android:id="@+id/addevent_beschrijving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addevent_subject"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="@string/beschrijving"
+        android:inputType="textShortMessage" />
+
+    <EditText
+        android:id="@+id/addevent_startdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/addevent_enddate"
+        android:layout_below="@+id/addevent_beschrijving"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/startdate"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/addevent_starttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/addevent_startdate"
+        android:layout_alignBottom="@+id/addevent_startdate"
+        android:layout_marginStart="52dp"
+        android:layout_toEndOf="@+id/addevent_startdate"
+        android:ems="10"
+        android:hint="@string/starttime"
+        android:inputType="time" />
+
+    <EditText
+        android:id="@+id/addevent_enddate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addevent_startdate"
+        android:layout_marginEnd="120dp"
+        android:layout_marginTop="39dp"
+        android:layout_toStartOf="@+id/saveEvent"
+        android:ems="10"
+        android:hint="@string/enddate"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/addevent_endtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/addevent_enddate"
+        android:layout_alignBottom="@+id/addevent_enddate"
+        android:layout_alignStart="@+id/addevent_starttime"
+        android:ems="10"
+        android:hint="@string/endtime"
+        android:inputType="time" />
+
+    <EditText
+        android:id="@+id/addevent_locatie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/addevent_beschrijving"
+        android:layout_below="@+id/addevent_enddate"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="@string/locatie"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/addevent_naam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/addevent_enddate"
+        android:layout_below="@+id/addevent_locatie"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/naam"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/addevent_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/addevent_naam"
+        android:layout_alignBottom="@+id/addevent_naam"
+        android:layout_alignStart="@+id/addevent_endtime"
+        android:ems="10"
+        android:hint="@string/emailadres"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/saveEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="42dp"
+        android:layout_marginEnd="13dp"
+        android:text="@string/save_event" />
+
+    <TextView
+        android:id="@+id/aanwezig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/addevent_locatie"
+        android:text="@string/aanwezig" />
+
+    <Button
+        android:id="@+id/addevent_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/addevent_naam"
+        android:layout_alignTop="@+id/saveEvent"
+        android:layout_marginEnd="27dp"
+        android:text="@string/back" />
+
+</RelativeLayout>

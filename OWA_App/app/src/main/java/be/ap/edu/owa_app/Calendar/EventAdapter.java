@@ -1,8 +1,8 @@
-package be.ap.edu.owa_app;
-
+package be.ap.edu.owa_app.Calendar;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +11,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import be.ap.edu.owa_app.MailList;
+import be.ap.edu.owa_app.R;
+
 /**
- * Created by isa_l on 06-12-17.
+ * Created by isa_l on 16-12-17.
  */
 
-public class ListAdapter extends ArrayAdapter<MailList> {
+public class EventAdapter extends ArrayAdapter<Event> {
 
-
-    // declaring our ArrayList of items
-    private ArrayList<MailList> objects;
+    private ArrayList<Event> objects;
 
     /* here we must override the constructor for ArrayAdapter
     * the only variable we care about now is ArrayList<Item> objects,
     * because it is the list of objects we want to display.
     */
-    public ListAdapter(Context context, int textViewResourceId, ArrayList<MailList> objects) {
+    public EventAdapter(Context context, int textViewResourceId, ArrayList<Event> objects) {
         super(context, textViewResourceId, objects);
         this.objects = objects;
     }
@@ -43,7 +44,7 @@ public class ListAdapter extends ArrayAdapter<MailList> {
         // to inflate it basically means to render, or show, the view.
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = inflater.inflate(R.layout.activity_listviewmails, null);
+        v = inflater.inflate(R.layout.activity_listviewevents, null);
 
 
 		/*
@@ -53,34 +54,25 @@ public class ListAdapter extends ArrayAdapter<MailList> {
 		 *
 		 * Therefore, i refers to the current Item object.
 		 */
-        MailList i = objects.get(position);
+        Event i = objects.get(position);
 
         if (i != null) {
 
             // This is how you obtain a reference to the TextViews.
             // These TextViews are created in the XML files we defined.
 
-            TextView tt = (TextView) v.findViewById(R.id.subject);
-            TextView ttd = (TextView) v.findViewById(R.id.sender);
-            TextView bp = (TextView) v.findViewById(R.id.body);
-           // CheckBox cb = v.findViewById(R.id.delete);
+            TextView subject = (TextView) v.findViewById(R.id.subject_event);
+            TextView date = (TextView) v.findViewById(R.id.date_event);
 
 
             // check to see if each individual textview is null.
             // if not, assign some text!
-            if (tt != null){
-                tt.setText(i.getSubject());
+            if (subject != null){
+                subject.setText(i.getSubject());
             }
-            if (ttd != null){
-                ttd.setText(i.getSender());
-            }
-            if (bp != null){
-                bp.setText(i.getBodyPreview());
-            }
-            if(!(i.isRead())){
-                tt.setTextColor(Color.RED);
-                bp.setTextColor(Color.RED);
-                ttd.setTextColor(Color.RED);
+            if (date != null){
+                String datetime = i.getStartDate() + " - " + i.getEndDate();
+                date.setText(datetime);
             }
         }
 
@@ -89,7 +81,7 @@ public class ListAdapter extends ArrayAdapter<MailList> {
 
     }
 
-    public MailList getItem(int position){
+    public Event getItem(int position){
         return objects.get(position);
     }
 }

@@ -37,6 +37,22 @@
     <string name="create_mail">Create mail</string>
     <string name="logout">Logout</string>
     <string name="title_activity_calendar">calendar</string>
+    <string name="add_event">Add Event</string>
+    <string name="list_events">List Events</string>
+    <string name="go_to_today">Go to today</string>
+    <string name="no_events_yet">No Events Yet</string>
+    <string name="subject">Subject</string>
+    <string name="beschrijving">Beschrijving</string>
+    <string name="date_time_date_time">Date Time - Date Time</string>
+    <string name="locatie">Locatie</string>
+    <string name="aanwezigen">Aanwezigen</string>
+    <string name="save_event">Save Event</string>
+    <string name="emailadres">Emailadres</string>
+    <string name="endtime">Endtime</string>
+    <string name="enddate">Enddate</string>
+    <string name="starttime">Starttime</string>
+    <string name="startdate">Startdate</string>
+    <string name="aanwezig">Aanwezig</string>
 
 
 </resources>

@@ -23,7 +23,11 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
-    final static String SCOPES [] = {"https://graph.microsoft.com/Mail.Read", "https://graph.microsoft.com/Mail.ReadWrite", "https://graph.microsoft.com/Mail.Send"};
+    final static String SCOPES [] = {"https://graph.microsoft.com/Mail.Read",
+            "https://graph.microsoft.com/Mail.ReadWrite",
+            "https://graph.microsoft.com/Mail.Send",
+            "https://graph.microsoft.com/Calendars.Read",
+            "https://graph.microsoft.com/Calendars.ReadWrite"};
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me";
 
     /* UI & Debugging Variables */
