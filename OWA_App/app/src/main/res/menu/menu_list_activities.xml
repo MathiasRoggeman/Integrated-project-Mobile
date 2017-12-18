@@ -9,14 +9,8 @@
         android:icon="@drawable/ic_control_point_black_24dp"
         android:title="@string/add_event"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/action_list_events"
-        android:icon="@drawable/ic_event_note_black_24dp"
-        android:title="@string/list_events"
-        app:showAsAction="always" />
 
 
 
 
 </menu>
-

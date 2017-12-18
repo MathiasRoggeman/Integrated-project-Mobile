@@ -2,9 +2,13 @@ package be.ap.edu.owa_app.Calendar;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -32,8 +36,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import be.ap.edu.owa_app.MailList;
-import be.ap.edu.owa_app.OpenMailActivity;
 import be.ap.edu.owa_app.R;
 
 public class ListEventsActivity extends AppCompatActivity {
@@ -53,7 +55,9 @@ public class ListEventsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_events);
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Eventlist");
         token = this.getIntent().getExtras().getString("token");
         Log.d("accesstoken", token);
 
@@ -117,6 +121,33 @@ public class ListEventsActivity extends AppCompatActivity {
             }
         });
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list_activities, menu);
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+            case R.id.action_add_event:
+                Intent intent = new Intent(ListEventsActivity.this, AddEventActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
+                return true;
+
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void callGraphAPI(final String token, String url) {
         Log.d("Start", "Start callGraphAPI");
@@ -127,7 +158,7 @@ public class ListEventsActivity extends AppCompatActivity {
 
         try {
             parameters.put("key", "value");
-            Log.d("ParametesO", parameters.toString());
+            Log.d("ParametersO", parameters.toString());
         } catch (Exception e) {
             Log.d("ParametersE", "Failed to put parameters: " + e.toString());
         }

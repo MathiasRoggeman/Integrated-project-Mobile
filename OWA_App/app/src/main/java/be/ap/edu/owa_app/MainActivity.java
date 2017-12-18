@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setTitle("Postvak in");
 
         token = this.getIntent().getExtras().getString("token");
         Log.d("messagetoken", token);
