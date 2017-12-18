@@ -14,13 +14,13 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
+
     <ListView
         android:id="@+id/event_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="59dp" />
+        android:layout_below="@+id/my_toolbar" />
 
     <Button
         android:id="@+id/back_eventlist"

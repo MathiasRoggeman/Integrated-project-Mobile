@@ -140,6 +140,12 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("token",token);
                 startActivity(intent);
                 break;
+            case R.id.action_contacts:
+                // Action to perform when Bag Menu item is selected.
+                Intent intent2 = new Intent(MainActivity.this, Contacts.class);
+                intent2.putExtra("token",token);
+                startActivity(intent2);
+                break;
         }
     }
 

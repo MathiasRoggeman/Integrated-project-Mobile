@@ -43,7 +43,8 @@
         <activity android:name=".Calendar.ListEventsActivity" />
         <activity android:name=".Calendar.ListEventDateActivity" />
         <activity android:name=".Calendar.DetailEventsView" />
-        <activity android:name=".Calendar.AddEventActivity"></activity>
+        <activity android:name=".Calendar.AddEventActivity" />
+        <activity android:name=".Contacts"></activity>
     </application>
 
 </manifest>
