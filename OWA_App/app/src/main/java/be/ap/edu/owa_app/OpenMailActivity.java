@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,12 +78,18 @@ public class OpenMailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Log.d("isRead", makeMail());
+        if(message.contains("<style>")) {
+            message = message.replace(message.substring(message.lastIndexOf("<style>"), message.lastIndexOf("</head>")), "");
+        }
 
         zender.setText(sender);
         subject.setText(onderwerp);
         datum.setText(date);
-        bericht.setText(textFromHtml);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            bericht.setText(Html.fromHtml(message,Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            bericht.setText(Html.fromHtml(message));
+        }
 
         Button button = findViewById(R.id.back_open);
         Button forward = (Button)findViewById(R.id.forward_message);
