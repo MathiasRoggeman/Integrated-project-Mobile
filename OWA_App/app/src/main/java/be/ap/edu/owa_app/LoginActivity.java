@@ -27,7 +27,9 @@ public class LoginActivity extends AppCompatActivity {
             "https://graph.microsoft.com/Mail.ReadWrite",
             "https://graph.microsoft.com/Mail.Send",
             "https://graph.microsoft.com/Calendars.Read",
-            "https://graph.microsoft.com/Calendars.ReadWrite"};
+            "https://graph.microsoft.com/Calendars.ReadWrite",
+            "https://graph.microsoft.com/Contacts.Read",
+            "https://graph.microsoft.com/Contacts.ReadWrite"};
     final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me";
 
     /* UI & Debugging Variables */

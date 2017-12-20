@@ -56,7 +56,6 @@ public class OpenMailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
         id = this.getIntent().getExtras().getString("id");
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
-        sharedPref = getSharedPreferences("SessionInfo" , Context.MODE_PRIVATE);
         token = this.getIntent().getExtras().getString("token");
         isRead = this.getIntent().getExtras().getBoolean("isRead");
 

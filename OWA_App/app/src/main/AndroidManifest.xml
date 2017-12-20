@@ -5,8 +5,9 @@
     <application
         android:allowBackup="true"
         android:configChanges="orientation"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_smiley"
+        android:label="NOT OWA"
+        android:roundIcon="@mipmap/ic_smiley"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -44,7 +45,13 @@
         <activity android:name=".Calendar.ListEventDateActivity" />
         <activity android:name=".Calendar.DetailEventsView" />
         <activity android:name=".Calendar.AddEventActivity" />
-        <activity android:name=".Contacts"></activity>
+        <activity android:name=".Contacts.ContactsActivity" />
+        <activity android:name=".Contacts.ContactsDetailActivity" />
+        <activity
+            android:name=".Contacts.EditContactActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Contacts.AddContactActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 import be.ap.edu.owa_app.Calendar.CalendarActivity;
+import be.ap.edu.owa_app.Contacts.ContactsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_contacts:
                 // Action to perform when Bag Menu item is selected.
-                Intent intent2 = new Intent(MainActivity.this, Contacts.class);
+                Intent intent2 = new Intent(MainActivity.this, ContactsActivity.class);
                 intent2.putExtra("token",token);
                 startActivity(intent2);
                 break;

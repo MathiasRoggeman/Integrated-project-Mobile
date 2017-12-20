@@ -16,7 +16,7 @@
     <string name="delete_mail">Delete</string>
 
 
-    <string name="naam">naam</string>
+    <string name="naam">Naam</string>
     <string name="mailadres">mailadres</string>
     <string name="comment">Comment</string>
     <string name="mail_inhoud">Mail inhoud</string>
@@ -54,5 +54,9 @@
     <string name="startdate">Startdate</string>
     <string name="aanwezig">Aanwezig</string>
     <string name="search">Search</string>
+    <string name="contactnaam">contactnaam</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="bewerken">Bewerken</string>
+    <string name="voornaam">Voornaam</string>
 
 </resources>
