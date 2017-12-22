@@ -30,8 +30,8 @@
         android:id="@+id/person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editfirstname"
         android:layout_alignStart="@+id/phone"
+        android:layout_alignTop="@+id/editname"
         android:scrollbars="vertical"
         android:src="@drawable/ic_person_black_24dp"
         android:tint="@android:color/darker_gray" />
@@ -63,8 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editmail"
-        android:layout_marginEnd="18dp"
-        android:layout_toStartOf="@+id/editnumber"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="33dp"
         android:src="@drawable/ic_phone_android_black_24dp"
         android:tint="@android:color/darker_gray" />
 
@@ -72,9 +72,9 @@
         android:id="@+id/editmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/editnumber"
         android:layout_below="@+id/editnumber"
-        android:layout_marginTop="67dp"
-        android:layout_toEndOf="@+id/phone"
+        android:layout_marginTop="66dp"
         android:ems="10"
         android:hint="@string/e_mail"
         android:inputType="textPersonName" />
@@ -84,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/phone"
+        android:layout_alignTop="@+id/editmail"
         android:scrollbars="vertical"
         android:src="@drawable/ic_email_black_24dp"
         android:tint="@android:color/darker_gray" />

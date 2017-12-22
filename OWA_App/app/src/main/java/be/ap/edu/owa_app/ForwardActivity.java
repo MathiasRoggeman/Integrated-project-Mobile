@@ -1,11 +1,12 @@
 package be.ap.edu.owa_app;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,27 +43,59 @@ public class ForwardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forward);
-
+        setContentView(R.layout.activity_sendmail);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
         id = this.getIntent().getExtras().getString("messageid");
         token = this.getIntent().getExtras().getString("token");
         Log.d("message", id);
-        Button send = findViewById(R.id.send_forward);
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+
+        }
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sendmail, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                Intent intent = new Intent(ForwardActivity.this, MainActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_send_mail:
                 try {
                     sendMail(token);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //Log.d("makeMail", makeMail());
-            }
-        });
+                Intent intent2 = new Intent(ForwardActivity.this, MainActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
+                return true;
 
 
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
-
     private void sendMail(final String token) throws JSONException {
 
         name = (TextView)findViewById(R.id.name);
