@@ -10,8 +10,6 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -44,7 +42,7 @@ public class OpenMailActivity extends AppCompatActivity {
     private String MSGRAPH_URL;
     SharedPreferences sharedPref;
     String token;
-
+    final Context context = this;
 
 
     @Override
@@ -70,7 +68,6 @@ public class OpenMailActivity extends AppCompatActivity {
         final TextView subject = (TextView)findViewById(R.id.onderwerp_open);
         final TextView datum = (TextView)findViewById(R.id.date_open);
         final EditText bericht = (EditText) findViewById(R.id.message_open);
-
         final String textFromHtml = Jsoup.parse(message).text();
 
         try {
@@ -93,23 +90,10 @@ public class OpenMailActivity extends AppCompatActivity {
         }
 
 
-        Button forward = (Button)findViewById(R.id.forward_message);
 
-        final Context context = this;
 
-        forward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ForwardActivity.class);
 
-                intent.putExtra("messageid", id);
-                intent.putExtra("body", textFromHtml);
-                intent.putExtra("token", token);
-                startActivity(intent);
-                Log.d("messageid", id);
 
-            }
-        });
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_openmail, menu);
@@ -139,10 +123,16 @@ public class OpenMailActivity extends AppCompatActivity {
                 return true;
             //TODO change icon
 
-            case R.id.forward_message:
-                Intent i = new Intent(OpenMailActivity.this, MainActivity.class);
-                i.putExtra("token", token);
-                startActivity(i);
+            case R.id.action_forward:
+                String message = this.getIntent().getExtras().getString("message");
+                final String textFromHtml = Jsoup.parse(message).text();
+                Intent intent3 = new Intent(context, ForwardActivity.class);
+
+                intent3.putExtra("messageid", id);
+                intent3.putExtra("body", textFromHtml);
+                intent3.putExtra("token", token);
+                startActivity(intent3);
+                Log.d("messageid", id);
                 return true;
 
 
