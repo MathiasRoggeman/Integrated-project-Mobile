@@ -1,11 +1,11 @@
 package be.ap.edu.owa_app.Calendar;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,9 +27,7 @@ import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 
-import be.ap.edu.owa_app.MainActivity;
 import be.ap.edu.owa_app.R;
-import be.ap.edu.owa_app.Sendmail;
 
 public class AddEventActivity extends AppCompatActivity {
 
@@ -45,8 +43,6 @@ public class AddEventActivity extends AppCompatActivity {
     EditText location;
     EditText naam;
     EditText mail;
-    Button save;
-    Button back;
 
 
 
@@ -54,37 +50,61 @@ public class AddEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
 
-        save = findViewById(R.id.saveEvent);
-        back = findViewById(R.id.addevent_back);
+
+
 
         //Log.d("makeEvent", makeEvent());
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    createEvent(token);
-                    Intent intent = new Intent(AddEventActivity.this, CalendarActivity.class);
-                    intent.putExtra("token", token);
-                    startActivity(intent);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+
+
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_save, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
                 Intent intent = new Intent(AddEventActivity.this, CalendarActivity.class);
                 intent.putExtra("token", token);
                 startActivity(intent);
-            }
-        });
+                return true;
+
+            case R.id.action_save:
+
+                try {
+                    createEvent(token);
+                    Intent intent2 = new Intent(AddEventActivity.this, CalendarActivity.class);
+                    intent2.putExtra("token", token);
+                    startActivity(intent2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return true;
 
 
+
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -1,11 +1,12 @@
 package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -39,19 +40,43 @@ public class AddContactActivity extends AppCompatActivity {
     private TextView nummer;
     private TextView voornaam;
     private TextView email;
-    private Button save;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Add contact");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
 
-        save = findViewById(R.id.saveContact);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_save, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                Intent intent = new Intent(AddContactActivity.this, ContactsActivity.class);
+                intent.putExtra("token",token);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_save:
                 naam = findViewById(R.id.editname);
                 voornaam = findViewById(R.id.editfirstname);
                 nummer = findViewById(R.id.editnumber);
@@ -61,12 +86,14 @@ public class AddContactActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(AddContactActivity.this, ContactsActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
+                Intent intent2 = new Intent(AddContactActivity.this, ContactsActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
+                break;
 
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void editContact(String url) throws JSONException {

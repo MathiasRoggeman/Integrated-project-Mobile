@@ -1,10 +1,13 @@
 package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -52,7 +55,10 @@ public class EditContactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
-
+        setContentView(R.layout.activity_edit_contact);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Add contact");
         token = this.getIntent().getExtras().getString("token");
         contactid = this.getIntent().getExtras().getString("contactid");
         displayName = this.getIntent().getExtras().getString("naam");
@@ -84,10 +90,28 @@ public class EditContactActivity extends AppCompatActivity {
         nummer.setText(mobilePhone);
         email.setText(mail);
 
-        save = findViewById(R.id.saveContact);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_save, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+            case R.id.action_save:
                 try {
                     editContact(MSGRAPH_URL);
                     Intent intent = new Intent(EditContactActivity.this, ContactsActivity.class);
@@ -96,9 +120,12 @@ public class EditContactActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-        });
 
+                break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void editContact(String url) throws JSONException {

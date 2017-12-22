@@ -52,12 +52,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:id="@+id/back_open"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/forward_message"
         android:id="@+id/forward_message"/>
 

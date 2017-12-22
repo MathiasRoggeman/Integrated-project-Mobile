@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,7 +44,7 @@ public class ListEventsActivity extends AppCompatActivity {
     private int year;
     private int month;
     private int dayOfMonth;
-    private Button back;
+
 
     private ArrayList<Event> events = new ArrayList<>();
     private ListView listView;
@@ -58,10 +57,12 @@ public class ListEventsActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Eventlist");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
         Log.d("accesstoken", token);
 
-        back = findViewById(R.id.back_eventlist);
+
 
         callGraphAPI(token, MSGRAPH_URL);
 
@@ -112,14 +113,7 @@ public class ListEventsActivity extends AppCompatActivity {
         }
 
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ListEventsActivity.this, CalendarActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
+
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_list_activities, menu);
@@ -133,13 +127,15 @@ public class ListEventsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                Intent intent = new Intent(ListEventsActivity.this, CalendarActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
                 return true;
 
             case R.id.action_add_event:
-                Intent intent = new Intent(ListEventsActivity.this, AddEventActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
+                Intent intent2 = new Intent(ListEventsActivity.this, AddEventActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
                 return true;
 
 

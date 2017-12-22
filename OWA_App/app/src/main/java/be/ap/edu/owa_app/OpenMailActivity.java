@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +52,8 @@ public class OpenMailActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         id = this.getIntent().getExtras().getString("id");
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
         token = this.getIntent().getExtras().getString("token");
@@ -90,19 +90,11 @@ public class OpenMailActivity extends AppCompatActivity {
             bericht.setText(Html.fromHtml(message));
         }
 
-        Button button = findViewById(R.id.back_open);
+
         Button forward = (Button)findViewById(R.id.forward_message);
 
         final Context context = this;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,14 +124,16 @@ public class OpenMailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
                 return true;
 
             case R.id.action_delete:
                 deleteMail(id);
-                Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
+                Intent intent2 = new Intent(OpenMailActivity.this, MainActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
                 return true;
             //TODO change icon
 

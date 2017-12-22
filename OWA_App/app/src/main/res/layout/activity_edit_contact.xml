@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="be.ap.edu.owa_app.Contacts.EditContactActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryDark"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
     <EditText
         android:id="@+id/editname"
         android:layout_width="wrap_content"
@@ -74,19 +83,10 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/saveContact"
         android:layout_alignStart="@+id/phone"
         android:scrollbars="vertical"
         android:src="@drawable/ic_email_black_24dp"
         android:tint="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/saveContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editmail"
-        android:layout_below="@+id/editmail"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="45dp"
-        android:text="@string/save_event" />
+
 </RelativeLayout>

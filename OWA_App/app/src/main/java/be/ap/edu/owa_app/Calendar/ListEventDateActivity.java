@@ -60,8 +60,7 @@ public class ListEventDateActivity extends AppCompatActivity {
         dayOfMonth = this.getIntent().getExtras().getInt("dayOfMonth");
 
         Log.d("accesstoken", token);
-
-        back = findViewById(R.id.back_eventlist);
+        
 
         MSGRAPH_URL += (year + "-" + month + "-" + dayOfMonth + "T00:00:00.000&enddatetime=" + year + "-" + month + "-" + dayOfMonth + "T23:59:59.000");
         //https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=2017-12-16T00:00:00.000&enddatetime=2017-12-16T23:59:59.000

@@ -1,11 +1,13 @@
 package be.ap.edu.owa_app.Calendar;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -44,14 +46,17 @@ public class DetailEventsView extends AppCompatActivity {
     TextView attendees;
 
     Button back;
-    Button delete;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_events_view);
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
         eventid = this.getIntent().getExtras().getString("eventid");
         subject = this.getIntent().getExtras().getString("subject");
@@ -66,7 +71,7 @@ public class DetailEventsView extends AppCompatActivity {
         datetime = findViewById(R.id.datetime_eventdetail);
         locatie = findViewById(R.id.locatie_eventdetail);
         attendees = findViewById(R.id.aanwezigen_eventdetail);
-
+        getSupportActionBar().setTitle(subject.toString());
         onderwerp.setText(subject);
         //description.setText(beschrijving);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -78,29 +83,46 @@ public class DetailEventsView extends AppCompatActivity {
         locatie.setText(location);
         attendees.setText(aanwezigen);
 
-        back = findViewById(R.id.backdetail);
-        delete = findViewById(R.id.deletedetail);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailEventsView.this, CalendarActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MSGRAPH_URL += eventid;
-                deleteEvent(MSGRAPH_URL);
-                Intent intent = new Intent(DetailEventsView.this, CalendarActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
+
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_event_detail, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                Intent intent = new Intent(DetailEventsView.this, ListEventsActivity.class);
+                intent.putExtra("token", token);
+                startActivity(intent);
+                return true;
+
+            case R.id.action_delete:
+                MSGRAPH_URL += eventid;
+                deleteEvent(MSGRAPH_URL);
+                Intent intent2 = new Intent(DetailEventsView.this, CalendarActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
+                return true;
+
+
+
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void deleteEvent(String url) {
 
         RequestQueue queue = Volley.newRequestQueue(this);

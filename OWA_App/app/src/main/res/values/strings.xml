@@ -58,5 +58,7 @@
     <string name="mobile_number">Mobile number</string>
     <string name="bewerken">Bewerken</string>
     <string name="voornaam">Voornaam</string>
+    <string name="make_contact">Make contact</string>
+
 
 </resources>

@@ -1,21 +1,18 @@
 package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -30,21 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import be.ap.edu.owa_app.Calendar.CalendarActivity;
-import be.ap.edu.owa_app.Calendar.DetailEventsView;
-import be.ap.edu.owa_app.Calendar.Event;
-import be.ap.edu.owa_app.Calendar.EventAdapter;
-import be.ap.edu.owa_app.Calendar.ListEventsActivity;
 import be.ap.edu.owa_app.MainActivity;
 import be.ap.edu.owa_app.R;
 
@@ -56,7 +45,7 @@ public class ContactsActivity extends AppCompatActivity {
     private ListView listView;
     private ContactsAdapter contactsAdapter;
 
-    private ImageView addContact;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,15 +91,7 @@ public class ContactsActivity extends AppCompatActivity {
             });
         }
 
-        addContact = findViewById(R.id.btn_add);
-        addContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ContactsActivity.this, AddContactActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
+
 
 
 
@@ -147,13 +128,14 @@ public class ContactsActivity extends AppCompatActivity {
                 startActivity(intent2);
                 break;
         }
+
     }
 
 
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_maillist, menu);
+        getMenuInflater().inflate(R.menu.menu_contacts, menu);
 
         return true;
 
@@ -169,6 +151,13 @@ public class ContactsActivity extends AppCompatActivity {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+
+            case R.id.action_make_contact:
+                // Action to perform when Bag Menu item is selected.
+                Intent intent = new Intent(ContactsActivity.this, AddContactActivity.class);
+                intent.putExtra("token",token);
+                startActivity(intent);
+                break;
 
 
         }
