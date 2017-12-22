@@ -35,16 +35,16 @@
                     android:scheme="msal0f1fbbeb-1161-4034-9875-70c8099230d7" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".Mail.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".OpenMailActivity"
+        <activity android:name=".Mail.OpenMailActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Sendmail"
+        <activity android:name=".Mail.Sendmail"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ForwardActivity"
+        <activity android:name=".Mail.ForwardActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity

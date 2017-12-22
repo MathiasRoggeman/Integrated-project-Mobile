@@ -1,4 +1,4 @@
-package be.ap.edu.owa_app;
+package be.ap.edu.owa_app.Mail;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +29,8 @@ import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
+
+import be.ap.edu.owa_app.R;
 
 
 public class Sendmail extends AppCompatActivity {

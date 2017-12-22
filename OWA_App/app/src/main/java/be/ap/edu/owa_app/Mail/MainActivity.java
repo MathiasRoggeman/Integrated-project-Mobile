@@ -1,4 +1,4 @@
-package be.ap.edu.owa_app;
+package be.ap.edu.owa_app.Mail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +39,8 @@ import java.util.Map;
 
 import be.ap.edu.owa_app.Calendar.CalendarActivity;
 import be.ap.edu.owa_app.Contacts.ContactsActivity;
+import be.ap.edu.owa_app.LoginActivity;
+import be.ap.edu.owa_app.R;
 
 public class MainActivity extends AppCompatActivity {
 
