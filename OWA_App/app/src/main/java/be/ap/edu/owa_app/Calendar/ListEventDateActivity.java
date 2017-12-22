@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +44,7 @@ public class ListEventDateActivity extends AppCompatActivity {
     private int year;
     private int month;
     private int dayOfMonth;
-    private Button back;
+
     private TextView noEvents;
 
     private ArrayList<Event> events = new ArrayList<>();
@@ -53,14 +55,18 @@ public class ListEventDateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_events);
-
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Eventlist");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
         year = this.getIntent().getExtras().getInt("year");
         month = this.getIntent().getExtras().getInt("month");
         dayOfMonth = this.getIntent().getExtras().getInt("dayOfMonth");
 
         Log.d("accesstoken", token);
-        
+
 
         MSGRAPH_URL += (year + "-" + month + "-" + dayOfMonth + "T00:00:00.000&enddatetime=" + year + "-" + month + "-" + dayOfMonth + "T23:59:59.000");
         //https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=2017-12-16T00:00:00.000&enddatetime=2017-12-16T23:59:59.000
@@ -117,15 +123,38 @@ public class ListEventDateActivity extends AppCompatActivity {
         }
 
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list_activities, menu);
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
                 Intent intent = new Intent(ListEventDateActivity.this, CalendarActivity.class);
                 intent.putExtra("token", token);
                 startActivity(intent);
-            }
-        });
+                return true;
+
+            case R.id.action_add_event:
+                Intent intent2 = new Intent(ListEventDateActivity.this, AddEventActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
+                return true;
+
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
+
 
     private void callGraphAPI(final String token, String url) {
         Log.d("Start", "Start callGraphAPI");
