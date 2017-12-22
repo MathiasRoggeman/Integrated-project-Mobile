@@ -1,4 +1,4 @@
-package be.ap.edu.owa_app;
+package be.ap.edu.owa_app.Mail;
 
 /**
  * Created by isa_l on 06-12-17.

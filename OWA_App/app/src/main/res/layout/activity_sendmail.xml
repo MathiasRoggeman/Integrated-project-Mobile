@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="be.ap.edu.owa_app.Sendmail">
+    tools:context="be.ap.edu.owa_app.Mail.Sendmail">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"

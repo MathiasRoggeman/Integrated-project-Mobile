@@ -1,4 +1,4 @@
-package be.ap.edu.owa_app;
+package be.ap.edu.owa_app.Mail;
 
 
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import be.ap.edu.owa_app.R;
 
 /**
  * Created by isa_l on 06-12-17.

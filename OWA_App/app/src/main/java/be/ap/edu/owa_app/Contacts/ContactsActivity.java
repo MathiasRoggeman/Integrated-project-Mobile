@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import be.ap.edu.owa_app.Calendar.CalendarActivity;
-import be.ap.edu.owa_app.MainActivity;
+import be.ap.edu.owa_app.Mail.MainActivity;
 import be.ap.edu.owa_app.R;
 
 public class ContactsActivity extends AppCompatActivity {

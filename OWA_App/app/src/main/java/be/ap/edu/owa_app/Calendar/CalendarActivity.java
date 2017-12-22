@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import be.ap.edu.owa_app.Contacts.ContactsActivity;
-import be.ap.edu.owa_app.MainActivity;
+import be.ap.edu.owa_app.Mail.MainActivity;
 import be.ap.edu.owa_app.R;
 
 public class CalendarActivity extends AppCompatActivity {

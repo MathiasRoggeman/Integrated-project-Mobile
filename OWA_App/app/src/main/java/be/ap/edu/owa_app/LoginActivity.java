@@ -1,7 +1,6 @@
 package be.ap.edu.owa_app;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +18,8 @@ import com.microsoft.identity.client.PublicClientApplication;
 import com.microsoft.identity.client.User;
 
 import java.util.List;
+
+import be.ap.edu.owa_app.Mail.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
