@@ -11,7 +11,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -35,51 +36,65 @@
                     android:scheme="msal0f1fbbeb-1161-4034-9875-70c8099230d7" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mail.MainActivity"
+        <activity
+            android:name=".Mail.MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Mail.OpenMailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Mail.OpenMailActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Mail.Sendmail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Mail.Sendmail"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Mail.ForwardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Mail.ForwardActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Calendar.CalendarActivity"
+            android:configChanges="orientation"
             android:label="@string/title_activity_calendar"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Calendar.ListEventsActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Calendar.ListEventsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendar.ListEventDateActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Calendar.ListEventDateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendar.DetailEventsView"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Calendar.DetailEventsView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendar.AddEventActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Calendar.AddEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Contacts.ContactsActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Contacts.ContactsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Contacts.ContactsDetailActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Contacts.ContactsDetailActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Contacts.EditContactActivity"
-            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Contacts.AddContactActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Contacts.AddContactActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Mail.SearchScreenActivity" />
+        <activity android:name=".Mail.SearchResultActivity" />
+        <activity android:name=".Mail.ReplyActivity"></activity>
     </application>
 
 </manifest>

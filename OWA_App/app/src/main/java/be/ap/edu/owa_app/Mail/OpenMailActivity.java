@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,9 +77,18 @@ public class OpenMailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(message.contains("<style>")) {
-            message = message.replace(message.substring(message.lastIndexOf("<style>"), message.lastIndexOf("</head>")), "");
+        while(message.contains("<!--")){
+            String first = "<!--";
+            String second = "-->";
+            message = message.replace(message.substring(message.indexOf(first), message.indexOf(second) + 3), "");
+           // message = message.replace("-->", "");
+
         }
+
+        /*if(message.contains("<style>")) {
+            String str = message.replace(message.substring(message.lastIndexOf("<style>"), message.lastIndexOf("</style>")), "");
+            Log.d("Substring", str);
+        }*/
 
         zender.setText(sender);
         subject.setText(onderwerp);
@@ -89,6 +99,7 @@ public class OpenMailActivity extends AppCompatActivity {
             bericht.setText(Html.fromHtml(message));
         }
 
+        bericht.setMovementMethod(LinkMovementMethod.getInstance());
 
 
 
@@ -110,9 +121,10 @@ public class OpenMailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
+                //Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
+                //intent.putExtra("token", token);
+                //startActivity(intent);
+                finish();
                 return true;
 
             case R.id.action_delete:
@@ -134,6 +146,12 @@ public class OpenMailActivity extends AppCompatActivity {
                 startActivity(intent3);
                 Log.d("messageid", id);
                 return true;
+
+            case R.id.action_reply:
+                Intent in = new Intent(context, ReplyActivity.class);
+                in.putExtra("messageid", id);
+                in.putExtra("token", token);
+                startActivity(in);
 
 
         }

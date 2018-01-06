@@ -173,6 +173,12 @@ public class MainActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
 
+            case R.id.action_search:
+                Intent in = new Intent(MainActivity.this, SearchScreenActivity.class);
+                in.putExtra("token", token);
+                startActivity(in);
+                return true;
+
             case R.id.action_create_mail:
                 Intent intent = new Intent(MainActivity.this, Sendmail.class);
                 intent.putExtra("token", token);

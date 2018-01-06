@@ -45,10 +45,9 @@ public class ForwardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forward);
-        setContentView(R.layout.activity_sendmail);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setTitle("Forward Mail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
@@ -57,7 +56,7 @@ public class ForwardActivity extends AppCompatActivity {
         Log.d("message", id);
 
 
-        }
+    }
 
 
 

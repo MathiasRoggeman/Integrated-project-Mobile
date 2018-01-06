@@ -61,6 +61,7 @@
     <string name="bewerken">Bewerken</string>
     <string name="voornaam">Voornaam</string>
     <string name="make_contact">Make contact</string>
+    <string name="reply_mail">Reply</string>
 
 
 </resources>
