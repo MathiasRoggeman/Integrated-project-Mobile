@@ -1,6 +1,5 @@
 package be.ap.edu.owa_app.Mail;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,12 +29,12 @@ import javax.json.JsonObjectBuilder;
 
 import be.ap.edu.owa_app.R;
 
-public class ReplyActivity extends AppCompatActivity {
+public class ReplyAllActivity extends AppCompatActivity {
 
     TextView comment;
-    String MSGRAPH_URL;
     String id;
     String token;
+    String MSGRAPH_URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,9 @@ public class ReplyActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Reply");
+        getSupportActionBar().setTitle("Reply All");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,7 +101,7 @@ public class ReplyActivity extends AppCompatActivity {
 
         System.out.println(mailObject.toString());
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, MSGRAPH_URL + id + "/reply", mailObject,
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, MSGRAPH_URL + id + "/replyAll", mailObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

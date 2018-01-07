@@ -41,7 +41,6 @@ public class OpenMailActivity extends AppCompatActivity {
     private Boolean isRead;
     private static final String TAG = OpenMailActivity.class.getSimpleName();
     private String MSGRAPH_URL;
-    SharedPreferences sharedPref;
     String token;
     final Context context = this;
 
@@ -152,6 +151,14 @@ public class OpenMailActivity extends AppCompatActivity {
                 in.putExtra("messageid", id);
                 in.putExtra("token", token);
                 startActivity(in);
+                return true;
+
+            case R.id.action_reply_all:
+                Intent i = new Intent(context, ReplyAllActivity.class);
+                i.putExtra("messageid", id);
+                i.putExtra("token", token);
+                startActivity(i);
+                return true;
 
 
         }

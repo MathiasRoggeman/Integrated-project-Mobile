@@ -94,7 +94,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Mail.SearchScreenActivity" />
         <activity android:name=".Mail.SearchResultActivity" />
-        <activity android:name=".Mail.ReplyActivity"></activity>
+        <activity android:name=".Mail.ReplyActivity" />
+        <activity android:name=".Mail.ReplyAllActivity"></activity>
     </application>
 
 </manifest>
