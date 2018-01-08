@@ -2,7 +2,6 @@ package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -108,7 +107,7 @@ public class EditContactActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                finish();
                 return true;
 
             case R.id.action_save:

@@ -1,11 +1,13 @@
 package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,14 +45,17 @@ public class ContactsDetailActivity extends AppCompatActivity {
     TextView mobilePhone;
     ImageView icon;
     ImageView mailIcon;
-    Button delete;
 
-    private Button bewerken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_detail);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Contact details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         token = this.getIntent().getExtras().getString("token");
         contactid = this.getIntent().getExtras().getString("contactid");
@@ -80,10 +85,28 @@ public class ContactsDetailActivity extends AppCompatActivity {
         email.setText(mail);
         mobilePhone.setText(mobile);
 
-        bewerken = findViewById(R.id.contactbewerken);
-        bewerken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_open_contacts, menu);
+
+        return true;
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //handle presses on the action bar items
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                finish();
+                return true;
+
+            case R.id.action_edit:
+                // Action to perform when Bag Menu item is selected.
                 Intent intent = new Intent(ContactsDetailActivity.this, EditContactActivity.class);
                 intent.putExtra("token", token);
                 intent.putExtra("contactid", contactid);
@@ -93,20 +116,18 @@ public class ContactsDetailActivity extends AppCompatActivity {
                 intent.putExtra("email", mail);
                 intent.putExtra("mobile", mobile);
                 startActivity(intent);
-            }
-        });
+                break;
 
-        delete = findViewById(R.id.contactdelete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            case R.id.action_delete:
                 deleteContact(contactid);
-                Intent intent = new Intent(ContactsDetailActivity.this, ContactsActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
-            }
-        });
+                Intent intent2 = new Intent(ContactsDetailActivity.this, ContactsActivity.class);
+                intent2.putExtra("token", token);
+                startActivity(intent2);
+                break;
 
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void deleteContact(String id) {

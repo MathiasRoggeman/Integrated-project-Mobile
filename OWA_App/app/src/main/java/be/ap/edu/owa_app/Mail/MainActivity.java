@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +48,7 @@ import be.ap.edu.owa_app.LoginActivity;
 import be.ap.edu.owa_app.R;
 
 public class MainActivity extends AppCompatActivity {
+    private SwipeRefreshLayout swipeContainer;
 
     final static String CLIENT_ID = "0f1fbbeb-1161-4034-9875-70c8099230d7";
     final static String SCOPES[] = {"https://graph.microsoft.com/Mail.Read",
@@ -87,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
 
+
+
+
+
         token = this.getIntent().getExtras().getString("token");
         positie = this.getIntent().getExtras().getInt("position");
         Log.d("messagetoken", token);
@@ -117,17 +123,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
-        if (bottomNavigationView != null) {
-            // Set action to perform when any menu-item is selected.
-            bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        selectFragment(item);
-                        return false;
-                    }
-                });
+            bottomNavigationView.setSelectedItemId(R.id.action_home);
+            if (bottomNavigationView != null) {
+                // Set action to perform when any menu-item is selected.
+                bottomNavigationView.setOnNavigationItemSelectedListener(
+                    new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            selectFragment(item);
+                            return false;
+                        }
+                    });
         }
 
 

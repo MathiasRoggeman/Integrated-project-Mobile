@@ -2,9 +2,12 @@ package be.ap.edu.owa_app.Mail;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import be.ap.edu.owa_app.Calendar.CalendarActivity;
+import be.ap.edu.owa_app.Contacts.ContactsActivity;
 import be.ap.edu.owa_app.R;
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -91,11 +96,45 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
 
             });
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+            bottomNavigationView.setSelectedItemId(R.id.action_home);
+            if (bottomNavigationView != null) {
+                // Set action to perform when any menu-item is selected.
+                bottomNavigationView.setOnNavigationItemSelectedListener(
+                    new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            selectFragment(item);
+                            return false;
+                        }
+                    });
+            }
         }
 
 
+    }
+    protected void selectFragment(MenuItem item) {
 
+        item.setChecked(true);
 
+        switch (item.getItemId()) {
+            case R.id.action_home:
+                // Action to perform when Home Menu item is selected.
+
+                break;
+            case R.id.action_calendar:
+                // Action to perform when Bag Menu item is selected.
+                Intent intent = new Intent(SearchResultActivity.this, CalendarActivity.class);
+                intent.putExtra("token",token);
+                startActivity(intent);
+                break;
+            case R.id.action_contacts:
+                // Action to perform when Bag Menu item is selected.
+                Intent intent2 = new Intent(SearchResultActivity.this, ContactsActivity.class);
+                intent2.putExtra("token",token);
+                startActivity(intent2);
+                break;
+        }
     }
 
     private void callGraphAPI(String url) {

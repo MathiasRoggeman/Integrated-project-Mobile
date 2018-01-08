@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="be.ap.edu.owa_app.OpenMailActivity ">
 
-
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_edit_24dp"
+        android:title="@string/delete_mail"
+        app:showAsAction="always" />
 
 
     <item
@@ -11,8 +15,6 @@
         android:icon="@drawable/ic_delete_black_24dp"
         android:title="@string/delete_mail"
         app:showAsAction="always" />
-
-
 
 
 </menu>

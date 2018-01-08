@@ -71,10 +71,9 @@ public class AddContactActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                Intent intent = new Intent(AddContactActivity.this, ContactsActivity.class);
-                intent.putExtra("token",token);
-                startActivity(intent);
+                finish();
                 return true;
+
 
             case R.id.action_save:
                 naam = findViewById(R.id.editname);

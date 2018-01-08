@@ -81,9 +81,7 @@ public class AddEventActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                Intent intent = new Intent(AddEventActivity.this, CalendarActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
+                finish();
                 return true;
 
             case R.id.action_save:

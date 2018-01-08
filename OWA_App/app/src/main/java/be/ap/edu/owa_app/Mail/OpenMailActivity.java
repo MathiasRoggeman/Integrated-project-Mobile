@@ -2,7 +2,6 @@ package be.ap.edu.owa_app.Mail;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -120,9 +119,6 @@ public class OpenMailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                //Intent intent = new Intent(OpenMailActivity.this, MainActivity.class);
-                //intent.putExtra("token", token);
-                //startActivity(intent);
                 finish();
                 return true;
 

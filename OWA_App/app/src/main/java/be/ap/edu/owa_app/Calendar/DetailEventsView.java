@@ -102,9 +102,7 @@ public class DetailEventsView extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                Intent intent = new Intent(DetailEventsView.this, ListEventsActivity.class);
-                intent.putExtra("token", token);
-                startActivity(intent);
+                finish();
                 return true;
 
             case R.id.action_delete:
