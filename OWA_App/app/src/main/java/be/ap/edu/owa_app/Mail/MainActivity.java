@@ -91,16 +91,27 @@ public class MainActivity extends AppCompatActivity {
         positie = this.getIntent().getExtras().getInt("position");
         Log.d("messagetoken", token);
 
-        if(positie == 0)
+        if(positie == 0) {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
-        else if(positie == 1)
+            getSupportActionBar().setTitle("Postvak in");
+        }
+        else if(positie == 1) {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/drafts/messages";
-        else if(positie == 2)
+            getSupportActionBar().setTitle("Concepten");
+        }
+        else if(positie == 2) {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/deleteditems/messages";
-        else if(positie == 3)
+            getSupportActionBar().setTitle("Verwijderde mails");
+        }
+        else if(positie == 3) {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/sentitems/messages";
-        else
+            getSupportActionBar().setTitle("Verzonden mails");
+        }
+        else {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
+            getSupportActionBar().setTitle("Postvak in");
+        }
+
 
         callGraphAPI(token, MSGRAPH_URL);
 
