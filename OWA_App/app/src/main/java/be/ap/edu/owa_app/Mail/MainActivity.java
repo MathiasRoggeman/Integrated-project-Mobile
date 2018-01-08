@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             "https://graph.microsoft.com/Mail.ReadWrite",
             "https://graph.microsoft.com/Mail.Send",
             "https://graph.microsoft.com/Calendars.Read" };
-    final static String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
+    String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
 
     private ArrayList<MailList> maillist = new ArrayList<>();
     private ListAdapter listadapter;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     private String token;
+    private int positie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +85,22 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Postvak in");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        //actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
 
 
         token = this.getIntent().getExtras().getString("token");
+        positie = this.getIntent().getExtras().getInt("position");
         Log.d("messagetoken", token);
+
+        if(positie == 0)
+            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
+        else if(positie == 1)
+            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/drafts/messages";
+        else if(positie == 2)
+            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/deleteditems/messages";
+        else if(positie == 3)
+            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/sentitems/messages";
+        else
+            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
 
         callGraphAPI(token, MSGRAPH_URL);
 
@@ -145,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] osArray = { "Postvak In", "Concepten", "Prullebak", "Verzonden", "Postvak Uit", "Spam" };
+        final String[] osArray = { "Postvak In", "Concepten", "Prullenbak", "Verzonden"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -154,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MainActivity.this, "Time for an upgrade! " + osArray[position] + " " + position, Toast.LENGTH_SHORT).show();
 
+                positie = position;
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.putExtra("position", positie);
+                intent.putExtra("token", token);
+                startActivity(intent);
             }
         });
     }
