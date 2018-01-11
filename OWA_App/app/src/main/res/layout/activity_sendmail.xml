@@ -7,14 +7,7 @@
 
     tools:context="be.ap.edu.owa_app.Mail.Sendmail">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="?attr/colorPrimaryDark"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
 
     <EditText
         android:id="@+id/txtMailContent"

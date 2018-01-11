@@ -6,14 +6,7 @@
     android:layout_height="match_parent"
     tools:context="be.ap.edu.owa_app.Calendar.AddEventActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimaryDark"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
 
     <EditText
         android:id="@+id/addevent_subject"
@@ -21,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/addevent_locatie"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="11dp"
         android:ems="10"
         android:hint="@string/subject"
         android:inputType="text|textShortMessage" />
@@ -32,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/addevent_startdate"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="51dp"
+        android:layout_marginBottom="26dp"
         android:ems="10"
         android:hint="@string/beschrijving"
         android:inputType="textShortMessage" />
@@ -88,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/addevent_beschrijving"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="39dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/locatie"
         android:inputType="text" />
@@ -99,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/addevent_mail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/naam"
         android:inputType="textPersonName" />

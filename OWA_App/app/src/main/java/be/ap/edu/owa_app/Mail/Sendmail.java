@@ -1,10 +1,7 @@
 package be.ap.edu.owa_app.Mail;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -54,8 +51,6 @@ public class Sendmail extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendmail);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -135,8 +130,7 @@ public class Sendmail extends AppCompatActivity {
         };
 
         queue.add(objectRequest);
-        Intent intent = new Intent(Sendmail.this, MainActivity.class);
-        startActivity(intent);
+       finish();
     }
 
     private String makeMail() {

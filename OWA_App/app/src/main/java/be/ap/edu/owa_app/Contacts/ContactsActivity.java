@@ -52,7 +52,6 @@ public class ContactsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Contacts");
         token = this.getIntent().getExtras().getString("token");
 

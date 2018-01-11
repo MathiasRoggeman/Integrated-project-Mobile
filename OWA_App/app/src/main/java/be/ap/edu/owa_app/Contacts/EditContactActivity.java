@@ -56,7 +56,6 @@ public class EditContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_contact);
         setContentView(R.layout.activity_edit_contact);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Add contact");
         token = this.getIntent().getExtras().getString("token");
         contactid = this.getIntent().getExtras().getString("contactid");
