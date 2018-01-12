@@ -36,4 +36,5 @@ dependencies {
 
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
     compile 'com.android.support:design:26.1.0'
+    compile 'com.github.sundeepk:compact-calendar-view:2.0.2.2'
 }

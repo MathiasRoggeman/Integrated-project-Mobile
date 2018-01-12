@@ -64,6 +64,8 @@
     <string name="reply_mail">Reply</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="kalender">Kalender</string>
+    <string name="event">Events</string>
 
 
 </resources>
