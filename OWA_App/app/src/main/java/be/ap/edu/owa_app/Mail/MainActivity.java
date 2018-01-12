@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
 
 
+
     ListView listView;
     private String token;
     private int positie;
@@ -358,8 +359,11 @@ public class MainActivity extends AppCompatActivity {
     /* Sets the Graph response */
     private void updateGraphUI(JSONObject graphResponse) {
         try {
+
+
             JSONArray subject = graphResponse.getJSONArray("value");
             for (int i = 0; i < subject.length(); i++) {
+
                 String id = (subject.getJSONObject(i).getString("id"));
                 String subj = (subject.getJSONObject(i).get("subject")).toString();
                 String sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();

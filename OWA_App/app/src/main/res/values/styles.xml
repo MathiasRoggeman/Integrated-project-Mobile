@@ -2,6 +2,13 @@
 
 
     <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/big_dip</item>
+        <item name="colorPrimaryDark">@color/big_dip</item>
+        <item name="android:windowBackground">@color/blanced_almond</item>
+        <item name="android:colorBackground">@color/wave</item>
+        <item name="android:navigationBarColor">@color/wave</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
 
     </style>
 

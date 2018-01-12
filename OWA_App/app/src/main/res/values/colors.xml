@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#003b46</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
     <color name="color_icon">#FFFFFF</color>
     <color name="custom_theme_color">#b0b0ff</color>
+    <color name="seafoam">#c4dfe6</color>
+    <color name="wave">#07575b</color>
+    <color name="blanced_almond">#ffeccc</color>
+    <color name="big_dip">#A4303F </color>
+    <color name="tucan">#F2D0A4</color>
 
 </resources>
