@@ -7,16 +7,18 @@
     tools:context="be.ap.edu.owa_app.Calendar.CalendarActivity$PlaceholderFragment">
 
     <TextView
-        android:text="Events"
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
+        android:id="@+id/textListEvents"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/events"
+        android:textSize="28sp"/>
 
+    <ListView
+        android:id="@+id/listEvents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textListEvents" />
 </RelativeLayout>

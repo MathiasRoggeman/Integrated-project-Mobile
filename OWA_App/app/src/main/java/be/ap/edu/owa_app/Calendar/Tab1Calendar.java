@@ -1,5 +1,6 @@
 package be.ap.edu.owa_app.Calendar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -95,6 +97,42 @@ public class Tab1Calendar extends Fragment {
                 eventAdapter = new EventAdapter(getContext(), R.layout.activity_listviewevents, events);
                 listView.setAdapter(eventAdapter);
                 eventAdapter.notifyDataSetChanged();
+
+                if (listView != null) {
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Event e = events.get(position);
+
+                            try {
+                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                                Date startdate = null;//You will get date object relative to server/client timezone wherever it is parsed
+                                startdate = dateFormat.parse(e.getStartDate());
+                                Date enddate = dateFormat.parse(e.getEndDate());
+                                //DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm"); //If you need time just put specific format for time like 'HH:mm:ss'
+                                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy' 'HH:mm");
+                                String dateStr = formatter.format(startdate);
+                                String endD = formatter.format(enddate);
+                                Intent intent = new Intent(getContext(), DetailEventsView.class);
+                                intent.putExtra("token", t);
+                                intent.putExtra("eventid", e.getId());
+                                intent.putExtra("subject", e.getSubject());
+                                intent.putExtra("beschrijving", e.getBody());
+                                intent.putExtra("startdate", dateStr);
+                                intent.putExtra("enddate", endD);
+                                intent.putExtra("location", e.getLocation());
+                                intent.putExtra("aanwezigen", e.getAttendees());
+                                startActivity(intent);
+
+                            } catch (ParseException ex) {
+                                ex.printStackTrace();
+                            }
+
+                        }
+
+                    });
+                }
             }
 
             @Override

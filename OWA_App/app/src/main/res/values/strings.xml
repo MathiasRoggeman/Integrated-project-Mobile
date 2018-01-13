@@ -66,6 +66,7 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="kalender">Kalender</string>
     <string name="event">Events</string>
+    <string name="events">Events</string>
 
 
 </resources>
