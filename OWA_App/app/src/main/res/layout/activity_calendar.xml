@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="be.ap.edu.owa_app.Calendar.CalendarActivity">
+    android:layout_height="wrap_content"
+    tools:context="be.ap.edu.owa_app.Mail.MainActivity"
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -44,6 +44,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/event" />
 
+
+
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -51,13 +53,15 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
+    </android.support.v4.view.ViewPager>
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/tucan"
-        app:menu="@menu/bottom_navigation"/>
-</android.support.design.widget.CoordinatorLayout>
+        app:menu="@menu/bottom_navigation" />
+
+</RelativeLayout>
