@@ -40,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
-    String token;
+    public static String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
