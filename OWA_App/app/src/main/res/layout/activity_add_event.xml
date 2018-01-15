@@ -30,7 +30,7 @@
         android:hint="@string/beschrijving"
         android:inputType="textShortMessage" />
 
-    <EditText
+    <TextView
         android:id="@+id/addevent_startdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,10 +38,9 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/addevent_endtime"
         android:ems="10"
-        android:hint="@string/startdate"
-        android:inputType="date" />
+        android:hint="@string/startdate" />
 
-    <EditText
+    <TextView
         android:id="@+id/addevent_starttime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,10 +48,9 @@
         android:layout_alignBottom="@+id/addevent_startdate"
         android:layout_alignParentEnd="true"
         android:ems="10"
-        android:hint="@string/starttime"
-        android:inputType="time" />
+        android:hint="@string/starttime" />
 
-    <EditText
+    <TextView
         android:id="@+id/addevent_enddate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,10 +59,9 @@
         android:layout_marginBottom="26dp"
         android:layout_toStartOf="@+id/addevent_starttime"
         android:ems="10"
-        android:hint="@string/enddate"
-        android:inputType="date" />
+        android:hint="@string/enddate"/>
 
-    <EditText
+    <TextView
         android:id="@+id/addevent_endtime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,8 +69,7 @@
         android:layout_alignBottom="@+id/addevent_enddate"
         android:layout_alignStart="@+id/addevent_starttime"
         android:ems="10"
-        android:hint="@string/endtime"
-        android:inputType="time" />
+        android:hint="@string/endtime" />
 
     <EditText
         android:id="@+id/addevent_locatie"

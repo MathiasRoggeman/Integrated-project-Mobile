@@ -94,7 +94,8 @@
         <activity android:name=".Mail.SearchScreenActivity" />
         <activity android:name=".Mail.SearchResultActivity" />
         <activity android:name=".Mail.ReplyActivity" />
-        <activity android:name=".Mail.ReplyAllActivity"></activity>
+        <activity android:name=".Mail.ReplyAllActivity" />
+        <activity android:name=".Calendar.AttendeesActivity"></activity>
     </application>
 
 </manifest>

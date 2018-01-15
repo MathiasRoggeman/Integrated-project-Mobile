@@ -67,6 +67,8 @@
     <string name="kalender">Kalender</string>
     <string name="event">Events</string>
     <string name="events">Events</string>
+    <string name="attendees">Aanwezigen:</string>
+    <string name="add_attendees">Add Attendees</string>
 
 
 </resources>
