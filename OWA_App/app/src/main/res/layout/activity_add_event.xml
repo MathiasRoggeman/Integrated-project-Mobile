@@ -7,14 +7,13 @@
     tools:context="be.ap.edu.owa_app.Calendar.AddEventActivity">
 
 
-
     <EditText
         android:id="@+id/addevent_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addevent_locatie"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="11dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:layout_toStartOf="@+id/addevent_starttime"
         android:ems="10"
         android:hint="@string/subject"
         android:inputType="text|textShortMessage" />
@@ -23,9 +22,8 @@
         android:id="@+id/addevent_beschrijving"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addevent_startdate"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="26dp"
+        android:layout_below="@+id/addevent_subject"
         android:ems="10"
         android:hint="@string/beschrijving"
         android:inputType="textShortMessage" />
@@ -34,9 +32,9 @@
         android:id="@+id/addevent_startdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addevent_endtime"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/addevent_endtime"
+        android:layout_below="@+id/addevent_locatie"
+        android:layout_marginTop="27dp"
         android:ems="10"
         android:hint="@string/startdate" />
 
@@ -54,12 +52,11 @@
         android:id="@+id/addevent_enddate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/aanwezig"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="26dp"
-        android:layout_toStartOf="@+id/addevent_starttime"
+        android:layout_alignStart="@+id/addevent_locatie"
+        android:layout_below="@+id/addevent_startdate"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/enddate"/>
+        android:hint="@string/enddate" />
 
     <TextView
         android:id="@+id/addevent_endtime"
@@ -75,42 +72,19 @@
         android:id="@+id/addevent_locatie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addevent_beschrijving"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
+        android:layout_alignStart="@+id/addevent_subject"
+        android:layout_below="@+id/addevent_beschrijving"
         android:ems="10"
         android:hint="@string/locatie"
         android:inputType="text" />
-
-    <EditText
-        android:id="@+id/addevent_naam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/addevent_mail"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="@string/naam"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/addevent_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:hint="@string/emailadres"
-        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/aanwezig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/addevent_naam"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="60dp"
+        android:layout_alignStart="@+id/addevent_enddate"
+        android:layout_below="@+id/addevent_enddate"
+        android:layout_marginTop="26dp"
         android:text="@string/aanwezig" />
 
 </RelativeLayout>

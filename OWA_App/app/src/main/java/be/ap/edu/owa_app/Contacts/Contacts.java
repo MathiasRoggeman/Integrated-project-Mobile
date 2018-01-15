@@ -1,10 +1,12 @@
 package be.ap.edu.owa_app.Contacts;
 
+import java.io.Serializable;
+
 /**
  * Created by isa_l on 20-12-17.
  */
 
-public class Contacts {
+public class Contacts implements Serializable {
 
     private String id;
     private String displayName;

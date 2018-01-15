@@ -1,6 +1,8 @@
 package be.ap.edu.owa_app.Calendar;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Instrumentation;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +40,7 @@ import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 
+import be.ap.edu.owa_app.Contacts.Contacts;
 import be.ap.edu.owa_app.Contacts.ContactsActivity;
 import be.ap.edu.owa_app.R;
 
@@ -159,7 +163,7 @@ public class AddEventActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AddEventActivity.this, AttendeesActivity.class);
                 intent.putExtra("token", token);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -281,5 +285,21 @@ public class AddEventActivity extends AppCompatActivity {
                                         .add("name", naam.getText().toString()))
                                 .add("type", "required")));
         return event.build().toString();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && data != null){
+            if(resultCode == RESULT_OK) {
+                ArrayList<Contacts> contactlist = (ArrayList<Contacts>) data.getSerializableExtra("contact_items");
+                Log.d("ArrayList", contactlist.get(0).getDisplayName());
+                String attendees = "";
+                for (Contacts contact : contactlist) {
+                    attendees += contact.getDisplayName() + "; ";
+                }
+                aanwezig.setText(attendees);
+            }
+        }
     }
 }

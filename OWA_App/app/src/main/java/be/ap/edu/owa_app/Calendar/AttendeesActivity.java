@@ -1,5 +1,6 @@
 package be.ap.edu.owa_app.Calendar;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.volley.AuthFailureError;
@@ -42,12 +44,15 @@ public class AttendeesActivity extends AppCompatActivity {
     private ListView listView;
     private ContactsAdapter contactsAdapter;
 
+    private ArrayList<Contacts> contact_items = new ArrayList<>();
+    private int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendees);
 
-        String token = this.getIntent().getExtras().getString("token");
+        final String token = this.getIntent().getExtras().getString("token");
         getContacts(token, url);
 
         Collections.sort(contacts, new Comparator<Contacts>(){
@@ -76,6 +81,15 @@ public class AttendeesActivity extends AppCompatActivity {
 
             @Override
             public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_add_attendees:
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("contact_items", contact_items);
+                        setResult(Activity.RESULT_OK, resultIntent);
+                        finish();
+
+                }
+
                 return false;
             }
 
@@ -85,7 +99,10 @@ public class AttendeesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+            public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
+                count++;
+                actionMode.setTitle(count + " aanwezigen");
+                contact_items.add(contacts.get(position));
 
             }
         });
