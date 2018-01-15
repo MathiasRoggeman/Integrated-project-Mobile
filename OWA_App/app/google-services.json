@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "50151075474",
+    "firebase_url": "https://not-owa.firebaseio.com",
+    "project_id": "not-owa",
+    "storage_bucket": "not-owa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50151075474:android:1d77c2fc728b59ef",
+        "android_client_info": {
+          "package_name": "be.ap.edu.owa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50151075474-7t9eotlidfdjbprltq9psb2vquq07ea9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzyFx8jfmMYWP0eSVRv1L9T3EGYzTa0sY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
