@@ -172,13 +172,13 @@ public class AddEventActivity extends AppCompatActivity {
     TimePickerDialog.OnTimeSetListener st = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-            starttime.setText(hour + ":" + minute);
+            starttime.setText(String.format("%02d:%02d", hour, minute));
         }
     };
     TimePickerDialog.OnTimeSetListener et = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-            endtime.setText(hour + ":" + minute);
+            endtime.setText(String.format("%02d:%02d", hour, minute));
         }
     };
     public boolean onCreateOptionsMenu(Menu menu) {
