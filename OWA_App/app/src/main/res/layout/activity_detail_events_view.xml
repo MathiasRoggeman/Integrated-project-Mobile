@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,7 +20,8 @@
         android:textSize="30sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="55dp" />
+        tools:layout_editor_absoluteY="55dp"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/beschrijving_eventdetail"
@@ -91,3 +94,4 @@
         android:textStyle="bold" />
 
 </RelativeLayout>
+</ScrollView>

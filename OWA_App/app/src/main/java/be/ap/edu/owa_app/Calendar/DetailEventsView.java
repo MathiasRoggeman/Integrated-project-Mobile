@@ -72,6 +72,13 @@ public class DetailEventsView extends AppCompatActivity {
         attendees = findViewById(R.id.aanwezigen_eventdetail);
         getSupportActionBar().setTitle(subject.toString());
         onderwerp.setText(subject);
+        while(beschrijving.contains("<!--")){
+            String first = "<!--";
+            String second = "-->";
+            beschrijving = beschrijving.replace(beschrijving.substring(beschrijving.indexOf(first), beschrijving.indexOf(second) + 3), "");
+            // message = message.replace("-->", "");
+
+        }
         //description.setText(beschrijving);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             description.setText(Html.fromHtml(beschrijving,Html.FROM_HTML_MODE_LEGACY));
