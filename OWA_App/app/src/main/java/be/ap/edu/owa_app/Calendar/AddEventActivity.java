@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 
 import be.ap.edu.owa_app.Contacts.Contacts;
@@ -64,6 +65,8 @@ public class AddEventActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSetListenerStart;
     private DatePickerDialog.OnDateSetListener dateSetListenerEnd;
 
+    private ArrayList<Contacts> contactlist = new ArrayList<>();
+
 
 
     @Override
@@ -87,8 +90,6 @@ public class AddEventActivity extends AppCompatActivity {
         enddate = findViewById(R.id.addevent_enddate);
         endtime = findViewById(R.id.addevent_endtime);
         location = findViewById(R.id.addevent_locatie);
-        naam = findViewById(R.id.addevent_naam);
-        mail = findViewById(R.id.addevent_mail);
         aanwezig = findViewById(R.id.aanwezig);
 
 
@@ -231,6 +232,8 @@ public class AddEventActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
+        Log.d("Contacts", makeEvent());
+
         final JSONObject eventObject = new JSONObject(makeEvent());
 
         System.out.println(eventObject.toString());
@@ -266,6 +269,16 @@ public class AddEventActivity extends AppCompatActivity {
 
 
     private String makeEvent() {
+
+        JsonArrayBuilder jsonUserArray = Json.createArrayBuilder();
+
+        for(Contacts x : contactlist){
+            Log.d("Contacts" , x.getDisplayName());
+            JsonObjectBuilder job = Json.createObjectBuilder().add("type", "required").add("emailAddress", Json.createObjectBuilder().add("name", x.getDisplayName()).add("address", x.getEmail()));
+            jsonUserArray.add(job);
+        }
+
+
         JsonObjectBuilder event = Json.createObjectBuilder()
                 .add("subject", subject.getText().toString())
                 .add("body", Json.createObjectBuilder()
@@ -279,11 +292,8 @@ public class AddEventActivity extends AppCompatActivity {
                         .add("timeZone", "UTC"))
                 .add("location", Json.createObjectBuilder()
                         .add("displayName", location.getText().toString()))
-                .add("attendees", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("emailAddress", Json.createObjectBuilder()
-                                        .add("name", naam.getText().toString()))
-                                .add("type", "required")));
+                .add("attendees", jsonUserArray);
+
         return event.build().toString();
     }
 
@@ -292,7 +302,7 @@ public class AddEventActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && data != null){
             if(resultCode == RESULT_OK) {
-                ArrayList<Contacts> contactlist = (ArrayList<Contacts>) data.getSerializableExtra("contact_items");
+                contactlist = (ArrayList<Contacts>) data.getSerializableExtra("contact_items");
                 Log.d("ArrayList", contactlist.get(0).getDisplayName());
                 String attendees = "";
                 for (Contacts contact : contactlist) {
