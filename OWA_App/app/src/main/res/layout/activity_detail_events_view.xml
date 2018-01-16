@@ -7,15 +7,16 @@
     tools:context="be.ap.edu.owa_app.Calendar.DetailEventsView">
 
 
-
     <TextView
         android:id="@+id/subject_eventdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/beschrijving_eventdetail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
         android:text="@string/subject"
+        android:textSize="30sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="55dp" />
 
@@ -23,10 +24,11 @@
         android:id="@+id/beschrijving_eventdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/datetime_eventdetail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="44dp"
+        android:layout_below="@+id/subject_eventdetail"
+        android:layout_marginTop="15dp"
         android:text="@string/beschrijving"
+        android:textSize="24sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="105dp" />
 
@@ -34,10 +36,11 @@
         android:id="@+id/datetime_eventdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/locatie_eventdetail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="72dp"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="24dp"
         android:text="@string/date_time_date_time"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="148dp" />
 
@@ -45,10 +48,11 @@
         android:id="@+id/locatie_eventdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/aanwezigen_eventdetail"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="51dp"
+        android:layout_below="@+id/beschrijving_eventdetail"
+        android:layout_marginTop="24dp"
         android:text="@string/locatie"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="197dp" />
 
@@ -56,11 +60,34 @@
         android:id="@+id/aanwezigen_eventdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="62dp"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="42dp"
         android:text="@string/aanwezigen"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="243dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/locatie_eventdetail"
+        android:layout_marginTop="26dp"
+        android:text="Periode"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/datetime_eventdetail"
+        android:layout_marginTop="74dp"
+        android:text="Aanwezigen"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

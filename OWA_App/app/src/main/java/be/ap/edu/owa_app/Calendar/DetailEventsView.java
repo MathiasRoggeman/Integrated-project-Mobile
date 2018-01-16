@@ -54,7 +54,6 @@ public class DetailEventsView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_events_view);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
@@ -80,7 +79,7 @@ public class DetailEventsView extends AppCompatActivity {
             description.setText(Html.fromHtml(beschrijving));
         }
         datetime.setText(startdate + " - " + enddate);
-        locatie.setText(location);
+        locatie.setText("Locatie: " + location);
         attendees.setText(aanwezigen);
 
 

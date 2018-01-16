@@ -54,6 +54,10 @@ public class AttendeesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendees);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Aanwezigen");
+
         final String token = this.getIntent().getExtras().getString("token");
         getContacts(token, url);
 

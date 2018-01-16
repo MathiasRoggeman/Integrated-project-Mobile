@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/addevent_beschrijving"
         android:layout_marginTop="28dp"
-        android:layout_toStartOf="@+id/addevent_starttime"
         android:ems="10"
         android:hint="@string/subject"
         android:inputType="text|textShortMessage" />
@@ -22,7 +22,7 @@
         android:id="@+id/addevent_beschrijving"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/addevent_locatie"
         android:layout_below="@+id/addevent_subject"
         android:ems="10"
         android:hint="@string/beschrijving"
@@ -32,11 +32,12 @@
         android:id="@+id/addevent_startdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/aanwezig"
         android:layout_below="@+id/addevent_locatie"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="91dp"
         android:ems="10"
-        android:hint="@string/startdate" />
+        android:hint="@string/startdate"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/addevent_starttime"
@@ -46,17 +47,19 @@
         android:layout_alignBottom="@+id/addevent_startdate"
         android:layout_alignParentEnd="true"
         android:ems="10"
-        android:hint="@string/starttime" />
+        android:hint="@string/starttime"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/addevent_enddate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/addevent_locatie"
+        android:layout_alignStart="@+id/aanwezig"
         android:layout_below="@+id/addevent_startdate"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="@string/enddate" />
+        android:hint="@string/enddate"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/addevent_endtime"
@@ -64,15 +67,16 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/addevent_enddate"
         android:layout_alignBottom="@+id/addevent_enddate"
-        android:layout_alignStart="@+id/addevent_starttime"
+        android:layout_alignParentEnd="true"
         android:ems="10"
-        android:hint="@string/endtime" />
+        android:hint="@string/endtime"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/addevent_locatie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/addevent_subject"
+        android:layout_alignStart="@+id/addevent_startdate"
         android:layout_below="@+id/addevent_beschrijving"
         android:ems="10"
         android:hint="@string/locatie"
@@ -82,9 +86,21 @@
         android:id="@+id/aanwezig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/addevent_enddate"
-        android:layout_below="@+id/addevent_enddate"
-        android:layout_marginTop="26dp"
-        android:text="@string/aanwezig" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="46dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/aanwezig"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addevent_starttime"
+        android:layout_alignStart="@+id/addevent_startdate"
+        android:layout_marginBottom="13dp"
+        android:text="Periode: "
+        android:textSize="24sp" />
 
 </RelativeLayout>
