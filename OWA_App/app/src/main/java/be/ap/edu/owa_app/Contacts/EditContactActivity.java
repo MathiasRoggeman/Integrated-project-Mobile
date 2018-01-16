@@ -54,9 +54,10 @@ public class EditContactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
-        setContentView(R.layout.activity_edit_contact);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        getSupportActionBar().setTitle("Add contact");
+        getSupportActionBar().setTitle("Edit contact");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         token = this.getIntent().getExtras().getString("token");
         contactid = this.getIntent().getExtras().getString("contactid");
         displayName = this.getIntent().getExtras().getString("naam");

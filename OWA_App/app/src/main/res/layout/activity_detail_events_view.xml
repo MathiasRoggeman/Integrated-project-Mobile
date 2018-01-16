@@ -79,7 +79,7 @@
         android:layout_below="@+id/locatie_eventdetail"
         android:layout_marginTop="26dp"
         android:text="Periode"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -90,7 +90,7 @@
         android:layout_alignTop="@+id/datetime_eventdetail"
         android:layout_marginTop="74dp"
         android:text="Aanwezigen"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 </RelativeLayout>
