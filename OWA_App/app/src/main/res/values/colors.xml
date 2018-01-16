@@ -11,5 +11,7 @@
     <color name="blanced_almond">#ffeccc</color>
     <color name="big_dip">#A4303F </color>
     <color name="tucan">#f2d0a4</color>
+    
+    <drawable name="red_color">#A4303F</drawable>
 
 </resources>

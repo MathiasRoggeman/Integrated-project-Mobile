@@ -47,6 +47,8 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        getSupportActionBar().setTitle("Kalender");
+
 
 
 
@@ -129,13 +131,6 @@ public class CalendarActivity extends AppCompatActivity {
                 Intent intent = new Intent(CalendarActivity.this, AddEventActivity.class);
                 intent.putExtra("token", token);
                 startActivity(intent);
-                return true;
-
-
-            case R.id.action_list_events:
-                Intent intent2 = new Intent(CalendarActivity.this,ListEventsActivity.class);
-                intent2.putExtra("token", token);
-                startActivity(intent2);
                 return true;
 
 

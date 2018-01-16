@@ -9,7 +9,9 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -87,6 +89,7 @@ public class AttendeesActivity extends AppCompatActivity {
                         resultIntent.putExtra("contact_items", contact_items);
                         setResult(Activity.RESULT_OK, resultIntent);
                         finish();
+                        return true;
 
                 }
 
@@ -100,12 +103,25 @@ public class AttendeesActivity extends AppCompatActivity {
 
             @Override
             public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
-                count++;
-                actionMode.setTitle(count + " aanwezigen");
-                contact_items.add(contacts.get(position));
+                if(checked) {
+                    count++;
+                    actionMode.setTitle(count + " aanwezigen");
+                    contact_items.add(contacts.get(position));
+                }else{
+                    count--;
+                    actionMode.setTitle(count + " aanwezigen");
+                    contact_items.remove(contacts.get(position));
+                }
 
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                view.setSelected(true);
+            }
+        });
+
 
     }
 
