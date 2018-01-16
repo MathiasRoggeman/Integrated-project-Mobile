@@ -28,9 +28,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -112,7 +117,6 @@ public class EditContactActivity extends AppCompatActivity {
         geboorteDatum = findViewById(R.id.geboortedatum);
 
 
-
         Log.d("contactid", contactid);
         Log.d("displayname", displayName);
         //Log.d("name", name);
@@ -129,9 +133,6 @@ public class EditContactActivity extends AppCompatActivity {
             companyName = "";
         if (personalNotes.equals("null"))
             personalNotes = "";
-
-
-
 
 
         naam.setText(surname);
@@ -160,13 +161,37 @@ public class EditContactActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 Log.d(TAG, "onDateSet: dd/mm/yyyy: " + day + "/" + month + "/" + year);
-
+                TimeZone tz = TimeZone.getTimeZone("UTC");
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+                df.setTimeZone(tz);
                 String date = year + "/" + month + "/" + day;
-                geboorteDatum.setText(date);
+
+
+                try {
+                    geboorteDatum.setText(toISO8601UTC(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    Log.d(TAG, "onDateSet: " + toISO8601UTC(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
 
+    }
+
+    public static String toISO8601UTC(String date) throws ParseException {
+        String normalFormat = "yyyy/mm/dd";
+
+        SimpleDateFormat formatter = new SimpleDateFormat(normalFormat);
+        Date datum = formatter.parse(date);
+        String to_format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+        SimpleDateFormat ISOformat =  new SimpleDateFormat(to_format);
+
+        return ISOformat.format(datum);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -189,7 +214,7 @@ public class EditContactActivity extends AppCompatActivity {
 
             case R.id.action_save:
                 try {
-                    editContact(MSGRAPH_URL,token);
+                    editContact(MSGRAPH_URL, token);
                     Intent intent = new Intent(EditContactActivity.this, ContactsActivity.class);
                     intent.putExtra("token", token);
                     startActivity(intent);
@@ -255,8 +280,6 @@ public class EditContactActivity extends AppCompatActivity {
                 .add("surname", naam.getText().toString())
                 .add("companyName", bedrijf.getText().toString())
                 .add("personalNotes", Opmerkingen.getText().toString())
-
-
                 .add("emailAddresses", Json.createArrayBuilder()
 
                         .add(Json.createObjectBuilder()
@@ -264,7 +287,7 @@ public class EditContactActivity extends AppCompatActivity {
                         ))
                 .add("jobTitle", (bedrijfsTitel.getText().toString()))
                 .add("mobilePhone", nummer.getText().toString());
-        Log.d(TAG, "date"+ geboorteDatum.getText().toString());
+        Log.d(TAG, "date" + geboorteDatum.getText().toString());
         return mail.build().toString();
     }
 }
