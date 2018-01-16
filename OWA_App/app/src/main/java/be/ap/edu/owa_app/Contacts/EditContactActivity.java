@@ -1,14 +1,20 @@
 package be.ap.edu.owa_app.Contacts;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -22,12 +28,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 
+import be.ap.edu.owa_app.Calendar.AddEventActivity;
 import be.ap.edu.owa_app.R;
 
 public class EditContactActivity extends AppCompatActivity {
@@ -39,37 +47,71 @@ public class EditContactActivity extends AppCompatActivity {
     private String surname;
     private String mail;
     private String mobilePhone;
+    private String companyName;
+    private String personalNotes;
+    private String birthday;
+    private String jobTitle;
     private static final String TAG = EditContactActivity.class.getSimpleName();
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts/";
-
 
 
     private EditText naam;
     private EditText voornaam;
     private EditText nummer;
     private EditText email;
+    private EditText Straat;
+    private EditText Postbus;
+    private EditText Omgeving;
+    private EditText Plaats;
+    private EditText Status;
+    private EditText Postcode;
+    private EditText Land;
+    private EditText bedrijf;
+    private EditText bedrijfsTitel;
+    private EditText Opmerkingen;
+    private TextView geboorteDatum;
     private Button save;
+
+    private DatePickerDialog.OnDateSetListener birthdayDatepicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_contact);
-        setContentView(R.layout.activity_edit_contact);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        getSupportActionBar().setTitle("Add contact");
+        setContentView(R.layout.activity_add_edit_contacts);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Contact aanpassen");
         token = this.getIntent().getExtras().getString("token");
+        Log.d(TAG, "onCreateTOKEN " + token.toString());
         contactid = this.getIntent().getExtras().getString("contactid");
         displayName = this.getIntent().getExtras().getString("naam");
         name = this.getIntent().getExtras().getString("name");
         surname = this.getIntent().getExtras().getString("surname");
         mail = this.getIntent().getExtras().getString("email");
         mobilePhone = this.getIntent().getExtras().getString("mobile");
+        companyName = this.getIntent().getExtras().getString("companyName");
+        personalNotes = this.getIntent().getExtras().getString("personalNotes");
+        birthday = this.getIntent().getExtras().getString("birthday");
+        jobTitle = this.getIntent().getExtras().getString("jobTitle");
         MSGRAPH_URL += contactid;
 
         naam = findViewById(R.id.editname);
-        voornaam = findViewById(R.id.editfirstname);
+        voornaam = findViewById(R.id.voornaam);
         nummer = findViewById(R.id.editnumber);
         email = findViewById(R.id.editmail);
+        Straat = findViewById(R.id.Straat);
+        Postbus = findViewById(R.id.Postbus);
+        Omgeving = findViewById(R.id.Omgeving);
+        Plaats = findViewById(R.id.Plaats);
+        Status = findViewById(R.id.Status);
+        Postcode = findViewById(R.id.Postcode);
+        Land = findViewById(R.id.Land);
+        bedrijf = findViewById(R.id.Bedrijf);
+        bedrijfsTitel = findViewById(R.id.Titel);
+        Opmerkingen = findViewById(R.id.Opmerkingen);
+        geboorteDatum = findViewById(R.id.geboortedatum);
+
+
 
         Log.d("contactid", contactid);
         Log.d("displayname", displayName);
@@ -78,19 +120,55 @@ public class EditContactActivity extends AppCompatActivity {
         Log.d("mail", mail);
         Log.d("mobilephone", mobilePhone);
 
-        if(mobilePhone.equals("null"))
+
+        if (mobilePhone.equals("null"))
             mobilePhone = "";
-        if(mail.equals("null"))
+        if (mail.equals("null"))
             mail = "";
+        if (companyName.equals("null"))
+            companyName = "";
+        if (personalNotes.equals("null"))
+            personalNotes = "";
+
+
+
+
 
         naam.setText(surname);
         voornaam.setText(name);
         nummer.setText(mobilePhone);
         email.setText(mail);
+        bedrijf.setText(companyName);
+        Opmerkingen.setText(personalNotes);
+        geboorteDatum.setText(birthday);
+        bedrijfsTitel.setText(jobTitle);
 
+        geboorteDatum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(EditContactActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, birthdayDatepicker, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        birthdayDatepicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: dd/mm/yyyy: " + day + "/" + month + "/" + year);
+
+                String date = year + "/" + month + "/" + day;
+                geboorteDatum.setText(date);
+            }
+        };
 
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save, menu);
 
@@ -111,7 +189,7 @@ public class EditContactActivity extends AppCompatActivity {
 
             case R.id.action_save:
                 try {
-                    editContact(MSGRAPH_URL);
+                    editContact(MSGRAPH_URL,token);
                     Intent intent = new Intent(EditContactActivity.this, ContactsActivity.class);
                     intent.putExtra("token", token);
                     startActivity(intent);
@@ -126,7 +204,7 @@ public class EditContactActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void editContact(String url) throws JSONException {
+    private void editContact(String url, final String Token) throws JSONException {
         Log.d("token", url);
 
     /* Make sure we have a token to send to graph */
@@ -154,7 +232,7 @@ public class EditContactActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + token);
+                headers.put("Authorization", "Bearer " + Token);
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 return headers;
             }
@@ -171,14 +249,22 @@ public class EditContactActivity extends AppCompatActivity {
 
     private String patchContact() {
         JsonObjectBuilder mail = Json.createObjectBuilder()
+                .add("birthday", (geboorteDatum.getText().toString()))
                 .add("displayName", voornaam.getText().toString() + " " + naam.getText().toString())
                 .add("givenName", voornaam.getText().toString())
                 .add("surname", naam.getText().toString())
+                .add("companyName", bedrijf.getText().toString())
+                .add("personalNotes", Opmerkingen.getText().toString())
+
+
                 .add("emailAddresses", Json.createArrayBuilder()
+
                         .add(Json.createObjectBuilder()
-                                        .add("address", email.getText().toString())
+                                .add("address", email.getText().toString())
                         ))
+                .add("jobTitle", (bedrijfsTitel.getText().toString()))
                 .add("mobilePhone", nummer.getText().toString());
+        Log.d(TAG, "date"+ geboorteDatum.getText().toString());
         return mail.build().toString();
     }
 }

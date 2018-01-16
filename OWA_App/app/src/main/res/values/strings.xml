@@ -49,7 +49,7 @@
     <string name="locatie">Locatie</string>
     <string name="aanwezigen">Aanwezigen</string>
     <string name="save_event">Save Event</string>
-    <string name="emailadres">Emailadres</string>
+    <string name="emailadres">E-mailadres</string>
     <string name="endtime">Endtime</string>
     <string name="enddate">Enddate</string>
     <string name="starttime">Starttime</string>
@@ -57,7 +57,7 @@
     <string name="aanwezig">Aanwezig</string>
     <string name="search">Search</string>
     <string name="contactnaam">contactnaam</string>
-    <string name="mobile_number">Mobile number</string>
+    <string name="mobile_number">Telefoonnummer</string>
     <string name="bewerken">Bewerken</string>
     <string name="voornaam">Voornaam</string>
     <string name="make_contact">Make contact</string>
@@ -69,6 +69,16 @@
     <string name="events">Events</string>
     <string name="attendees">Aanwezigen:</string>
     <string name="add_attendees">Add Attendees</string>
-
+    <string name="birthday">Geboortedatum</string>
+    <string name="postbus">Postbus</string>
+    <string name="straat">Straat</string>
+    <string name="omgeving">Omgeving</string>
+    <string name="plaats">Plaats</string>
+    <string name="land">Land</string>
+    <string name="postcode">Postcode</string>
+    <string name="status">Status</string>
+    <string name="bedrijf">Bedrijf</string>
+    <string name="titel">Titel</string>
+    <string name="opmerkingen">Opmerkingen</string>
 
 </resources>

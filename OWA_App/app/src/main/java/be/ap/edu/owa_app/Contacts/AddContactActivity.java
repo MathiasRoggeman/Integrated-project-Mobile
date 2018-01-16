@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -35,20 +36,29 @@ public class AddContactActivity extends AppCompatActivity {
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts";
     private static final String TAG = AddContactActivity.class.getSimpleName();
 
-
-    private TextView naam;
-    private TextView nummer;
-    private TextView voornaam;
-    private TextView email;
+    private EditText naam;
+    private EditText voornaam;
+    private EditText nummer;
+    private EditText email;
+    private EditText Straat;
+    private EditText Postbus;
+    private EditText Omgeving;
+    private EditText Plaats;
+    private EditText Status;
+    private EditText Postcode;
+    private EditText Land;
+    private EditText Bedrijf;
+    private EditText BedrijfsTitel;
+    private EditText Opmerkingen;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_contact);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setContentView(R.layout.activity_add_edit_contacts);
 
-        getSupportActionBar().setTitle("Add contact");
+
+        getSupportActionBar().setTitle("Nieuw contact");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         token = this.getIntent().getExtras().getString("token");
@@ -77,9 +87,21 @@ public class AddContactActivity extends AppCompatActivity {
 
             case R.id.action_save:
                 naam = findViewById(R.id.editname);
-                voornaam = findViewById(R.id.editfirstname);
+                voornaam = findViewById(R.id.voornaam);
                 nummer = findViewById(R.id.editnumber);
                 email = findViewById(R.id.editmail);
+                Straat = findViewById(R.id.Straat);
+                Postbus = findViewById(R.id.Postbus);
+                Omgeving = findViewById(R.id.Omgeving);
+                Plaats = findViewById(R.id.Plaats);
+                Status = findViewById(R.id.Status);
+                Postcode = findViewById(R.id.Postcode);
+                Land = findViewById(R.id.Land);
+                Bedrijf = findViewById(R.id.Bedrijf);
+                BedrijfsTitel = findViewById(R.id.Titel);
+                Opmerkingen = findViewById(R.id.Opmerkingen);
+
+
                 try {
                     editContact(MSGRAPH_URL);
                 } catch (JSONException e) {
@@ -143,11 +165,14 @@ public class AddContactActivity extends AppCompatActivity {
                 .add("displayName", voornaam.getText().toString() + " " + naam.getText().toString())
                 .add("givenName", voornaam.getText().toString())
                 .add("surname", naam.getText().toString())
+                .add("companyName", Bedrijf.getText().toString())
+                .add("personalNotes",Opmerkingen.getText().toString())
                 .add("emailAddresses", Json.createArrayBuilder()
                         .add(Json.createObjectBuilder()
                                 .add("address", email.getText().toString())
                         ))
                 .add("mobilePhone", nummer.getText().toString());
+
         return mail.build().toString();
     }
 }

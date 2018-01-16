@@ -42,6 +42,7 @@ public class ContactsActivity extends AppCompatActivity {
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts";
 
     private ArrayList<Contacts> contacts = new ArrayList<>();
+    private ArrayList<Address> adressen = new ArrayList<>();
     private ListView listView;
     private ContactsAdapter contactsAdapter;
 
@@ -74,6 +75,7 @@ public class ContactsActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Contacts e = contacts.get(position);
 
+
                     Intent intent = new Intent(ContactsActivity.this, ContactsDetailActivity.class);
                     intent.putExtra("token", token);
                     intent.putExtra("contactid", e.getId());
@@ -82,6 +84,17 @@ public class ContactsActivity extends AppCompatActivity {
                     intent.putExtra("mobile", e.getMobile());
                     intent.putExtra("givenname", e.getName());
                     intent.putExtra("surname", e.getSurname());
+                    intent.putExtra("companyName",e.getBedrijf());
+                    intent.putExtra("personalNotes", e.getOpmerkingen());
+                    intent.putExtra("birthday",e.getBirthday());
+                    intent.putExtra("jobTitle", e.getBedrijfsTitel());
+           /*
+                    intent.putExtra("adress_Straat", e.getAddress().getStraat());
+                    intent.putExtra("adress_Postbus", e.getAddress().getPostbus());
+                    intent.putExtra("adress_Omgeving", e.getAddress().getOmgeving());
+                    intent.putExtra("adress_Plaats", e.getAddress().getPlaats());
+                    intent.putExtra("adress_Postcode", e.getAddress().getPostcode());
+                    intent.putExtra("adress_Land", e.getAddress().getLand());*/
                     startActivity(intent);
 
 
@@ -195,6 +208,10 @@ public class ContactsActivity extends AppCompatActivity {
                                 Log.d("givenname", givenname);
                                 String surname = (subject.getJSONObject(i).get("surname")).toString();
                                 String mobilePhone = (subject.getJSONObject(i).getString("mobilePhone"));
+                                String bedrijf  = (subject.getJSONObject(i).get("companyName")).toString();
+                                String opmerkingen = (subject.getJSONObject(i).get("personalNotes")).toString();
+                                String birthday = (subject.getJSONObject(i).get("birthday")).toString();
+                                String bedrijfstitel = (subject.getJSONObject(i).get("jobTitle")).toString();
                                 JSONArray mailArray = (subject.getJSONObject(i).getJSONArray("emailAddresses"));
                                 String mail;
                                 if(mailArray != null && mailArray.length() > 0) {
@@ -202,7 +219,7 @@ public class ContactsActivity extends AppCompatActivity {
                                 }else{
                                     mail = "null";
                                 }
-                                contacts.add(new Contacts(id, name, givenname, surname, mail, mobilePhone));
+                                contacts.add(new Contacts(id, name, givenname, surname, mail, mobilePhone, bedrijf, opmerkingen, birthday, bedrijfstitel));
                             }
                             listView.requestLayout();
                             contactsAdapter.notifyDataSetChanged();

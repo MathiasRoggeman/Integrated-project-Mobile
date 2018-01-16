@@ -1,6 +1,7 @@
 package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +37,11 @@ public class ContactsDetailActivity extends AppCompatActivity {
     private String surname;
     private String mail;
     private String mobile;
+    private String bedrijf;
+    private String bedrijfsTitel;
+    private String opmerkingen;
+    private String geboortedatum;
+    private Address adres;
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts/";
     private static final String TAG = ContactsDetailActivity.class.getSimpleName();
 
@@ -63,19 +69,37 @@ public class ContactsDetailActivity extends AppCompatActivity {
         surname = this.getIntent().getExtras().getString("surname");
         mail = this.getIntent().getExtras().getString("mail");
         mobile = this.getIntent().getExtras().getString("mobile");
+        bedrijf = this.getIntent().getExtras().getString("companyName");
+        opmerkingen = this.getIntent().getExtras().getString("personalNotes");
+        geboortedatum = this.getIntent().getExtras().getString("birthtday");
+/*        adres.setStraat(this.getIntent().getExtras().getString("adress_Postbus"));
+        adres.setPostbus(this.getIntent().getExtras().getString("adress_Straat"));
+        adres.setOmgeving(this.getIntent().getExtras().getString("adress_Omgeving"));
+        adres.setPlaats(this.getIntent().getExtras().getString("adress_Plaats"));
+        adres.setPostcode(this.getIntent().getExtras().getString("adress_Postcode"));
+        adres.setLand(this.getIntent().getExtras().getString("adress_Land"));*/
 
-
+        naam = findViewById(R.id.contactnaam);
         naam = findViewById(R.id.contactnaam);
         email = findViewById(R.id.contactsemail);
         mobilePhone = findViewById(R.id.contactmobile);
         icon = findViewById(R.id.phone);
         mailIcon = findViewById(R.id.imageView);
 
-        if(mail.equals("null")){
+        if (mail.equals("null")) {
             email.setVisibility(View.INVISIBLE);
             mailIcon.setVisibility(View.INVISIBLE);
         }
-        if(mobile.equals("null")){
+        if (mobile.equals("null")) {
+            mobilePhone.setVisibility(View.INVISIBLE);
+            icon.setVisibility(View.INVISIBLE);
+        }
+
+        if (mobile.equals("null")) {
+            mobilePhone.setVisibility(View.INVISIBLE);
+            icon.setVisibility(View.INVISIBLE);
+        }
+        if (mobile.equals("null")) {
             mobilePhone.setVisibility(View.INVISIBLE);
             icon.setVisibility(View.INVISIBLE);
         }
@@ -86,6 +110,7 @@ public class ContactsDetailActivity extends AppCompatActivity {
 
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_open_contacts, menu);
 
@@ -114,6 +139,16 @@ public class ContactsDetailActivity extends AppCompatActivity {
                 intent.putExtra("surname", surname);
                 intent.putExtra("email", mail);
                 intent.putExtra("mobile", mobile);
+                intent.putExtra("companyName", bedrijf);
+                intent.putExtra("personalNotes", opmerkingen);
+                intent.putExtra("birthday", geboortedatum);
+                intent.putExtra("jobTitle", bedrijfsTitel);
+/*                intent.putExtra("adress_Straat", adres.getStraat());
+                intent.putExtra("adress_Postbus", adres.getPostbus());
+                intent.putExtra("adress_Omgeving", adres.getOmgeving());
+                intent.putExtra("adress_Plaats", adres.getOmgeving());
+                intent.putExtra("adress_Postcode", adres.getPostcode());
+                intent.putExtra("adress_Land", adres.getLand());*/
                 startActivity(intent);
                 break;
 
