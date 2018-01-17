@@ -12,8 +12,9 @@ public class MailList {
     private Boolean read;
     private String message;
     private String date;
+    private Boolean hasAttachments;
 
-    public MailList(String id, String subject, String sender, String bodypreview, boolean read, String message, String date) {
+    public MailList(String id, String subject, String sender, String bodypreview, boolean read, String message, String date, Boolean hasAttachments) {
         this.id = id;
         this.subject = subject;
         this.sender = sender;
@@ -21,6 +22,17 @@ public class MailList {
         this.read = read;
         this.message = message;
         this.date = date;
+        this.hasAttachments = hasAttachments;
+    }
+
+    public MailList(String id, String subject, String bodypreview, Boolean read, String message, String date, Boolean hasAttachments) {
+        this.id = id;
+        this.subject = subject;
+        this.bodypreview = bodypreview;
+        this.read = read;
+        this.message = message;
+        this.date = date;
+        this.hasAttachments = hasAttachments;
     }
 
     public String getId() {
@@ -89,5 +101,13 @@ public class MailList {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Boolean getHasAttachments() {
+        return hasAttachments;
+    }
+
+    public void setHasAttachments(Boolean hasAttachments) {
+        this.hasAttachments = hasAttachments;
     }
 }

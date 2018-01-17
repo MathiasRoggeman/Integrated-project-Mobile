@@ -15,7 +15,9 @@
         android:layout_marginTop="57dp"
         android:text="@string/search"
         tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="300dp" />
+        tools:layout_editor_absoluteY="300dp"
+        android:background="#b71007"
+        android:textColor="#FFF"/>
 
     <EditText
         android:id="@+id/editText"

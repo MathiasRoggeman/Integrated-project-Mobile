@@ -197,7 +197,8 @@ public class SearchResultActivity extends AppCompatActivity {
                 Boolean read = (subject.getJSONObject(i).getBoolean("isRead"));
                 String message = (subject.getJSONObject(i).getJSONObject("body").getString("content"));
                 String date = (subject.getJSONObject(i).getString("receivedDateTime"));
-                maillist.add(new MailList(id, subj, sender, bodypr, read, message, date));
+                Boolean hasAttachments = subject.getJSONObject(i).getBoolean("hasAttachments");
+                maillist.add(new MailList(id, subj, sender, bodypr, read, message, date, hasAttachments));
             }
             listView.requestLayout();
             listadapter.notifyDataSetChanged();

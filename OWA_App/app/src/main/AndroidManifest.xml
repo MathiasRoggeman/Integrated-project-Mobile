@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.ap.edu.owa_app">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:allowBackup="true"
         android:configChanges="orientation"
@@ -95,21 +98,22 @@
         <activity android:name=".Mail.SearchResultActivity" />
         <activity android:name=".Mail.ReplyActivity" />
         <activity android:name=".Mail.ReplyAllActivity" />
-        <activity android:name=".Calendar.AttendeesActivity"></activity>
+        <activity android:name=".Calendar.AttendeesActivity" />
 
-        <!--fcm-->
+        <!-- fcm -->
 
-        <service android:name="be.ap.edu.owa_app.MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name="be.ap.edu.owa_app.MyFirebaseInstanceIdService">
+        <service android:name=".MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".Mail.AttachmentActivity"></activity>
     </application>
 
 </manifest>

@@ -21,6 +21,8 @@ public class SearchScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_screen);
 
+        getSupportActionBar().setTitle("Search Mail");
+
         token = this.getIntent().getExtras().getString("token");
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {

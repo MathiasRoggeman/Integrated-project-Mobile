@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.json.Json;
+
 import be.ap.edu.owa_app.Calendar.CalendarActivity;
 import be.ap.edu.owa_app.Contacts.ContactsActivity;
 import be.ap.edu.owa_app.LoginActivity;
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         if(positie == 0) {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
             getSupportActionBar().setTitle("Postvak in");
+
         }
         else if(positie == 1) {
             MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/drafts/messages";
@@ -162,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("message", mail.getMessage());
                     intent.putExtra("token", token);
                     intent.putExtra("isRead", mail.isRead());
+                    intent.putExtra("hasAttachments", mail.getHasAttachments());
 
                     // 4
                     startActivity(intent);
@@ -363,15 +367,21 @@ public class MainActivity extends AppCompatActivity {
 
             JSONArray subject = graphResponse.getJSONArray("value");
             for (int i = 0; i < subject.length(); i++) {
+                String sender;
 
                 String id = (subject.getJSONObject(i).getString("id"));
                 String subj = (subject.getJSONObject(i).get("subject")).toString();
-                String sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();
                 String bodypr = (subject.getJSONObject(i).getString("bodyPreview"));
                 Boolean read = (subject.getJSONObject(i).getBoolean("isRead"));
                 String message = (subject.getJSONObject(i).getJSONObject("body").getString("content"));
                 String date = (subject.getJSONObject(i).getString("receivedDateTime"));
-                maillist.add(new MailList(id, subj, sender, bodypr, read, message, date));
+                Boolean hasAttachments = subject.getJSONObject(i).getBoolean("hasAttachments");
+                if(subject.getJSONObject(i).has("sender")) {
+                    sender = (subject.getJSONObject(i).getJSONObject("sender").getJSONObject("emailAddress").get("name")).toString();
+                    maillist.add(new MailList(id, subj, sender, bodypr, read, message, date, hasAttachments));
+                }else {
+                    maillist.add(new MailList(id, subj, bodypr, read, message, date, hasAttachments));
+                }
             }
             listView.requestLayout();
             listadapter.notifyDataSetChanged();

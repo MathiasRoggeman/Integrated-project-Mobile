@@ -1,15 +1,19 @@
 package be.ap.edu.owa_app.Mail;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -21,10 +25,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +43,13 @@ public class OpenMailActivity extends AppCompatActivity {
 
     private String id;
     private Boolean isRead;
+    private Boolean hasAttachments;
     private static final String TAG = OpenMailActivity.class.getSimpleName();
     private String MSGRAPH_URL;
     String token;
     final Context context = this;
+
+    ImageView attachm;
 
 
     @Override
@@ -56,6 +65,7 @@ public class OpenMailActivity extends AppCompatActivity {
         MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages/";
         token = this.getIntent().getExtras().getString("token");
         isRead = this.getIntent().getExtras().getBoolean("isRead");
+        hasAttachments = this.getIntent().getExtras().getBoolean("hasAttachments");
 
         String sender = this.getIntent().getExtras().getString("sender");
         String onderwerp = this.getIntent().getExtras().getString("onderwerp");
@@ -69,7 +79,7 @@ public class OpenMailActivity extends AppCompatActivity {
         final String textFromHtml = Jsoup.parse(message).text();
 
         try {
-            callGraphAPI(MSGRAPH_URL, id);
+            patchIsRead(MSGRAPH_URL, id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -81,6 +91,9 @@ public class OpenMailActivity extends AppCompatActivity {
            // message = message.replace("-->", "");
 
         }
+
+        attachm = findViewById(R.id.attachment);
+        attachm.setVisibility(View.INVISIBLE);
 
         /*if(message.contains("<style>")) {
             String str = message.replace(message.substring(message.lastIndexOf("<style>"), message.lastIndexOf("</style>")), "");
@@ -98,8 +111,12 @@ public class OpenMailActivity extends AppCompatActivity {
 
         bericht.setMovementMethod(LinkMovementMethod.getInstance());
 
+        Log.d("Attachments", hasAttachments.toString());
 
+        if(hasAttachments){
 
+            attachm.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -161,7 +178,7 @@ public class OpenMailActivity extends AppCompatActivity {
     }
 
 
-    private void callGraphAPI(String url, String id) throws JSONException {
+    private void patchIsRead(String url, String id) throws JSONException {
         Log.d("token", MSGRAPH_URL);
 
     /* Make sure we have a token to send to graph */
@@ -255,5 +272,6 @@ public class OpenMailActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
+
 
 }

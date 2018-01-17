@@ -9,9 +9,7 @@
     <color name="seafoam">#c4dfe6</color>
     <color name="wave">#07575b</color>
     <color name="blanced_almond">#ffeccc</color>
-    <color name="big_dip">#A4303F </color>
+    <color name="big_dip">#b71007 </color>
     <color name="tucan">#f2d0a4</color>
-    
-    <drawable name="red_color">#A4303F</drawable>
 
 </resources>

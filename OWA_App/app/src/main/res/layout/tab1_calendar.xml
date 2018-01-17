@@ -22,7 +22,7 @@
         android:id="@+id/compactcalendar_view"
         android:layout_width="match_parent"
         android:layout_height="209dp"
-        app:compactCalendarBackgroundColor="#ffe95451"
+        app:compactCalendarBackgroundColor="#B71007"
         app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
         app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
         app:compactCalendarMultiEventIndicatorColor="#fff"

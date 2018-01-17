@@ -77,9 +77,11 @@ public class ListAdapter extends ArrayAdapter<MailList> {
             TextView bp = (TextView) v.findViewById(R.id.body);
             // CheckBox cb = v.findViewById(R.id.delete);
 
-            String firstLetter = i.getSender().substring(0,1);
-            person_circle_text.append(firstLetter.toUpperCase());
+            if(!(i.getSender() == null)) {
+                String firstLetter = i.getSender().substring(0, 1);
+                person_circle_text.append(firstLetter.toUpperCase());
 
+            }
 
             // check to see if each individual textview is null.
             // if not, assign some text!
