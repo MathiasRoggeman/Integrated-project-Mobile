@@ -71,13 +71,12 @@ public class ContactsDetailActivity extends AppCompatActivity {
         mobile = this.getIntent().getExtras().getString("mobile");
         bedrijf = this.getIntent().getExtras().getString("companyName");
         opmerkingen = this.getIntent().getExtras().getString("personalNotes");
-        geboortedatum = this.getIntent().getExtras().getString("birthtday");
-/*        adres.setStraat(this.getIntent().getExtras().getString("adress_Postbus"));
-        adres.setPostbus(this.getIntent().getExtras().getString("adress_Straat"));
-        adres.setOmgeving(this.getIntent().getExtras().getString("adress_Omgeving"));
-        adres.setPlaats(this.getIntent().getExtras().getString("adress_Plaats"));
-        adres.setPostcode(this.getIntent().getExtras().getString("adress_Postcode"));
-        adres.setLand(this.getIntent().getExtras().getString("adress_Land"));*/
+        geboortedatum = this.getIntent().getExtras().getString("birthday");
+        adres.setStreet(this.getIntent().getExtras().getString("adress_Straat"));
+        adres.setState(this.getIntent().getExtras().getString("adress_Provincie"));
+        adres.setCity(this.getIntent().getExtras().getString("adress_Stad"));
+        adres.setPostalCode(this.getIntent().getExtras().getString("adress_Postcode"));
+        adres.setCountryOrRegion(this.getIntent().getExtras().getString("adress_Land"));
 
         naam = findViewById(R.id.contactnaam);
         naam = findViewById(R.id.contactnaam);
@@ -143,7 +142,7 @@ public class ContactsDetailActivity extends AppCompatActivity {
                 intent.putExtra("personalNotes", opmerkingen);
                 intent.putExtra("birthday", geboortedatum);
                 intent.putExtra("jobTitle", bedrijfsTitel);
-/*                intent.putExtra("adress_Straat", adres.getStraat());
+            /*    intent.putExtra("adress_Straat", adres.getStraat());
                 intent.putExtra("adress_Postbus", adres.getPostbus());
                 intent.putExtra("adress_Omgeving", adres.getOmgeving());
                 intent.putExtra("adress_Plaats", adres.getOmgeving());

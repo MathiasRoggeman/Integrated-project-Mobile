@@ -80,5 +80,7 @@
     <string name="bedrijf">Bedrijf</string>
     <string name="titel">Titel</string>
     <string name="opmerkingen">Opmerkingen</string>
+    <string name="staat">Staat</string>
+    <string name="provincie">Provincie</string>
 
 </resources>

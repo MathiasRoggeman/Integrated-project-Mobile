@@ -56,6 +56,7 @@ public class EditContactActivity extends AppCompatActivity {
     private String personalNotes;
     private String birthday;
     private String jobTitle;
+    private Address adres = new Address();
     private static final String TAG = EditContactActivity.class.getSimpleName();
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts/";
 
@@ -98,6 +99,7 @@ public class EditContactActivity extends AppCompatActivity {
         personalNotes = this.getIntent().getExtras().getString("personalNotes");
         birthday = this.getIntent().getExtras().getString("birthday");
         jobTitle = this.getIntent().getExtras().getString("jobTitle");
+
         MSGRAPH_URL += contactid;
 
         naam = findViewById(R.id.editname);
@@ -106,9 +108,8 @@ public class EditContactActivity extends AppCompatActivity {
         email = findViewById(R.id.editmail);
         Straat = findViewById(R.id.Straat);
         Postbus = findViewById(R.id.Postbus);
-        Omgeving = findViewById(R.id.Omgeving);
+        Omgeving = findViewById(R.id.staat);
         Plaats = findViewById(R.id.Plaats);
-        Status = findViewById(R.id.Status);
         Postcode = findViewById(R.id.Postcode);
         Land = findViewById(R.id.Land);
         bedrijf = findViewById(R.id.Bedrijf);
@@ -133,12 +134,15 @@ public class EditContactActivity extends AppCompatActivity {
             companyName = "";
         if (personalNotes.equals("null"))
             personalNotes = "";
+        if (birthday.equals("null"))
+            birthday.equals("Geboortedatum");
 
 
         naam.setText(surname);
         voornaam.setText(name);
         nummer.setText(mobilePhone);
         email.setText(mail);
+
         bedrijf.setText(companyName);
         Opmerkingen.setText(personalNotes);
         geboorteDatum.setText(birthday);
@@ -189,7 +193,7 @@ public class EditContactActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat(normalFormat);
         Date datum = formatter.parse(date);
         String to_format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-        SimpleDateFormat ISOformat =  new SimpleDateFormat(to_format);
+        SimpleDateFormat ISOformat = new SimpleDateFormat(to_format);
 
         return ISOformat.format(datum);
     }
@@ -286,7 +290,17 @@ public class EditContactActivity extends AppCompatActivity {
                                 .add("address", email.getText().toString())
                         ))
                 .add("jobTitle", (bedrijfsTitel.getText().toString()))
-                .add("mobilePhone", nummer.getText().toString());
+                .add("mobilePhone", nummer.getText().toString())
+                .add("homeAddress", Json.createArrayBuilder()
+
+                        .add(Json.createObjectBuilder()
+                                .add("city", Omgeving.getText().toString())
+                                .add("countryOrRegion", Land.getText().toString())
+                                .add("postalCode",Postcode.getText().toString())
+                                .add("state",Plaats.getText().toString() )
+                                .add("street", Straat.getText().toString())
+                        ));
+
         Log.d(TAG, "date" + geboorteDatum.getText().toString());
         return mail.build().toString();
     }

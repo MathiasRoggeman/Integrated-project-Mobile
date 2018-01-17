@@ -92,9 +92,8 @@ public class AddContactActivity extends AppCompatActivity {
                 email = findViewById(R.id.editmail);
                 Straat = findViewById(R.id.Straat);
                 Postbus = findViewById(R.id.Postbus);
-                Omgeving = findViewById(R.id.Omgeving);
+                Omgeving = findViewById(R.id.staat);
                 Plaats = findViewById(R.id.Plaats);
-                Status = findViewById(R.id.Status);
                 Postcode = findViewById(R.id.Postcode);
                 Land = findViewById(R.id.Land);
                 Bedrijf = findViewById(R.id.Bedrijf);

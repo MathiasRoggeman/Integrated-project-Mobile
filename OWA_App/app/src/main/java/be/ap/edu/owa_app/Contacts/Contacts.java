@@ -19,31 +19,21 @@ public class Contacts {
     private String Opmerkingen;
 
 
-    public Contacts(String id, String displayName, String name, String surname, String email, String mobile, Address address, String bedrijf, String opmerkingen) {
-        this.id = id;
-        this.displayName = displayName;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.mobile = mobile;
-        this.address = address;
-        this.Bedrijf = bedrijf;
-        this.Opmerkingen = opmerkingen;
 
-    }
-
-    public Contacts(String id, String displayName, String name, String surname, String email, String mobile, String bedrijf, String opmerkingen, String birthday, String bedrijfsTitel) {
+    public Contacts(String id, String birthday, String displayName, String name, String surname, String email, String mobile,String bedrijf, String bedrijfsTitel, String opmerkingen) {
         this.id = id;
-        this.displayName = displayName;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.mobile = mobile;
-        this.Bedrijf = bedrijf;
-        this.Opmerkingen = opmerkingen;
         this.Birthday = birthday;
+        this.displayName = displayName;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.mobile = mobile;
+        this.Bedrijf = bedrijf;
         this.BedrijfsTitel = bedrijfsTitel;
+        this.Opmerkingen = opmerkingen;
     }
+
+
 
     public Contacts(String id, String displayName, String name, String surname, String email, String mobile) {
         this.id = id;

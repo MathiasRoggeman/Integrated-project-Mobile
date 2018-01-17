@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,10 +44,9 @@ public class ContactsActivity extends AppCompatActivity {
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts";
 
     private ArrayList<Contacts> contacts = new ArrayList<>();
-    private ArrayList<Address> adressen = new ArrayList<>();
+
     private ListView listView;
     private ContactsAdapter contactsAdapter;
-
 
 
     @Override
@@ -58,7 +59,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         getContacts(token, MSGRAPH_URL);
 
-        Collections.sort(contacts, new Comparator<Contacts>(){
+        Collections.sort(contacts, new Comparator<Contacts>() {
             public int compare(Contacts p1, Contacts p2) {
                 return p1.getDisplayName().compareTo(p2.getDisplayName());
             }
@@ -84,17 +85,16 @@ public class ContactsActivity extends AppCompatActivity {
                     intent.putExtra("mobile", e.getMobile());
                     intent.putExtra("givenname", e.getName());
                     intent.putExtra("surname", e.getSurname());
-                    intent.putExtra("companyName",e.getBedrijf());
+                    intent.putExtra("companyName", e.getBedrijf());
                     intent.putExtra("personalNotes", e.getOpmerkingen());
-                    intent.putExtra("birthday",e.getBirthday());
+                    intent.putExtra("birthday", e.getBirthday());
                     intent.putExtra("jobTitle", e.getBedrijfsTitel());
-           /*
-                    intent.putExtra("adress_Straat", e.getAddress().getStraat());
-                    intent.putExtra("adress_Postbus", e.getAddress().getPostbus());
-                    intent.putExtra("adress_Omgeving", e.getAddress().getOmgeving());
-                    intent.putExtra("adress_Plaats", e.getAddress().getPlaats());
-                    intent.putExtra("adress_Postcode", e.getAddress().getPostcode());
-                    intent.putExtra("adress_Land", e.getAddress().getLand());*/
+
+                    intent.putExtra("adress_Straat", e.getAddress().getStreet());
+                    intent.putExtra("adress_Provincie", e.getAddress().getState());
+                    intent.putExtra("adress_Stad", e.getAddress().getState());
+                    intent.putExtra("adress_Postcode", e.getAddress().getPostalCode());
+                    intent.putExtra("adress_Land", e.getAddress().getCountryOrRegion());
                     startActivity(intent);
 
 
@@ -104,21 +104,18 @@ public class ContactsActivity extends AppCompatActivity {
         }
 
 
-
-
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.action_contacts);
         if (bottomNavigationView != null) {
             // Set action to perform when any menu-item is selected.
             bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        selectFragment(item);
-                        return false;
-                    }
-                });
+                    new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            selectFragment(item);
+                            return false;
+                        }
+                    });
         }
     }
 
@@ -130,20 +127,18 @@ public class ContactsActivity extends AppCompatActivity {
             case R.id.action_home:
                 // Action to perform when Home Menu item is selected.
                 Intent intent = new Intent(ContactsActivity.this, MainActivity.class);
-                intent.putExtra("token",token);
+                intent.putExtra("token", token);
                 startActivity(intent);
                 break;
             case R.id.action_calendar:
                 // Action to perform when Bag Menu item is selected.
                 Intent intent2 = new Intent(ContactsActivity.this, CalendarActivity.class);
-                intent2.putExtra("token",token);
+                intent2.putExtra("token", token);
                 startActivity(intent2);
                 break;
         }
 
     }
-
-
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,7 +162,7 @@ public class ContactsActivity extends AppCompatActivity {
             case R.id.action_make_contact:
                 // Action to perform when Bag Menu item is selected.
                 Intent intent = new Intent(ContactsActivity.this, AddContactActivity.class);
-                intent.putExtra("token",token);
+                intent.putExtra("token", token);
                 startActivity(intent);
                 break;
 
@@ -208,18 +203,26 @@ public class ContactsActivity extends AppCompatActivity {
                                 Log.d("givenname", givenname);
                                 String surname = (subject.getJSONObject(i).get("surname")).toString();
                                 String mobilePhone = (subject.getJSONObject(i).getString("mobilePhone"));
-                                String bedrijf  = (subject.getJSONObject(i).get("companyName")).toString();
+                                String bedrijf = (subject.getJSONObject(i).get("companyName")).toString();
                                 String opmerkingen = (subject.getJSONObject(i).get("personalNotes")).toString();
                                 String birthday = (subject.getJSONObject(i).get("birthday")).toString();
                                 String bedrijfstitel = (subject.getJSONObject(i).get("jobTitle")).toString();
                                 JSONArray mailArray = (subject.getJSONObject(i).getJSONArray("emailAddresses"));
                                 String mail;
-                                if(mailArray != null && mailArray.length() > 0) {
+                                if (mailArray != null && mailArray.length() > 0) {
                                     mail = mailArray.getJSONObject(0).getString("address");
-                                }else{
+                                } else {
                                     mail = "null";
                                 }
-                                contacts.add(new Contacts(id, name, givenname, surname, mail, mobilePhone, bedrijf, opmerkingen, birthday, bedrijfstitel));
+
+                                String homeadres = (subject.getJSONObject(i).get("homeAddress")).toString();
+                                Toast.makeText(ContactsActivity.this, homeadres.toString(), Toast.LENGTH_SHORT).show();
+
+                                Address a = new Address();
+                                Gson g = new Gson();
+
+                                Address address = g.fromJson("{\"name\": \"John\"}", Address.class);
+                                contacts.add(new Contacts(id, birthday, name, givenname, surname, mail, mobilePhone, bedrijf, bedrijfstitel, opmerkingen));
                             }
                             listView.requestLayout();
                             contactsAdapter.notifyDataSetChanged();

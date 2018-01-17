@@ -5,67 +5,50 @@ package be.ap.edu.owa_app.Contacts;
  */
 
 public class Address {
-    private String Straat;
-    private String Postbus;
-    private String Omgeving;
-    private String Plaats;
-    private String Status;
-    private String Postcode;
-    private String Land;
+    private String street;
+    private String city;
+    private String state;
+    private String countryOrRegion;
+    private String postalCode;
 
-    public String getStraat() {
-        return Straat;
+    public String getStreet() {
+        return street;
     }
 
-    public void setStraat(String straat) {
-        Straat = straat;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getPostbus() {
-        return Postbus;
+    public String getCity() {
+        return city;
     }
 
-    public void setPostbus(String postbus) {
-        Postbus = postbus;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getOmgeving() {
-        return Omgeving;
+    public String getState() {
+        return state;
     }
 
-    public void setOmgeving(String omgeving) {
-        Omgeving = omgeving;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getPlaats() {
-        return Plaats;
+    public String getCountryOrRegion() {
+        return countryOrRegion;
     }
 
-    public void setPlaats(String plaats) {
-        Plaats = plaats;
+    public void setCountryOrRegion(String countryOrRegion) {
+        this.countryOrRegion = countryOrRegion;
     }
 
-    public String getStatus() {
-        return Status;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setStatus(String status) {
-        Status = status;
-    }
-
-    public String getPostcode() {
-        return Postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        Postcode = postcode;
-    }
-
-    public String getLand() {
-        return Land;
-    }
-
-    public void setLand(String land) {
-        Land = land;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }
+

@@ -89,50 +89,42 @@
             android:backgroundTint="@android:color/transparent"
             android:hint="@string/postbus" />
         <EditText
-            android:id="@+id/Omgeving"
+            android:id="@+id/staat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:ems="10"
-            android:hint="@string/omgeving"
+            android:hint="@string/provincie"
             android:drawableLeft="@drawable/invisible"
             android:drawablePadding="20dp"
             android:drawableTint="@color/blanced_almond"
             android:backgroundTint="@android:color/transparent" />
+
         <EditText
             android:id="@+id/Plaats"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:ems="10"
+            android:backgroundTint="@android:color/transparent"
             android:drawableLeft="@drawable/invisible"
             android:drawablePadding="20dp"
             android:drawableTint="@color/blanced_almond"
-            android:hint="@string/plaats"
-            android:backgroundTint="@android:color/transparent" />
-        <EditText
-            android:id="@+id/Status"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="start"
             android:ems="10"
-            android:hint="@string/status"
-            android:drawableLeft="@drawable/invisible"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/blanced_almond"
-            android:backgroundTint="@android:color/transparent" />
+            android:hint="@string/plaats" />
+
         <EditText
             android:id="@+id/Postcode"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:ems="10"
-            android:hint="@string/postcode"
+            android:backgroundTint="@android:color/transparent"
             android:drawableLeft="@drawable/invisible"
             android:drawablePadding="20dp"
             android:drawableTint="@color/blanced_almond"
-            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/postcode"
             android:inputType="textPersonName" />
+
         <EditText
             android:id="@+id/Land"
             android:layout_width="match_parent"
