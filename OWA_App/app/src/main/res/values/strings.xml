@@ -74,7 +74,7 @@
     <string name="straat">Straat</string>
     <string name="omgeving">Omgeving</string>
     <string name="plaats">Plaats</string>
-    <string name="land">Land</string>
+    <string name="land">Land/Regio</string>
     <string name="postcode">Postcode</string>
     <string name="status">Status</string>
     <string name="bedrijf">Bedrijf</string>
@@ -82,5 +82,6 @@
     <string name="opmerkingen">Opmerkingen</string>
     <string name="staat">Staat</string>
     <string name="provincie">Provincie</string>
+    <string name="stad">Stad</string>
 
 </resources>

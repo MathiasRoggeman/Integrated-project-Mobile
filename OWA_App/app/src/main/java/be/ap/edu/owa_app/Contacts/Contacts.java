@@ -29,11 +29,24 @@ public class Contacts {
         this.email = email;
         this.mobile = mobile;
         this.Bedrijf = bedrijf;
+        this.address = address;
         this.BedrijfsTitel = bedrijfsTitel;
         this.Opmerkingen = opmerkingen;
     }
 
-
+    public Contacts(String id, String birthday, String displayName, String name, String surname, String email, String mobile, Address address, String bedrijf, String bedrijfsTitel, String opmerkingen) {
+        this.id = id;
+        Birthday = birthday;
+        this.displayName = displayName;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+        Bedrijf = bedrijf;
+        BedrijfsTitel = bedrijfsTitel;
+        Opmerkingen = opmerkingen;
+    }
 
     public Contacts(String id, String displayName, String name, String surname, String email, String mobile) {
         this.id = id;

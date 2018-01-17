@@ -56,6 +56,7 @@ public class EditContactActivity extends AppCompatActivity {
     private String personalNotes;
     private String birthday;
     private String jobTitle;
+    private String adressBool;
     private Address adres = new Address();
     private static final String TAG = EditContactActivity.class.getSimpleName();
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts/";
@@ -66,17 +67,15 @@ public class EditContactActivity extends AppCompatActivity {
     private EditText nummer;
     private EditText email;
     private EditText Straat;
-    private EditText Postbus;
-    private EditText Omgeving;
-    private EditText Plaats;
-    private EditText Status;
+    private EditText Stad;
+    private EditText Provincie;
     private EditText Postcode;
     private EditText Land;
     private EditText bedrijf;
     private EditText bedrijfsTitel;
     private EditText Opmerkingen;
     private TextView geboorteDatum;
-    private Button save;
+
 
     private DatePickerDialog.OnDateSetListener birthdayDatepicker;
 
@@ -99,6 +98,17 @@ public class EditContactActivity extends AppCompatActivity {
         personalNotes = this.getIntent().getExtras().getString("personalNotes");
         birthday = this.getIntent().getExtras().getString("birthday");
         jobTitle = this.getIntent().getExtras().getString("jobTitle");
+        adressBool = this.getIntent().getExtras().getString("adressBool");
+
+        if (adressBool.equals("1")){
+
+            adres.setStreet(this.getIntent().getExtras().getString("adress_Straat"));
+            adres.setState(this.getIntent().getExtras().getString("adress_Provincie"));
+            adres.setCity(this.getIntent().getExtras().getString("adress_Stad"));
+            adres.setPostalCode(this.getIntent().getExtras().getString("adress_Postcode"));
+            adres.setCountryOrRegion(this.getIntent().getExtras().getString("adress_Land"));
+
+        }
 
         MSGRAPH_URL += contactid;
 
@@ -107,10 +117,9 @@ public class EditContactActivity extends AppCompatActivity {
         nummer = findViewById(R.id.editnumber);
         email = findViewById(R.id.editmail);
         Straat = findViewById(R.id.Straat);
-        Postbus = findViewById(R.id.Postbus);
-        Omgeving = findViewById(R.id.staat);
-        Plaats = findViewById(R.id.Plaats);
         Postcode = findViewById(R.id.Postcode);
+        Stad = findViewById(R.id.Stad);
+        Provincie = findViewById(R.id.staat);
         Land = findViewById(R.id.Land);
         bedrijf = findViewById(R.id.Bedrijf);
         bedrijfsTitel = findViewById(R.id.Titel);
@@ -147,6 +156,16 @@ public class EditContactActivity extends AppCompatActivity {
         Opmerkingen.setText(personalNotes);
         geboorteDatum.setText(birthday);
         bedrijfsTitel.setText(jobTitle);
+
+        if (adressBool.equals("1")) {
+
+            Straat.setText(adres.getStreet().toString());
+            Postcode.setText(adres.getPostalCode().toString());
+            Stad.setText(adres.getCity().toString());
+            Provincie.setText(adres.getState().toString());
+            Land.setText(adres.getCountryOrRegion().toString());
+
+        }
 
         geboorteDatum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,20 +303,19 @@ public class EditContactActivity extends AppCompatActivity {
                 .add("surname", naam.getText().toString())
                 .add("companyName", bedrijf.getText().toString())
                 .add("personalNotes", Opmerkingen.getText().toString())
+                .add("jobTitle", bedrijfsTitel.getText().toString())
                 .add("emailAddresses", Json.createArrayBuilder()
-
                         .add(Json.createObjectBuilder()
                                 .add("address", email.getText().toString())
                         ))
-                .add("jobTitle", (bedrijfsTitel.getText().toString()))
+
                 .add("mobilePhone", nummer.getText().toString())
                 .add("homeAddress", Json.createArrayBuilder()
-
                         .add(Json.createObjectBuilder()
-                                .add("city", Omgeving.getText().toString())
+                                .add("city", Stad.getText().toString())
                                 .add("countryOrRegion", Land.getText().toString())
                                 .add("postalCode",Postcode.getText().toString())
-                                .add("state",Plaats.getText().toString() )
+                                .add("state",Provincie.getText().toString() )
                                 .add("street", Straat.getText().toString())
                         ));
 

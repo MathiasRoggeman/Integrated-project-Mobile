@@ -1,76 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="be.ap.edu.owa_app.Contacts.ContactsDetailActivity">
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
 
-
-
-    <ImageView
-        android:id="@+id/contacts"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/contactnaam"
-        android:layout_marginEnd="11dp"
-        android:layout_toStartOf="@+id/contactnaam"
-        android:src="@drawable/ic_perm_contact_calendar_black_24dp"
-        android:tint="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/contactnaam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/my_toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:text="@string/contactnaam"
-        android:textSize="25sp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/contactsemail"
-        android:layout_marginEnd="25dp"
-        android:layout_toStartOf="@+id/contactmobile"
-        android:scrollbars="vertical"
-        android:src="@drawable/ic_email_black_24dp"
-        android:tint="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/contactsemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/contactnaam"
-        android:layout_below="@+id/contacts"
-        android:layout_marginTop="54dp"
-        android:maxLines="1"
-        android:text="@string/e_mail"
-        android:textSize="15sp" />
-
-    <ImageView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_alignTop="@+id/contactmobile"
-        android:src="@drawable/ic_phone_android_black_24dp"
-        android:tint="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/contactmobile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/contactsemail"
-        android:layout_below="@+id/contactsemail"
-        android:layout_marginTop="36dp"
-        android:text="@string/mobile_number"
-        android:textSize="20sp" />
+        android:orientation="vertical" >
 
 
+        <TextView
+            android:id="@+id/contactnaam"
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@+id/contacts"
+            android:drawablePadding="25dp"
+            android:drawableStart="@drawable/ic_perm_contact_calendar_black_24dp"
+            android:drawableTint="@color/big_dip"
+            android:text="@string/contactnaam"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/contacts"
+            android:layout_gravity="start"
+            android:layout_marginTop="59dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_phone_android_black_24dp"
+            android:drawableTint="@color/big_dip"
+            android:ems="10"
+            android:hint="@string/mobile_number"
+            android:inputType="phone" />
+
+
+        <TextView
+            android:id="@+id/mail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/geboortedatum"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_email_black_24dp"
+            android:drawableTint="@color/big_dip"
+            android:ems="10"
+            android:hint="@string/emailadres" />
+
+        <TextView
+            android:id="@+id/Straat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_location_on_black_24dp"
+            android:drawableTint="@color/big_dip"
+            android:ems="10"
+            android:hint="@string/straat" />
+
+        <TextView
+            android:id="@+id/Postcode"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:ems="10"
+            android:hint="@string/postcode"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/Stad"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:ems="10"
+            android:hint="@string/stad" />
+
+        <TextView
+            android:id="@+id/staat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:ems="10"
+            android:hint="@string/provincie"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:backgroundTint="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/Land"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:ems="10"
+            android:hint="@string/land"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:backgroundTint="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/geboortedatum"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Opmerkingen"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/big_dip"
+            android:ems="10"
+            android:hint="@string/birthday"
+            android:textAlignment="textStart"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/Bedrijf"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/number"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_domain_black_24dp"
+            android:drawableTint="@color/big_dip"
+            android:ems="10"
+            android:hint="@string/bedrijf" />
+
+        <TextView
+            android:id="@+id/Titel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Bedrijf"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:ems="10"
+            android:hint="@string/titel" />
+
+        <TextView
+            android:id="@+id/Opmerkingen"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Titel"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_comment_black_24dp"
+            android:drawableTint="@color/big_dip"
+            android:ems="10"
+            android:hint="@string/opmerkingen" />
 
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+
+
+</ScrollView>

@@ -89,12 +89,18 @@ public class ContactsActivity extends AppCompatActivity {
                     intent.putExtra("personalNotes", e.getOpmerkingen());
                     intent.putExtra("birthday", e.getBirthday());
                     intent.putExtra("jobTitle", e.getBedrijfsTitel());
+                    intent.putExtra("adressBool", "0");
 
-                    intent.putExtra("adress_Straat", e.getAddress().getStreet());
-                    intent.putExtra("adress_Provincie", e.getAddress().getState());
-                    intent.putExtra("adress_Stad", e.getAddress().getState());
-                    intent.putExtra("adress_Postcode", e.getAddress().getPostalCode());
-                    intent.putExtra("adress_Land", e.getAddress().getCountryOrRegion());
+                    if ( e.getAddress() != null) {
+                        intent.putExtra("adressBool", "1");
+                        intent.putExtra("adress_Straat", e.getAddress().getStreet());
+                        intent.putExtra("adress_Provincie", e.getAddress().getState());
+                        intent.putExtra("adress_Stad", e.getAddress().getCity());
+                        intent.putExtra("adress_Postcode", e.getAddress().getPostalCode());
+                        intent.putExtra("adress_Land", e.getAddress().getCountryOrRegion());
+                    }
+
+
                     startActivity(intent);
 
 
@@ -214,15 +220,29 @@ public class ContactsActivity extends AppCompatActivity {
                                 } else {
                                     mail = "null";
                                 }
-
-                                String homeadres = (subject.getJSONObject(i).get("homeAddress")).toString();
-                                Toast.makeText(ContactsActivity.this, homeadres.toString(), Toast.LENGTH_SHORT).show();
+                                JSONObject homeadres = (JSONObject) subject.getJSONObject(i).get("homeAddress");
 
                                 Address a = new Address();
-                                Gson g = new Gson();
 
-                                Address address = g.fromJson("{\"name\": \"John\"}", Address.class);
-                                contacts.add(new Contacts(id, birthday, name, givenname, surname, mail, mobilePhone, bedrijf, bedrijfstitel, opmerkingen));
+                                if (homeadres.length() > 0) {
+
+                                    a.setStreet(homeadres.getString("street"));
+                                    a.setCity(homeadres.getString("city"));
+                                    a.setState(homeadres.getString("state"));
+                                    a.setCountryOrRegion(homeadres.getString("countryOrRegion"));
+                                    a.setPostalCode(homeadres.getString("postalCode"));
+
+                                } else {
+                                    mail = "null";
+                                }
+
+                                if (homeadres.length() == 0) {
+                                    contacts.add(new Contacts(id, birthday, name, givenname, surname, mail, mobilePhone, bedrijf, bedrijfstitel, opmerkingen));
+                                } else {
+                                    contacts.add(new Contacts(id, birthday, name, givenname, surname, mail, mobilePhone, a, bedrijf, bedrijfstitel, opmerkingen));
+                                }
+
+
                             }
                             listView.requestLayout();
                             contactsAdapter.notifyDataSetChanged();

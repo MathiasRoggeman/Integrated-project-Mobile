@@ -77,40 +77,6 @@
             android:ems="10"
             android:backgroundTint="@android:color/transparent"
             android:hint="@string/straat" />
-        <EditText
-            android:id="@+id/Postbus"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="start"
-            android:ems="10"
-            android:drawableLeft="@drawable/invisible"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/blanced_almond"
-            android:backgroundTint="@android:color/transparent"
-            android:hint="@string/postbus" />
-        <EditText
-            android:id="@+id/staat"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="start"
-            android:ems="10"
-            android:hint="@string/provincie"
-            android:drawableLeft="@drawable/invisible"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/blanced_almond"
-            android:backgroundTint="@android:color/transparent" />
-
-        <EditText
-            android:id="@+id/Plaats"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="start"
-            android:backgroundTint="@android:color/transparent"
-            android:drawableLeft="@drawable/invisible"
-            android:drawablePadding="20dp"
-            android:drawableTint="@color/blanced_almond"
-            android:ems="10"
-            android:hint="@string/plaats" />
 
         <EditText
             android:id="@+id/Postcode"
@@ -124,6 +90,30 @@
             android:ems="10"
             android:hint="@string/postcode"
             android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/Stad"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:ems="10"
+            android:hint="@string/stad" />
+
+        <EditText
+            android:id="@+id/staat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:ems="10"
+            android:hint="@string/provincie"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:backgroundTint="@android:color/transparent" />
 
         <EditText
             android:id="@+id/Land"
