@@ -260,6 +260,7 @@ public class EditContactActivity extends AppCompatActivity {
             return;
         }
 
+        Log.d("patchcontact", patchContact());
         RequestQueue queue = Volley.newRequestQueue(this);
         final JSONObject contactobject = new JSONObject(patchContact());
 
@@ -310,14 +311,15 @@ public class EditContactActivity extends AppCompatActivity {
                         ))
 
                 .add("mobilePhone", nummer.getText().toString())
-                .add("homeAddress", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
+                .add("homeAddress", Json.createObjectBuilder()
+                                .add("street", Straat.getText().toString())
                                 .add("city", Stad.getText().toString())
+                                .add("state",Provincie.getText().toString() )
                                 .add("countryOrRegion", Land.getText().toString())
                                 .add("postalCode",Postcode.getText().toString())
-                                .add("state",Provincie.getText().toString() )
-                                .add("street", Straat.getText().toString())
-                        ));
+
+
+                        );
 
         Log.d(TAG, "date" + geboorteDatum.getText().toString());
         return mail.build().toString();
