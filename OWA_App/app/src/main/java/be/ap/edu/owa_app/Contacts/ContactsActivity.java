@@ -54,7 +54,7 @@ public class ContactsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        getSupportActionBar().setTitle("Contacts");
+        getSupportActionBar().setTitle("Contacten");
         token = this.getIntent().getExtras().getString("token");
 
         getContacts(token, MSGRAPH_URL);

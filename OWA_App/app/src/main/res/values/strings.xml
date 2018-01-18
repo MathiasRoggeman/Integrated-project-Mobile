@@ -65,8 +65,8 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="kalender">Kalender</string>
-    <string name="event">Events</string>
-    <string name="events">Events</string>
+    <string name="event">Gebeurtenis</string>
+    <string name="events">Gebeurtenissen</string>
     <string name="attendees">Aanwezigen:</string>
     <string name="add_attendees">Add Attendees</string>
     <string name="birthday">Geboortedatum</string>
@@ -83,5 +83,7 @@
     <string name="staat">Staat</string>
     <string name="provincie">Provincie</string>
     <string name="stad">Stad</string>
+    <string name="contacten">Contacten</string>
+    <string name="Calender">Kalender</string>
 
 </resources>

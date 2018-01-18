@@ -9,11 +9,11 @@
     <item
         android:id="@+id/action_calendar"
         android:icon="@drawable/ic_event_note_black_24dp"
-        android:title="@string/bag"/>
+        android:title="@string/Calender"/>
 
     <item
         android:id="@+id/action_contacts"
         android:icon="@drawable/ic_account"
-        android:title="@string/account"/>
+        android:title="@string/contacten"/>
 
 </menu>

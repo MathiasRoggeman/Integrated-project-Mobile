@@ -7,9 +7,9 @@
     <application
         android:allowBackup="true"
         android:configChanges="orientation"
-        android:icon="@mipmap/ic_smiley"
+        android:icon="@mipmap/ic_launcher"
         android:label="NOT OWA"
-        android:roundIcon="@mipmap/ic_smiley"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/CustomTheme">
