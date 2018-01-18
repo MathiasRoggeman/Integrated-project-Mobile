@@ -232,10 +232,7 @@ public class ContactsActivity extends AppCompatActivity {
                                     a.setCountryOrRegion(homeadres.getString("countryOrRegion"));
                                     a.setPostalCode(homeadres.getString("postalCode"));
 
-                                } else {
-                                    mail = "null";
                                 }
-
                                 if (homeadres.length() == 0) {
                                     contacts.add(new Contacts(id, birthday, name, givenname, surname, mail, mobilePhone, bedrijf, bedrijfstitel, opmerkingen));
                                 } else {

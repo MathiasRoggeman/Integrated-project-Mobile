@@ -228,14 +228,15 @@ public class AddContactActivity extends AppCompatActivity {
                                 .add("address", email.getText().toString())
                         ))
                 .add("mobilePhone", nummer.getText().toString())
-                .add("homeAddress", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("city", Stad.getText().toString())
-                                .add("countryOrRegion", Land.getText().toString())
-                                .add("postalCode", Postcode.getText().toString())
-                                .add("state", Provincie.getText().toString())
-                                .add("street", Straat.getText().toString())
-                        ));
+                .add("homeAddress", Json.createObjectBuilder()
+                        .add("street", Straat.getText().toString())
+                        .add("city", Stad.getText().toString())
+                        .add("state",Provincie.getText().toString() )
+                        .add("countryOrRegion", Land.getText().toString())
+                        .add("postalCode",Postcode.getText().toString())
+
+
+                );
         return mail.build().toString();
     }
 }
