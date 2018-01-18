@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<MailList> maillist = new ArrayList<>();
     private ListAdapter listadapter;
 
+    private ArrayList<MailFolder> mailFolders = new ArrayList<>();
+
     /* UI & Debugging Variables */
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -76,49 +78,38 @@ public class MainActivity extends AppCompatActivity {
     private String token;
     private int positie;
 
+    Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        token = this.getIntent().getExtras().getString("token");
+        maillist = new ArrayList<>();
+
+
+        Log.d("messagetoken", token);
+
+
+        getMailFolders(token, "https://graph.microsoft.com/v1.0/me/mailFolders/");
+        Log.d("mailContext", "SizeOncreate" + mailFolders.size());
+        token = this.getIntent().getExtras().getString("token");
+        positie = this.getIntent().getExtras().getInt("position");
+        String id = this.getIntent().getExtras().getString("id");
+
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
-        addDrawerItems();
-        setupDrawer();
         getSupportActionBar().setTitle("Postvak in");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        setupDrawer();
 
 
+        MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
 
 
-
-
-        token = this.getIntent().getExtras().getString("token");
-        positie = this.getIntent().getExtras().getInt("position");
-        Log.d("messagetoken", token);
-
-        if(positie == 0) {
-            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
-            getSupportActionBar().setTitle("Postvak in");
-
-        }
-        else if(positie == 1) {
-            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/drafts/messages";
-            getSupportActionBar().setTitle("Concepten");
-        }
-        else if(positie == 2) {
-            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/deleteditems/messages";
-            getSupportActionBar().setTitle("Verwijderde mails");
-        }
-        else if(positie == 3) {
-            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/sentitems/messages";
-            getSupportActionBar().setTitle("Verzonden mails");
-        }
-        else {
-            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
-            getSupportActionBar().setTitle("Postvak in");
-        }
 
 
         callGraphAPI(token, MSGRAPH_URL);
@@ -177,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        final String[] osArray = { "Postvak In", "Concepten", "Prullenbak", "Verzonden"};
+        String[] osArray = new String[mailFolders.size()];
+
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
@@ -357,6 +349,101 @@ public class MainActivity extends AppCompatActivity {
             3000,
             DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(request);
+    }
+
+    private void getMailFolders(final String token, String url) {
+        Log.d(TAG, "Starting volley request to graph");
+
+    /* Make sure we have a token to send to graph */
+        if (token == null) {
+            return;
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JSONObject parameters = new JSONObject();
+
+        try {
+            parameters.put("key", "value");
+        } catch (Exception e) {
+            Log.d(TAG, "Failed to put parameters: " + e.toString());
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,
+                parameters, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+            /* Successfully called graph, process data and send to UI */
+                Log.d(TAG, "Response: " + response.toString());
+
+                try {
+                    JSONArray subject = response.getJSONArray("value");
+                    for (int i = 0; i < subject.length(); i++) {
+                        String id = subject.getJSONObject(i).getString("id");
+                        String name = subject.getJSONObject(i).getString("displayName");
+                        int totalItemCount = subject.getJSONObject(i).getInt("totalItemCount");
+                        if(totalItemCount > 0) {
+                            mailFolders.add(new MailFolder(id, name, totalItemCount));
+                            Log.d("Mailfolder", name);
+                        }
+                    }
+
+
+                    String[] osName = new String[mailFolders.size()];
+                    final String[] osID = new String[mailFolders.size()];
+                    int i = 0;
+                    for(MailFolder f : mailFolders){
+
+                        osName[i] = f.getName();
+                        osID[i] = f.getId();
+                        i++;
+                    }
+
+                    mAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, osName);
+                    mDrawerList.setAdapter(mAdapter);
+
+                    mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            listadapter.clear();
+                            listadapter.notifyDataSetChanged();
+                            Toast.makeText(MainActivity.this, "ID: " + osID[position] , Toast.LENGTH_SHORT).show();
+
+                            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/" + osID[position] + "/messages";
+                            callGraphAPI(token, MSGRAPH_URL);
+                            positie = position;
+                            /*Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                            intent.putExtra("position", positie);
+                            intent.putExtra("token", token);
+                            intent.putExtra("id", osID[position]);
+                            startActivity(intent);*/
+                            mDrawerLayout.closeDrawers();
+                            setupDrawer();
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Error: " + error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + token);
+                return headers;
+            }
+        };
+
+        Log.d(TAG, "Adding HTTP GET to Queue, Request: " + request.toString());
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
 
