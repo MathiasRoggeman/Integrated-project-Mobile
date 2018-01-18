@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Time for an upgrade! " + osArray[position] + " " + position, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(MainActivity.this, "Time for an upgrade! " + osArray[position] + " " + position, Toast.LENGTH_SHORT).show();
 
                 positie = position;
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
