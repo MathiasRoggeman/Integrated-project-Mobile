@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ import be.ap.edu.owa_app.R;
 public class ContactsAdapter extends ArrayAdapter<Contacts> {
 
     private ArrayList<Contacts> objects;
-
+    private ImageView person_circle;
+    private TextView person_circle_text;
     /* here we must override the constructor for ArrayAdapter
     * the only variable we care about now is ArrayList<Item> objects,
     * because it is the list of objects we want to display.
@@ -57,11 +59,13 @@ public class ContactsAdapter extends ArrayAdapter<Contacts> {
 
             // This is how you obtain a reference to the TextViews.
             // These TextViews are created in the XML files we defined.
-
+            person_circle = (ImageView) v.findViewById(R.id.person_circle);
+            person_circle_text = v.findViewById(R.id.person_circle_text);
             TextView name = (TextView) v.findViewById(R.id.name_contact);
             TextView email = (TextView) v.findViewById(R.id.email_contact);
 
-
+            String firstLetter = i.getName().substring(0,1);
+            person_circle_text.append(firstLetter.toUpperCase());
             // check to see if each individual textview is null.
             // if not, assign some text!
             if (name != null){

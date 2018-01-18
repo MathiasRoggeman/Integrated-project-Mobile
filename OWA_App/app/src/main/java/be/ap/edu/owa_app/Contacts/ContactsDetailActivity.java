@@ -1,6 +1,7 @@
 package be.ap.edu.owa_app.Contacts;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,15 +38,29 @@ public class ContactsDetailActivity extends AppCompatActivity {
     private String surname;
     private String mail;
     private String mobile;
+    private String bedrijf;
+    private String bedrijfsTitel;
+    private String opmerkingen;
+    private String geboortedatum;
+    private String adressBool;
+    private Address adres = new Address();
     private String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/contacts/";
     private static final String TAG = ContactsDetailActivity.class.getSimpleName();
-
+    private TextView Straat;
+    private TextView Stad;
+    private TextView Provincie;
+    private TextView Postcode;
+    private TextView Land;
 
     TextView naam;
     TextView email;
     TextView mobilePhone;
     ImageView icon;
     ImageView mailIcon;
+    TextView geboortedatumText;
+    TextView bedrijfText;
+    TextView bedrijfstitelText;
+    TextView opmerkingenText;
 
 
     @Override
@@ -63,29 +79,77 @@ public class ContactsDetailActivity extends AppCompatActivity {
         surname = this.getIntent().getExtras().getString("surname");
         mail = this.getIntent().getExtras().getString("mail");
         mobile = this.getIntent().getExtras().getString("mobile");
+        bedrijf = this.getIntent().getExtras().getString("companyName");
+        bedrijfsTitel = this.getIntent().getExtras().getString("jobTitle");
+        opmerkingen = this.getIntent().getExtras().getString("personalNotes");
+        geboortedatum = this.getIntent().getExtras().getString("birthday");
+        adressBool = this.getIntent().getExtras().getString("adressBool");
+
+        if (adressBool.equals("1")){
+            adres.setStreet(this.getIntent().getExtras().getString("adress_Straat"));
+            adres.setState(this.getIntent().getExtras().getString("adress_Provincie"));
+            adres.setCity(this.getIntent().getExtras().getString("adress_Stad"));
+            adres.setPostalCode(this.getIntent().getExtras().getString("adress_Postcode"));
+            adres.setCountryOrRegion(this.getIntent().getExtras().getString("adress_Land"));
+
+        }
 
 
         naam = findViewById(R.id.contactnaam);
-        email = findViewById(R.id.contactsemail);
-        mobilePhone = findViewById(R.id.contactmobile);
-        icon = findViewById(R.id.phone);
-        mailIcon = findViewById(R.id.imageView);
+        email = findViewById(R.id.mail);
+        mobilePhone = findViewById(R.id.number);
+        geboortedatumText = findViewById(R.id.geboortedatum);
+        bedrijfText = findViewById(R.id.Bedrijf);
+        bedrijfstitelText = findViewById(R.id.Titel);
+        opmerkingenText = findViewById(R.id.Opmerkingen);
+        Straat = findViewById(R.id.Straat);
+        Postcode = findViewById(R.id.Postcode);
+        Stad = findViewById(R.id.Stad);
+        Provincie = findViewById(R.id.staat);
+        Land = findViewById(R.id.Land);
 
-        if(mail.equals("null")){
+        if (mail.equals("null")) {
             email.setVisibility(View.INVISIBLE);
-            mailIcon.setVisibility(View.INVISIBLE);
+
         }
-        if(mobile.equals("null")){
+        if (mobile.equals("null")) {
             mobilePhone.setVisibility(View.INVISIBLE);
-            icon.setVisibility(View.INVISIBLE);
+
+        }
+
+        if (geboortedatum.equals("null")) {
+            geboortedatumText.setVisibility(View.INVISIBLE);
+        }
+        if (bedrijf.equals("null")) {
+            bedrijfText.setVisibility(View.INVISIBLE);
+        }
+        if (bedrijfsTitel.equals("null")){
+            bedrijfstitelText.setVisibility(View.INVISIBLE);
+        }
+        if (opmerkingen.equals("null")){
+            opmerkingenText.setVisibility(View.INVISIBLE);
         }
 
         naam.setText(displayName);
         email.setText(mail);
         mobilePhone.setText(mobile);
+        geboortedatumText.setText(geboortedatum);
+        bedrijfText.setText(bedrijf);
+        bedrijfstitelText.setText(bedrijfsTitel);
+        opmerkingenText.setText(opmerkingen);
 
+        if (adressBool.equals("1")) {
+
+            Straat.setText(adres.getStreet().toString());
+            Postcode.setText(adres.getPostalCode().toString());
+            Stad.setText(adres.getCity().toString());
+            Provincie.setText(adres.getState().toString());
+            Land.setText(adres.getCountryOrRegion().toString());
+
+        }
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_open_contacts, menu);
 
@@ -114,6 +178,22 @@ public class ContactsDetailActivity extends AppCompatActivity {
                 intent.putExtra("surname", surname);
                 intent.putExtra("email", mail);
                 intent.putExtra("mobile", mobile);
+                intent.putExtra("companyName", bedrijf);
+                intent.putExtra("personalNotes", opmerkingen);
+                intent.putExtra("birthday", geboortedatum);
+                intent.putExtra("jobTitle", bedrijfsTitel);
+                intent.putExtra("adressBool", "0");
+
+                if (adressBool.equals("1")) {
+                    intent.putExtra("adressBool", "1");
+                    intent.putExtra("adress_Straat", adres.getStreet());
+                    intent.putExtra("adress_Provincie", adres.getState());
+                    intent.putExtra("adress_Stad", adres.getCity());
+                    intent.putExtra("adress_Postcode", adres.getPostalCode());
+                    intent.putExtra("adress_Land", adres.getCountryOrRegion());
+                }
+
+
                 startActivity(intent);
                 break;
 

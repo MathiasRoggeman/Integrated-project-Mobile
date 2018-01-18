@@ -181,6 +181,7 @@ public class AddEventActivity extends AppCompatActivity {
             endtime.setText(String.format("%02d:%02d", hour, minute));
         }
     };
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save, menu);
 

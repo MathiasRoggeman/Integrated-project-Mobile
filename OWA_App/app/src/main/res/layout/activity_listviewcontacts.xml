@@ -6,19 +6,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="6dip">
 
+    <ImageView
+        android:id="@+id/person_circle"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/person_circle_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/person_circle"
+        android:layout_alignLeft="@+id/person_circle"
+        android:layout_alignRight="@+id/person_circle"
+        android:layout_alignTop="@+id/person_circle"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="false"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/name_contact"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+
         android:textStyle="bold">
     </TextView>
+
 
     <TextView
         android:id="@+id/email_contact"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name_contact"
+        android:layout_toEndOf="@+id/person_circle"
         android:singleLine="true"
         android:textSize="12sp" />
 

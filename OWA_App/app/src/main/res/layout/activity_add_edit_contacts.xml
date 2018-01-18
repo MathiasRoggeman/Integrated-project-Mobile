@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,66 +13,72 @@
         android:orientation="vertical" >
 
 
-        <TextView
-            android:id="@+id/contactnaam"
-            android:layout_width="381dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="40dp"
-            android:layout_toEndOf="@+id/contacts"
-            android:drawablePadding="25dp"
-            android:drawableStart="@drawable/ic_perm_contact_calendar_black_24dp"
-            android:drawableTint="@color/big_dip"
-            android:text="@string/contactnaam"
-            android:textSize="25sp" />
-
-
-        <TextView
-            android:id="@+id/number"
+        <EditText
+            android:id="@+id/editname"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/contacts"
             android:layout_gravity="start"
-            android:layout_marginTop="59dp"
             android:layout_weight="1"
+            android:drawablePadding="20dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawableTint="@color/big_dip"
             android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/naam"
+            android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/voornaam"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:ems="10"
+            android:drawableLeft="@drawable/invisible"
+            android:drawablePadding="20dp"
+            android:drawableTint="@color/blanced_almond"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="@string/voornaam"/>
+
+        <EditText
+            android:id="@+id/editnumber"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_weight="1"
             android:drawablePadding="20dp"
             android:drawableStart="@drawable/ic_phone_android_black_24dp"
             android:drawableTint="@color/big_dip"
+            android:backgroundTint="@android:color/transparent"
             android:ems="10"
             android:hint="@string/mobile_number"
             android:inputType="phone" />
 
 
-        <TextView
-            android:id="@+id/mail"
+        <EditText
+            android:id="@+id/editmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/geboortedatum"
             android:layout_gravity="start"
-            android:backgroundTint="@android:color/transparent"
             android:drawablePadding="20dp"
             android:drawableStart="@drawable/ic_email_black_24dp"
             android:drawableTint="@color/big_dip"
             android:ems="10"
+            android:backgroundTint="@android:color/transparent"
             android:hint="@string/emailadres" />
 
-        <TextView
+
+        <EditText
             android:id="@+id/Straat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:backgroundTint="@android:color/transparent"
             android:drawablePadding="20dp"
             android:drawableStart="@drawable/ic_location_on_black_24dp"
             android:drawableTint="@color/big_dip"
             android:ems="10"
+            android:backgroundTint="@android:color/transparent"
             android:hint="@string/straat" />
 
-        <TextView
+        <EditText
             android:id="@+id/Postcode"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -84,7 +91,7 @@
             android:hint="@string/postcode"
             android:inputType="textPersonName" />
 
-        <TextView
+        <EditText
             android:id="@+id/Stad"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -96,7 +103,7 @@
             android:ems="10"
             android:hint="@string/stad" />
 
-        <TextView
+        <EditText
             android:id="@+id/staat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -108,7 +115,7 @@
             android:drawableTint="@color/blanced_almond"
             android:backgroundTint="@android:color/transparent" />
 
-        <TextView
+        <EditText
             android:id="@+id/Land"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -124,63 +131,51 @@
             android:id="@+id/geboortedatum"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/Opmerkingen"
             android:layout_gravity="start"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:drawablePadding="20dp"
             android:drawableTint="@color/big_dip"
             android:ems="10"
             android:hint="@string/birthday"
+            android:backgroundTint="@android:color/transparent"
             android:textAlignment="textStart"
             android:textSize="17dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/Bedrijf"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/number"
             android:layout_gravity="start"
-            android:backgroundTint="@android:color/transparent"
             android:drawablePadding="20dp"
             android:drawableStart="@drawable/ic_domain_black_24dp"
             android:drawableTint="@color/big_dip"
             android:ems="10"
+            android:backgroundTint="@android:color/transparent"
             android:hint="@string/bedrijf" />
-
-        <TextView
+        <EditText
             android:id="@+id/Titel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/Bedrijf"
             android:layout_gravity="start"
-            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
             android:drawableLeft="@drawable/invisible"
             android:drawablePadding="20dp"
             android:drawableTint="@color/blanced_almond"
-            android:ems="10"
-            android:hint="@string/titel" />
+            android:backgroundTint="@android:color/transparent"
+            android:hint="@string/titel"/>
 
-        <TextView
+        <EditText
             android:id="@+id/Opmerkingen"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/Titel"
             android:layout_gravity="start"
-            android:backgroundTint="@android:color/transparent"
             android:drawablePadding="20dp"
             android:drawableStart="@drawable/ic_comment_black_24dp"
             android:drawableTint="@color/big_dip"
             android:ems="10"
+            android:backgroundTint="@android:color/transparent"
             android:hint="@string/opmerkingen" />
-
-
-
     </LinearLayout>
 
 

@@ -9,11 +9,46 @@ import java.io.Serializable;
 public class Contacts implements Serializable {
 
     private String id;
+    private String Birthday;
     private String displayName;
     private String name;
     private String surname;
     private String email;
     private String mobile;
+    private Address address;
+    private String Bedrijf;
+    private String BedrijfsTitel;
+    private String Opmerkingen;
+
+
+
+    public Contacts(String id, String birthday, String displayName, String name, String surname, String email, String mobile,String bedrijf, String bedrijfsTitel, String opmerkingen) {
+        this.id = id;
+        this.Birthday = birthday;
+        this.displayName = displayName;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.mobile = mobile;
+        this.Bedrijf = bedrijf;
+        this.address = address;
+        this.BedrijfsTitel = bedrijfsTitel;
+        this.Opmerkingen = opmerkingen;
+    }
+
+    public Contacts(String id, String birthday, String displayName, String name, String surname, String email, String mobile, Address address, String bedrijf, String bedrijfsTitel, String opmerkingen) {
+        this.id = id;
+        Birthday = birthday;
+        this.displayName = displayName;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+        Bedrijf = bedrijf;
+        BedrijfsTitel = bedrijfsTitel;
+        Opmerkingen = opmerkingen;
+    }
 
     public Contacts(String id, String displayName, String name, String surname, String email, String mobile) {
         this.id = id;
@@ -70,5 +105,46 @@ public class Contacts implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public String getBedrijf() {
+        return Bedrijf;
+    }
+
+    public void setBedrijf(String bedrijf) {
+        Bedrijf = bedrijf;
+    }
+
+    public String getBedrijfsTitel() {
+        return BedrijfsTitel;
+    }
+
+    public void setBedrijfsTitel(String bedrijfsTitel) {
+        BedrijfsTitel = bedrijfsTitel;
+    }
+
+    public String getOpmerkingen() {
+        return Opmerkingen;
+    }
+
+    public void setOpmerkingen(String opmerkingen) {
+        Opmerkingen = opmerkingen;
+    }
+
+    public String getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        Birthday = birthday;
     }
 }
