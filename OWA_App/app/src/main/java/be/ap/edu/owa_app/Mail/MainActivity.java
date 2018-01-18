@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             "https://graph.microsoft.com/Mail.ReadWrite",
             "https://graph.microsoft.com/Mail.Send",
             "https://graph.microsoft.com/Calendars.Read" };
-    String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages";
+    String MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/inbox/messages?$top=50";
 
     private ArrayList<MailList> maillist = new ArrayList<>();
     private ListAdapter listadapter;
@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Inbox");
 
         token = this.getIntent().getExtras().getString("token");
         maillist = new ArrayList<>();
@@ -101,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
-        getSupportActionBar().setTitle("Postvak in");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         setupDrawer();
@@ -200,7 +200,8 @@ public class MainActivity extends AppCompatActivity {
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("Postvak In");
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
@@ -388,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-                    String[] osName = new String[mailFolders.size()];
+                    final String[] osName = new String[mailFolders.size()];
                     final String[] osID = new String[mailFolders.size()];
                     int i = 0;
                     for(MailFolder f : mailFolders){
@@ -406,18 +407,16 @@ public class MainActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             listadapter.clear();
                             listadapter.notifyDataSetChanged();
-                            Toast.makeText(MainActivity.this, "ID: " + osID[position] , Toast.LENGTH_SHORT).show();
 
-                            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/" + osID[position] + "/messages";
+                            MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me/mailfolders/" + osID[position] + "/messages?$top=50";
                             callGraphAPI(token, MSGRAPH_URL);
                             positie = position;
-                            /*Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                            intent.putExtra("position", positie);
-                            intent.putExtra("token", token);
-                            intent.putExtra("id", osID[position]);
-                            startActivity(intent);*/
+                            getSupportActionBar().setTitle(osName[position]);
                             mDrawerLayout.closeDrawers();
+                            mDrawerToggle.setDrawerIndicatorEnabled(true);
                             setupDrawer();
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
                         }
                     });
                 } catch (JSONException e) {
