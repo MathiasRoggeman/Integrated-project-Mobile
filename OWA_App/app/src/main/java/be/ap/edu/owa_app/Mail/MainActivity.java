@@ -419,6 +419,27 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
+
+                    mDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+                        /** Called when a drawer has settled in a completely open state. */
+                        public void onDrawerOpened(View drawerView) {
+                            super.onDrawerOpened(drawerView);
+                            getSupportActionBar().setTitle("Mappen");
+                            invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                        }
+
+                        /** Called when a drawer has settled in a completely closed state. */
+                        public void onDrawerClosed(View view) {
+                            super.onDrawerClosed(view);
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                            getSupportActionBar().setDisplayShowHomeEnabled(true);
+                            invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                        }
+                    };
+
+                    mDrawerToggle.setDrawerIndicatorEnabled(true);
+                    mDrawerLayout.setDrawerListener(mDrawerToggle);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
