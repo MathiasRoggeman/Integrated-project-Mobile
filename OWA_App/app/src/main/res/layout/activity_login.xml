@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="233dp"
-        android:background="#303030"
+        android:background="#b71007"
         android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
