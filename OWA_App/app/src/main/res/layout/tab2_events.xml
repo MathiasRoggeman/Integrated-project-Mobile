@@ -6,19 +6,12 @@
     android:layout_height="match_parent"
     tools:context="be.ap.edu.owa_app.Calendar.CalendarActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/textListEvents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/events"
-        android:textSize="28sp"/>
+
 
     <ListView
         android:id="@+id/listEvents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textListEvents" />
+        />
 </RelativeLayout>
